@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "512018361981",
+    "project_id": "notes-flirt",
+    "storage_bucket": "notes-flirt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512018361981:android:92f4e58fb792e6fa8bcb14",
+        "android_client_info": {
+          "package_name": "com.example.flutter_progress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512018361981-m637qps1hva75embl42j85lfeu5n5vm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz_Vudl9zfV-25I7P1jBye1FJmV9QtWcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512018361981-m637qps1hva75embl42j85lfeu5n5vm6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
