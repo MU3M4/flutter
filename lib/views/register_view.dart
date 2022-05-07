@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:flutter_progress/views/verify_email_view.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -58,6 +58,16 @@ class _RegisterViewState extends State<RegisterView> {
             onPressed: () async {
               final email = _email.text;
               final password = _password.text;
+              // try{
+              //   if (user.emailVerified) {
+              //   print('email is verified');
+              // } else {
+              //   return const VerifyEmailView();
+              // }
+              // } catch{
+
+              // }
+
               try {
                 final userCredential = await FirebaseAuth.instance
                     .createUserWithEmailAndPassword(
@@ -71,6 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
                 } else {
                   print(e.code);
                 }
+               // FirebaseAuth.userCredential.reload();
               }
             },
             child: const Text("Register"),
