@@ -43,6 +43,7 @@ class _RegisterViewState extends State<RegisterView> {
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
+              
               hintText: 'Enter Your Email Address',
             ),
           ),

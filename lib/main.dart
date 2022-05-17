@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
 import 'dart:developer' as devtools show log;
 import 'package:flutter_progress/views/login_view.dart';
+import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
 import 'firebase_options.dart';
