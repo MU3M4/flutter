@@ -14,6 +14,7 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
+  bool _isObscure = true;
 
   @override
   void initState() {
@@ -31,71 +32,111 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_label
+    //removes the debug icon
+    debugShowCheckedModeBanner:
+    false;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
       ),
-      body: Column(
-        children: [
-          TextField(
-            controller: _email,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              
-              hintText: 'Enter Your Email Address',
-            ),
-          ),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            decoration: const InputDecoration(
-              hintText: 'Enter Your Password',
-            ),
-          ),
-          TextButton(
-            onPressed: () async {
-              final email = _email.text;
-              final password = _password.text;
-              // try{
-              //   if (user.emailVerified) {
-              //   print('email is verified');
-              // } else {
-              //   return const VerifyEmailView();
-              // }
-              // } catch{
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                controller: _email,
+                enableSuggestions: false,
+                autocorrect: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.mail),
+                  contentPadding:
+                      const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'Email Address',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: const OutlineInputBorder(),
+                ),
+                textInputAction: TextInputAction.next,
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              TextField(
+                controller: _password,
+                obscureText: _isObscure,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: InputDecoration(
+                    hintText: 'Password',
+                    prefixIcon: const Icon(Icons.key),
+                    contentPadding:
+                        const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
+                    ),
+                    textInputAction: TextInputAction.done,
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              TextButton(
+                onPressed: () async {
+                  final email = _email.text;
+                  final password = _password.text;
+                  // try{
+                  //   if (user.emailVerified) {
+                  //   print('email is verified');
+                  // } else {
+                  //   return const VerifyEmailView();
+                  // }
+                  // } catch{
 
-              // }
+                  // }
 
-              try {
-                final userCredential = await FirebaseAuth.instance
-                    .createUserWithEmailAndPassword(
-                        email: email, password: password);
-                devtools.log(userCredential.toString());
-              } on FirebaseAuthException catch (e) {
-                if (e.code == 'weak-password') {
-                  devtools.log('weak password');
-                } else if (e.code == 'email-already-in-use') {
-                  devtools.log('email is already in use');
-                } else {
-                  devtools.log(e.code);
-                }
-                // FirebaseAuth.userCredential.reload();
-              }
-            },
-            child: const Text("Register"),
+                  try {
+                    final userCredential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                            email: email, password: password);
+                    devtools.log(userCredential.toString());
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      devtools.log('weak password');
+                    } else if (e.code == 'email-already-in-use') {
+                      devtools.log('email is already in use');
+                    } else {
+                      devtools.log(e.code);
+                    }
+                    // FirebaseAuth.userCredential.reload();
+                  }
+                },
+                child: const Text("Register"),
+              ),
+              TextButton(
+                //Padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil(loginRoute, (route) => false);
+                },
+                child: const Text(' Already Registered? Login in Here'),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(loginRoute, (route) => false);
-            },
-            child: const Text(' Already Registered? Login in Here'),
-          )
-        ],
+        ),
       ),
     );
   }

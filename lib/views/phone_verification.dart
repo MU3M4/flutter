@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress/views/Signup.dart';
 
 import '../firebase_options.dart';
 
@@ -70,6 +71,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
               decoration: const InputDecoration(
                 hintText: ('Phone Number'),
               ),
+              textInputAction: TextInputAction.next,
             ),
             const SizedBox(
               height: 10,
@@ -82,6 +84,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                 autocorrect: false,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(hintText: "Enter the Code"),
+                textInputAction: TextInputAction.done,
               ),
             ),
             const SizedBox(
@@ -94,6 +97,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                 } else {
                   verifyNumber();
                 }
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUp()));
               },
               child: Text(otpCodeVisible ? "Next" : "verify"),
             ),
@@ -120,11 +124,11 @@ class _PhoneAuthState extends State<PhoneAuth> {
         codeAutoRetrievalTimeout: (String verificationID) {});
   }
 
-  void verifyCode() async{
+  void verifyCode() async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationIDReceived, smsCode: _otp.text);
-        await auth.signInWithCredential(credential).then((value) {
-          print("You are logged in Successfully");
-        });
+    await auth.signInWithCredential(credential).then((value) {
+      print("You are logged in Successfully");
+    });
   }
 }

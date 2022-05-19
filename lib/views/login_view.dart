@@ -15,6 +15,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
+  bool _isObscure = true;
 
   @override
   void initState() {
@@ -56,25 +57,40 @@ class _LoginViewState extends State<LoginView> {
               break;
           }
           return Column(
-            children: [
+            children: <Widget> [
               TextField(
                 controller: _email,
                 enableSuggestions: false,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
+                
                 decoration: const InputDecoration(
-                  hintText: 'Enter Your Email Address',
+                  prefixIcon: Icon(Icons.mail),
+                  hintText: 'Email Address',
                 ),
+                textInputAction: TextInputAction.next,
               ),
               TextField(
                 controller: _password,
                 obscureText: true,
                 enableSuggestions: false,
                 autocorrect: false,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Your Password',
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  prefixIcon: const Icon(Icons.key),
+                  suffixIcon: IconButton(
+                  icon: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      _isObscure = !_isObscure;
+                    });
+                  },
                 ),
-              ),
+                ),
+                  textInputAction: TextInputAction.done,
+                ),
+              
               TextButton(
                 onPressed: () async {
                   final email = _email.text;
