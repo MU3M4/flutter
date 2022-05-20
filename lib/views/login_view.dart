@@ -36,6 +36,15 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
+         leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.orange,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: FutureBuilder(
         future: Firebase.initializeApp(
@@ -64,7 +73,11 @@ class _LoginViewState extends State<LoginView> {
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.orange),
+                  ),
                   prefixIcon: Icon(Icons.mail),
                   hintText: 'Email Address',
                 ),
@@ -76,8 +89,11 @@ class _LoginViewState extends State<LoginView> {
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Colors.orange),
+                  ),
                   hintText: 'Password',
-                  prefixIcon: const Icon(Icons.key),
+                  prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                   icon: Icon(
                       _isObscure ? Icons.visibility : Icons.visibility_off),

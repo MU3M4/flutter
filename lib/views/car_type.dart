@@ -32,8 +32,17 @@ class _CarTypeState extends State<CarType> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Car Type'),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.orange,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
-      body: Column(children: <Widget> [
+      body: Column(children: <Widget>[
         // year textfield
         TextField(
           controller: _year,
@@ -43,11 +52,12 @@ class _CarTypeState extends State<CarType> {
             hintText: 'Year',
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.orange),
             ),
           ),
         ),
         //space in between the two fields
-         const SizedBox(
+        const SizedBox(
           height: 25,
         ),
         //applied model textfield
@@ -59,10 +69,11 @@ class _CarTypeState extends State<CarType> {
             hintText: 'Applied Model',
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.orange),
             ),
           ),
         ),
-         const SizedBox(
+        const SizedBox(
           height: 25,
         ),
         //numberplate textfield
@@ -73,10 +84,11 @@ class _CarTypeState extends State<CarType> {
             hintText: 'Number Plate',
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.orange),
             ),
           ),
         ),
-       const SizedBox(
+        const SizedBox(
           height: 25,
         ),
         //add car textbutton

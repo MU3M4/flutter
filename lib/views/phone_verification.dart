@@ -38,7 +38,17 @@ class _PhoneAuthState extends State<PhoneAuth> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Enter Your Mobile Number'),
+         leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.orange,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
+      
     );
     // ignore: dead_code
     body:
@@ -68,7 +78,12 @@ class _PhoneAuthState extends State<PhoneAuth> {
               enableSuggestions: false,
               autocorrect: false,
               keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
+                prefixIcon: const Icon(Icons.phone),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Colors.orange),
+                ),
                 hintText: ('Phone Number'),
               ),
               textInputAction: TextInputAction.next,
@@ -85,6 +100,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(hintText: "Enter the Code"),
                 textInputAction: TextInputAction.done,
+                
               ),
             ),
             const SizedBox(

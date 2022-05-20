@@ -39,6 +39,15 @@ class _RegisterViewState extends State<RegisterView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
+         leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.orange,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -58,6 +67,7 @@ class _RegisterViewState extends State<RegisterView> {
                   hintText: 'Email Address',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.orange),
                   ),
                   focusedBorder: const OutlineInputBorder(),
                 ),
@@ -72,8 +82,11 @@ class _RegisterViewState extends State<RegisterView> {
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Colors.orange),
+                  ),
                     hintText: 'Password',
-                    prefixIcon: const Icon(Icons.key),
+                    prefixIcon: const Icon(Icons.lock),
                     contentPadding:
                         const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     suffixIcon: IconButton(
