@@ -92,7 +92,14 @@ class _CarTypeState extends State<CarType> {
           height: 25,
         ),
         //add car textbutton
-        TextButton(onPressed: () {}, child: const Text('ADD CAR'))
+        TextButton(
+          onPressed: () {},
+          child: const Text('ADD CAR'),
+        ),
+        TextButton(
+          onPressed: () {},
+          child: const Text('Continue'),
+        ),
       ]),
     );
   }

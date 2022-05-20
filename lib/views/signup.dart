@@ -22,8 +22,8 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void initState() {
-    // _fname = TextEditingController();
-    //  _lname = TextEditingController();
+     _fname = TextEditingController();
+     _lname = TextEditingController();
     _email = TextEditingController();
     _password = TextEditingController();
     _cpassword = TextEditingController();
@@ -32,8 +32,8 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void dispose() {
-    // _fname.dispose();
-    // _lname.dispose();
+     _fname.dispose();
+    _lname.dispose();
     _email.dispose();
     _password.dispose();
     _cpassword.dispose();
@@ -65,22 +65,19 @@ class _SignUpState extends State<SignUp> {
               children: <Widget>[
                 //first name textfield
                 TextFormField(
-                  //controller: _fname,
+                  controller: _fname,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'please enter name';
                     }
                     return null;
                   },
-                  // onSaved: (value) {
-                  //   _fname = value;
-                  // },
+                 
                   enableSuggestions: false,
                   autocorrect: false,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     //
-
                     prefixIcon: const Icon(Icons.account_circle),
                     hintText: 'First Name',
                     contentPadding:
@@ -98,7 +95,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 //last name textfield
                 TextField(
-                 // controller: _lname,
+                 controller: _lname,
                   enableSuggestions: false,
                   autocorrect: false,
                   keyboardType: TextInputType.name,

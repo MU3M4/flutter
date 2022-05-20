@@ -18,7 +18,9 @@ void main() {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
+     // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
       routes: {
+        phoneRoute:(context) => const PhoneAuth(),
         loginRoute: (context) => const LoginView(),
         noteRoute: (context) => const NotesView(),
         registerRoute: (context) => const RegisterView(),
