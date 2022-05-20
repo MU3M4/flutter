@@ -11,9 +11,9 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String _lname, _fname;
-  //late final TextEditingController _fname;
-  //late final TextEditingController _lname;
+ // String _lname, _fname;
+  late final TextEditingController _fname;
+  late final TextEditingController _lname;
   late final TextEditingController _email;
   late final TextEditingController _password;
   late final TextEditingController _cpassword;
@@ -98,7 +98,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 //last name textfield
                 TextField(
-                  controller: _lname,
+                 // controller: _lname,
                   enableSuggestions: false,
                   autocorrect: false,
                   keyboardType: TextInputType.name,
