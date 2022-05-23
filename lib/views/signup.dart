@@ -11,7 +11,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
- // String _lname, _fname;
+  // String _lname, _fname;
   late final TextEditingController _fname;
   late final TextEditingController _lname;
   late final TextEditingController _email;
@@ -22,8 +22,8 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void initState() {
-     _fname = TextEditingController();
-     _lname = TextEditingController();
+    _fname = TextEditingController();
+    _lname = TextEditingController();
     _email = TextEditingController();
     _password = TextEditingController();
     _cpassword = TextEditingController();
@@ -32,7 +32,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void dispose() {
-     _fname.dispose();
+    _fname.dispose();
     _lname.dispose();
     _email.dispose();
     _password.dispose();
@@ -63,21 +63,22 @@ class _SignUpState extends State<SignUp> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                //first name textfield
+                //first name textformfield
                 TextFormField(
                   controller: _fname,
+                  //used to check on whether the textformfield is empty and return a message to the user.
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'please enter name';
+                      return 'please enter first name';
                     }
                     return null;
                   },
-                 
+
                   enableSuggestions: false,
                   autocorrect: false,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
-                    //
+                    //sets the icon giving the user a hint
                     prefixIcon: const Icon(Icons.account_circle),
                     hintText: 'First Name',
                     contentPadding:
@@ -94,8 +95,14 @@ class _SignUpState extends State<SignUp> {
                   height: 25,
                 ),
                 //last name textfield
-                TextField(
-                 controller: _lname,
+                TextFormField(
+                  controller: _lname,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'please enter your last name';
+                    }
+                    return null;
+                  },
                   enableSuggestions: false,
                   autocorrect: false,
                   keyboardType: TextInputType.name,
@@ -114,9 +121,20 @@ class _SignUpState extends State<SignUp> {
                 const SizedBox(
                   height: 25,
                 ),
-                // email textfield
-                TextField(
+                // email textformfield
+                TextFormField(
                   controller: _email,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'please enter email address';
+                    }
+                    //regular expression validates the format of the email address
+                    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                        .hasMatch(value)) {
+                      return 'please enter a valid email address';
+                    }
+                    return null;
+                  },
                   enableSuggestions: false,
                   autocorrect: false,
                   keyboardType: TextInputType.emailAddress,
@@ -136,8 +154,14 @@ class _SignUpState extends State<SignUp> {
                   height: 25,
                 ),
                 //password field
-                TextField(
+                TextFormField(
                   controller: _password,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'please enter your password';
+                    }
+                    return null;
+                  },
                   enableSuggestions: false,
                   autocorrect: false,
                   obscureText: _isObscure,
@@ -157,8 +181,17 @@ class _SignUpState extends State<SignUp> {
                   height: 25,
                 ),
                 //confirm password field
-                TextField(
+                TextFormField(
                   controller: _cpassword,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'please confirm your password';
+                    }
+                    if (_password.text != _cpassword.text) {
+                      return 'passwords do not match';
+                    }
+                    return null;
+                  },
                   enableSuggestions: false,
                   autocorrect: false,
                   obscureText: _isObscure,
@@ -180,10 +213,18 @@ class _SignUpState extends State<SignUp> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
+                      if (_formKey.currentState!.validate()) {
+                        //                   ScaffoldMessenger.of(context).showSnackBar(
+                        // const SnackBar(content: Text('Processing Data')),
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => const CarType())));
+                            builder: ((context) => const CarType()),
+                          ),
+                        );
+                      } else {
+                        print('unsuccessful');
+                      }
                     },
                     child: const Text('Next'))
               ],

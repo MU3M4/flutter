@@ -39,7 +39,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
       appBar: AppBar(
         title: const Text('Enter Your Mobile Number'),
          leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.orange,
           ),
@@ -73,8 +73,18 @@ class _PhoneAuthState extends State<PhoneAuth> {
           }
 
           return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            TextField(
+            TextFormField(
               controller: _phone,
+              validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'please enter phone';
+                    }
+                    //regular expression validates the format of the email address
+                    if(value.length< 10){
+                      return 'please enter a valid phone number';
+                    }
+                    return null;
+                  },
               enableSuggestions: false,
               autocorrect: false,
               keyboardType: TextInputType.phone,

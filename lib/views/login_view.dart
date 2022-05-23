@@ -36,7 +36,7 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-         leading: IconButton(
+        leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
             color: Colors.orange,
@@ -67,14 +67,13 @@ class _LoginViewState extends State<LoginView> {
           }
           return Center(
             child: Column(
-              children: <Widget> [
+              children: <Widget>[
                 TextField(
                   controller: _email,
                   enableSuggestions: false,
                   autocorrect: false,
                   keyboardType: TextInputType.emailAddress,
-                  
-                  decoration:  InputDecoration(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.orange),
@@ -90,24 +89,24 @@ class _LoginViewState extends State<LoginView> {
                   enableSuggestions: false,
                   autocorrect: false,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.orange),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.orange),
                     ),
                     hintText: 'Password',
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
-                    icon: Icon(
-                        _isObscure ? Icons.visibility : Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        _isObscure = !_isObscure;
-                      });
-                    },
+                      icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
                   ),
-                  ),
-                    textInputAction: TextInputAction.done,
-                  ),
-                
+                  textInputAction: TextInputAction.done,
+                ),
                 TextButton(
                   onPressed: () async {
                     final email = _email.text;
