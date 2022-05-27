@@ -7,6 +7,7 @@ import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/notes.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
+import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
 import 'firebase_options.dart';
 
@@ -18,7 +19,7 @@ void main() {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const Splash(),
      // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
       routes: {
         phoneRoute:(context) => const PhoneAuth(),

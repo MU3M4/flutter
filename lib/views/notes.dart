@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/routes.dart';
+
 class NotesView extends StatefulWidget {
   const NotesView({Key? key}) : super(key: key);
 
@@ -16,7 +17,7 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(' Main UI'),
+      //  title: const Text(' Main UI'),
         actions: [
           PopupMenuButton<MenuAction>(
             onSelected: (value) async {
@@ -42,7 +43,45 @@ class _NotesViewState extends State<NotesView> {
           )
         ],
       ),
-      body: const Text('Hello World'),
+      body: Center(
+      //  alignment: Alignment.center,
+      //  margin: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+          Material(
+            child: InkWell(
+                onTap: (){},
+              splashColor: Colors.black,
+            
+            child: Ink.image(
+              
+              image: const AssetImage('lib/assets/images/appointment.jpeg')),
+              
+              ),
+             
+            ),
+            const SizedBox (height: 6),
+           const  Text('Appointment'),
+       GestureDetector(
+         onTap: () {
+           
+         },
+       
+        child: Image.asset('lib/assets/images/fix.jpeg',
+        fit: BoxFit.cover,
+        width: 110.0,
+        height: 110.0,
+       ),
+       ),
+      const SizedBox(height: 6),
+       const Text('Fix Car'),
+         
+          ],
+          
+        ),
+       
+      ),
     );
   }
 }
