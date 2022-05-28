@@ -11,21 +11,25 @@ import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
 import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MaterialApp(
-      title: 'HomePage',
+      title: '',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const Splash(),
-     // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
+      // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
       routes: {
-        phoneRoute:(context) => const PhoneAuth(),
+        phoneRoute: (context) => const PhoneAuth(),
         loginRoute: (context) => const LoginView(),
         noteRoute: (context) => const NotesView(),
         registerRoute: (context) => const RegisterView(),
+
       },
     ),
   );
@@ -63,5 +67,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-

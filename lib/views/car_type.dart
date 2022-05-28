@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progress/constants/routes.dart';
+import 'package:flutter_progress/views/notes.dart';
 
 class CarType extends StatefulWidget {
   const CarType({Key? key}) : super(key: key);
@@ -97,7 +99,13 @@ class _CarTypeState extends State<CarType> {
           child: const Text('ADD CAR'),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => const NotesView()),
+                          ));
+          },
           child: const Text('Continue'),
         ),
       ]),

@@ -33,12 +33,36 @@ class _PhoneAuthState extends State<PhoneAuth> {
     super.dispose();
   }
 
+  void buildFuture() {
+    // FutureBuilder(
+    //     future: Firebase.initializeApp(
+    //       options: DefaultFirebaseOptions.currentPlatform,
+    //     ),
+    //     builder: (context, snapshot) {
+    //       switch (snapshot.connectionState) {
+    //         case ConnectionState.none:
+    //           //
+    //           break;
+    //         case ConnectionState.waiting:
+    //           //
+    //           break;
+    //         case ConnectionState.active:
+    //           //
+    //           break;
+    //         case ConnectionState.done:
+    //           //
+    //           break;
+    //       }
+    //     }
+    //     );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Enter Your Mobile Number'),
-         leading: IconButton(
+        leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
             color: Colors.orange,
@@ -48,90 +72,81 @@ class _PhoneAuthState extends State<PhoneAuth> {
           },
         ),
       ),
-      
-    );
-    // ignore: dead_code
-    body:
-    FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              //
-              break;
-            case ConnectionState.waiting:
-              //
-              break;
-            case ConnectionState.active:
-              //
-              break;
-            case ConnectionState.done:
-              //
-              break;
-          }
+      // ignore: dead_code
+      body: Center(
+        child: Container(
+          margin: const EdgeInsets.all(20),
+          child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
+                    controller: _phone,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'please enter phone';
+                      }
 
-          return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            TextFormField(
-              controller: _phone,
-              validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'please enter phone';
-                    }
-                    //regular expression validates the format of the email address
-                    if(value.length< 10){
-                      return 'please enter a valid phone number';
-                    }
-                    return null;
-                  },
-              enableSuggestions: false,
-              autocorrect: false,
-              keyboardType: TextInputType.phone,
-              decoration:  InputDecoration(
-                prefixIcon: const Icon(Icons.phone),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.orange),
-                ),
-                hintText: ('Phone Number'),
-              ),
-              textInputAction: TextInputAction.next,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Visibility(
-              visible: otpCodeVisible,
-              child: TextField(
-                controller: _otp,
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(hintText: "Enter the Code"),
-                textInputAction: TextInputAction.done,
-                
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (otpCodeVisible) {
-                  verifyCode();
-                } else {
-                  verifyNumber();
-                }
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUp()));
-              },
-              child: Text(otpCodeVisible ? "Next" : "verify"),
-            ),
-          ]);
-        });
+                      if (value.length < 10) {
+                        return 'please enter a valid phone number';
+                      }
+                      return null;
+                    },
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.phone),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.orange),
+                      ),
+                      hintText: ('Phone Number'),
+                    ),
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Visibility(
+                    visible: otpCodeVisible,
+                    child: TextField(
+                      controller: _otp,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      keyboardType: TextInputType.number,
+                      decoration:
+                          const InputDecoration(hintText: "Enter the Code"),
+                      textInputAction: TextInputAction.done,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (otpCodeVisible) {
+                        verifyCode();
+                      } else {
+                        verifyPhoneNumber();
+                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUp()));
+                    },
+                    child: Text(otpCodeVisible ? "Next" : "verify"),
+                  ),
+                ]),
+          ),
+        ),
+      ),
+    );
+    //  return Column(mainAxisAlignment: MainAxisAlignment.center,
   }
 
-  void verifyNumber() {
+  void verifyPhoneNumber() {
     auth.verifyPhoneNumber(
         phoneNumber: _phone.text,
         verificationCompleted: (PhoneAuthCredential credential) async {

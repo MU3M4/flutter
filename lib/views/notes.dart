@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress/views/appointment.dart';
+import 'package:flutter_progress/views/fix_car.dart';
 
 import '../constants/routes.dart';
 
@@ -17,7 +19,7 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      //  title: const Text(' Main UI'),
+        //  title: const Text(' Main UI'),
         actions: [
           PopupMenuButton<MenuAction>(
             onSelected: (value) async {
@@ -44,43 +46,46 @@ class _NotesViewState extends State<NotesView> {
         ],
       ),
       body: Center(
-      //  alignment: Alignment.center,
-      //  margin: const EdgeInsets.all(20),
+        //  alignment: Alignment.center,
+        //  margin: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          Material(
-            child: InkWell(
-                onTap: (){},
-              splashColor: Colors.black,
-            
-            child: Ink.image(
-              
-              image: const AssetImage('lib/assets/images/appointment.jpeg')),
-              
+            Material(
+              elevation: 8,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const Appointment())));
+                },
+                splashColor: Colors.black,
+                child: Ink.image(
+                    image:
+                        const AssetImage('lib/assets/images/appointment.jpeg')),
               ),
-             
             ),
-            const SizedBox (height: 6),
-           const  Text('Appointment'),
-       GestureDetector(
-         onTap: () {
+            const SizedBox(height: 6),
+            const Text('Appointment',
+                style: TextStyle(fontSize: 32, color: Colors.white)),
+           InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => const FixCar())));
+              },
+              splashColor: Colors.black,
+              child: Ink.image(
+                image:
+               const AssetImage('lib/assets/images/fix.jpeg')), 
            
-         },
-       
-        child: Image.asset('lib/assets/images/fix.jpeg',
-        fit: BoxFit.cover,
-        width: 110.0,
-        height: 110.0,
-       ),
-       ),
-      const SizedBox(height: 6),
-       const Text('Fix Car'),
-         
+              ),
+            
+            const SizedBox(height: 6),
+            const Text('Fix Car',
+                style: TextStyle(fontSize: 32, color: Colors.white)),
           ],
-          
         ),
-       
       ),
     );
   }
