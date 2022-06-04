@@ -7,6 +7,7 @@ import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/notes.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
+import 'package:flutter_progress/views/select_garage.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
 import 'firebase_options.dart';
@@ -29,6 +30,7 @@ void main() async {
         loginRoute: (context) => const LoginView(),
         noteRoute: (context) => const NotesView(),
         registerRoute: (context) => const RegisterView(),
+        garageRoute: (context) => const SelectGarage(),
 
       },
     ),

@@ -1,0 +1,51 @@
+{
+  "AdminDetails": {
+    "Email": "",
+    "IDNumber": "",
+    "Name": "",
+    "PhoneNumber": ""
+  },
+  "Appointments": {
+    "ActiveAppointments": {
+      "Date": "",
+      "Name": "",
+      "Time": ""
+    },
+    "AllAppointments": {
+      "Date": "",
+      "Name": "",
+      "Time": ""
+    },
+    "CompletedAppointments": {
+      "Date": "",
+      "Name": "",
+      "Time": ""
+    }
+  },
+  "GarageDetails": {
+    "Location": {
+      "Latitude": "",
+      "Longitude": ""
+    },
+    "garagename": "",
+    "officenumber": ""
+  },
+  "MechanicsDetails": {
+    "employeeContactNumber": "0795822312",
+    "employeeSpecialty": "Engines",
+    "employeeemail": "brianmech@gmail.com",
+    "employeename": "Mike Mechanic",
+    "users": {
+      "employeeContactNumber": "12345676",
+      "employeeSpecialty": "Body ",
+      "employeeemail": "mugudemakufu12@gmail.com",
+      "employeename": "Mike Demakufu"
+    }
+  },
+  "users": {
+    "email": "",
+    "name": "",
+    "password": "",
+    "phonenumber": ""
+  }
+}
