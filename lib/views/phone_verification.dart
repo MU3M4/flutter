@@ -62,15 +62,15 @@ class _PhoneAuthState extends State<PhoneAuth> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Enter Your Mobile Number'),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.orange,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(
+        //     Icons.arrow_back,
+        //     color: Colors.orange,
+        //   ),
+        //   onPressed: () {
+        //     Navigator.of(context).pop();
+        //   },
+        // ),
       ),
       // ignore: dead_code
       body: Center(
@@ -145,7 +145,18 @@ class _PhoneAuthState extends State<PhoneAuth> {
     );
     //  return Column(mainAxisAlignment: MainAxisAlignment.center,
   }
+// Future<ConfirmationResult> signInWithPhoneNumber(
+//   String phoneNumber, [
+//   RecaptchaVerifier? verifier,
+// ]) async {
+//   assert(phoneNumber.isNotEmpty);
 
+//   verifier ??= RecaptchaVerifier();
+//   return ConfirmationResult._(
+//     this,
+//     await _delegate.signInWithPhoneNumber(phoneNumber, verifier.delegate),
+//   );
+// }
   void verifyPhoneNumber() {
     auth.verifyPhoneNumber(
         phoneNumber: _phone.text,

@@ -45,47 +45,44 @@ class _NotesViewState extends State<NotesView> {
           )
         ],
       ),
-      body: Center(
-        //  alignment: Alignment.center,
-        //  margin: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Material(
-              elevation: 8,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const Appointment())));
-                },
-                splashColor: Colors.black,
-                child: Ink.image(
-                    image:
-                        const AssetImage('lib/assets/images/appointment.jpeg')),
-              ),
-            ),
-            const SizedBox(height: 6),
-            const Text('Appointment',
-                style: TextStyle(fontSize: 32, color: Colors.white)),
-           InkWell(
+      body: Column(
+        // //  alignment: Alignment.center,
+        // //  margin: const EdgeInsets.all(20),
+        // child: Column
+
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Material(
+            elevation: 8,
+            child: InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => const FixCar())));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => const Appointment())));
               },
               splashColor: Colors.black,
               child: Ink.image(
-                image:
-               const AssetImage('lib/assets/images/fix.jpeg')), 
-           
-              ),
-            
-            const SizedBox(height: 6),
-            const Text('Fix Car',
-                style: TextStyle(fontSize: 32, color: Colors.white)),
-          ],
-        ),
+                  image:
+                      const AssetImage('lib/assets/images/appointment.jpeg')),
+            ),
+          ),
+          const SizedBox(height: 6),
+          const Text('Appointment',
+              style: TextStyle(fontSize: 32, color: Colors.white)),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => const FixCar())));
+            },
+            splashColor: Colors.black,
+            child: Ink.image(
+                image: const AssetImage('lib/assets/images/fix.jpeg')),
+          ),
+          const SizedBox(height: 6),
+          const Text('Fix Car',
+              style: TextStyle(fontSize: 32, color: Colors.white)),
+        ],
       ),
     );
   }
