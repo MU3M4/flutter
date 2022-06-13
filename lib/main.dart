@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
+import 'package:flutter_progress/views/fix_car.dart';
 import 'dart:developer' as devtools show log;
 import 'package:flutter_progress/views/login_view.dart';
-import 'package:flutter_progress/views/notes.dart';
+import 'package:flutter_progress/views/map_screen.dart';
+//import 'package:flutter_progress/views/notes.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
 import 'package:flutter_progress/views/select_garage.dart';
@@ -19,19 +21,19 @@ void main() async {
   );
   runApp(
     MaterialApp(
-      title: '',
+      title: 'Flutter Google Maps',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
       ),
-      home: const Splash(),
+      home: const MapScreen(),
       // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
       routes: {
         phoneRoute: (context) => const PhoneAuth(),
         loginRoute: (context) => const LoginView(),
-        noteRoute: (context) => const NotesView(),
+        //noteRoute: (context) => const NotesView(),
         registerRoute: (context) => const RegisterView(),
         garageRoute: (context) => const SelectGarage(),
-
       },
     ),
   );
@@ -60,7 +62,7 @@ class HomePage extends StatelessWidget {
             //  else {
             //    return const LoginView();
             // }
-            return const NotesView();
+            return const MapScreen();
 
           default:
             return const CircularProgressIndicator();

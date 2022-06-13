@@ -44,6 +44,8 @@ dependencies:
   page_transition: ^2.0.5
   google_maps_flutter: ^2.1.7
   http: ^0.13.4
+  dio: ^4.0.6
+  flutter_polyline_points: ^1.0.0
 
 dev_dependencies:
   flutter_test:

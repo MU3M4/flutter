@@ -2,7 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/firebase_options.dart';
 import 'package:flutter_progress/views/login_view.dart';
-import 'package:flutter_progress/views/notes.dart';
+//import 'package:flutter_progress/views/notes.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/signup.dart';
 import 'package:page_transition/page_transition.dart';

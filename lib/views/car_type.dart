@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
-import 'package:flutter_progress/views/notes.dart';
+import 'package:flutter_progress/views/map_screen.dart';
+
 
 class CarType extends StatefulWidget {
   const CarType({Key? key}) : super(key: key);
@@ -103,7 +104,7 @@ class _CarTypeState extends State<CarType> {
             Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) => const NotesView()),
+                            builder: ((context) => const MapScreen()),
                           ));
           },
           child: const Text('Continue'),
