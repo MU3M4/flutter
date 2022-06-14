@@ -31,7 +31,7 @@ void main() async {
       routes: {
         phoneRoute: (context) => const PhoneAuth(),
         loginRoute: (context) => const LoginView(),
-        //noteRoute: (context) => const NotesView(),
+        //mapRoute: (context) => const MapScreen(),
         registerRoute: (context) => const RegisterView(),
         garageRoute: (context) => const SelectGarage(),
       },

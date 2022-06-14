@@ -4,3 +4,4 @@ const noteRoute = '/notes/';
 const phoneRoute = '/phone/';
 const garageRoute = '/garage/';
 //const notesRoute = '/notes/';
+const mapRoute = '/map/';

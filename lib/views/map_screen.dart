@@ -16,9 +16,9 @@ class _MapScreenState extends State<MapScreen> {
     zoom: 11.5,
   );
   late GoogleMapController _googleMapController;
-  late Marker _origin;
-  late Marker _destination;
-  late Directions _info;
+  Marker? _origin;
+  Marker? _destination;
+  Directions? _info;
   @override
   void dispose() {
     _googleMapController.dispose();
@@ -36,7 +36,7 @@ class _MapScreenState extends State<MapScreen> {
             onPressed: () => _googleMapController.animateCamera(
               CameraUpdate.newCameraPosition(
                 CameraPosition(
-                  target: _origin.position,
+                  target: _origin!.position,
                   zoom: 14.5,
                   tilt: 50.0,
                 ),
@@ -52,7 +52,7 @@ class _MapScreenState extends State<MapScreen> {
             onPressed: () => _googleMapController.animateCamera(
               CameraUpdate.newCameraPosition(
                 CameraPosition(
-                    target: _destination.position, zoom: 14.5, tilt: 50.0),
+                    target: _destination!.position, zoom: 14.5, tilt: 50.0),
               ),
             ),
             style: TextButton.styleFrom(
@@ -72,15 +72,15 @@ class _MapScreenState extends State<MapScreen> {
             initialCameraPosition: _initialCameraPosition,
             onMapCreated: (controller) => _googleMapController = controller,
             markers: {
-              if (_origin != null) _origin,
-              if (_destination != null) _destination,
+              if (_origin != null) _origin!,
+              if (_destination != null) _destination!,
             },
             polylines: {
               if (_info != null)
               Polyline(polylineId: const PolylineId('overview_polyline'),
               color: Colors.red,
               width: 5,
-              points: _info.polylinePoints
+              points: _info!.polylinePoints
               .map((e) => LatLng(e.latitude, e.longitude))
               .toList(),
               ),
@@ -107,7 +107,7 @@ class _MapScreenState extends State<MapScreen> {
               ]
             ),
             child: Text(
-              '${_info.totalDistance}, ${_info.totalDuration}',
+              '${_info!.totalDistance}, ${_info!.totalDuration}',
               style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w600,
@@ -123,7 +123,7 @@ class _MapScreenState extends State<MapScreen> {
         foregroundColor: Colors.black,
         onPressed: () => _googleMapController.animateCamera(
           _info != null
-          ? CameraUpdate.newLatLngBounds(_info.bounds, 100.0)
+          ? CameraUpdate.newLatLngBounds(_info!.bounds, 100.0)
           : CameraUpdate.newCameraPosition(_initialCameraPosition),
         ),
         child: const Icon(Icons.center_focus_strong),
@@ -157,7 +157,7 @@ class _MapScreenState extends State<MapScreen> {
         );
       });
       final directions = await DirectionsRepository()
-      .getDirections(origin: _origin.position, destination: pos);
+      .getDirections(origin: _origin!.position, destination: pos);
       setState(() => _info = directions!);
     }
   }
