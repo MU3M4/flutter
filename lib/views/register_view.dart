@@ -39,7 +39,7 @@ class _RegisterViewState extends State<RegisterView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
-         leading: IconButton(
+        leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
             color: Colors.orange,
@@ -82,24 +82,25 @@ class _RegisterViewState extends State<RegisterView> {
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.orange),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.orange),
                   ),
-                    hintText: 'Password',
-                    prefixIcon: const Icon(Icons.lock),
-                    contentPadding:
-                        const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off),
-                      onPressed: () {
-                        setState(() {
-                          _isObscure = !_isObscure;
-                        });
-                      },
-                    ),
-                    ),
-                    textInputAction: TextInputAction.done,
+                  hintText: 'Password',
+                  prefixIcon: const Icon(Icons.lock),
+                  contentPadding:
+                      const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                  ),
+                ),
+                textInputAction: TextInputAction.done,
               ),
               const SizedBox(
                 height: 35,

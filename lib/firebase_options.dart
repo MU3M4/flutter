@@ -37,29 +37,33 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD_O7TwzjMlr_Vg9s9QhpOnsls8KaOWIEE',
-    appId: '1:512018361981:web:8b5b1e738771c4e38bcb14',
-    messagingSenderId: '512018361981',
-    projectId: 'notes-flirt',
-    authDomain: 'notes-flirt.firebaseapp.com',
-    storageBucket: 'notes-flirt.appspot.com',
+    apiKey: 'AIzaSyAH89SmA9RnEzXN7TiwCpe2UNXccmOuZfg',
+    appId: '1:1076653947330:web:f7b2b54310813f70d6be5b',
+    messagingSenderId: '1076653947330',
+    projectId: 'atta-web-app-a5135',
+    authDomain: 'atta-web-app-a5135.firebaseapp.com',
+    databaseURL: 'https://atta-web-app-a5135-default-rtdb.firebaseio.com',
+    storageBucket: 'atta-web-app-a5135.appspot.com',
+    measurementId: 'G-QV3CT7TBMZ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBz_Vudl9zfV-25I7P1jBye1FJmV9QtWcg',
-    appId: '1:512018361981:android:92f4e58fb792e6fa8bcb14',
-    messagingSenderId: '512018361981',
-    projectId: 'notes-flirt',
-    storageBucket: 'notes-flirt.appspot.com',
+    apiKey: 'AIzaSyA8H7Fo7uxatEmyPhCrReaPOm5md9JnVbY',
+    appId: '1:1076653947330:android:79fa2418b2e17ab2d6be5b',
+    messagingSenderId: '1076653947330',
+    projectId: 'atta-web-app-a5135',
+    databaseURL: 'https://atta-web-app-a5135-default-rtdb.firebaseio.com',
+    storageBucket: 'atta-web-app-a5135.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAGsAkXmZ-OZAZzSgqq3tRHAmQn8xl-sdE',
-    appId: '1:512018361981:ios:7c4dc41280ffd7078bcb14',
-    messagingSenderId: '512018361981',
-    projectId: 'notes-flirt',
-    storageBucket: 'notes-flirt.appspot.com',
-    iosClientId: '512018361981-5uiq9cgtqgv6asc60p9l46g4pf4bdk5c.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCUR_g_iaSt_45zK4na80-cefLmnwnReOI',
+    appId: '1:1076653947330:ios:cf9666442afa7c24d6be5b',
+    messagingSenderId: '1076653947330',
+    projectId: 'atta-web-app-a5135',
+    databaseURL: 'https://atta-web-app-a5135-default-rtdb.firebaseio.com',
+    storageBucket: 'atta-web-app-a5135.appspot.com',
+    iosClientId: '1076653947330-e04c196mnsalcqev97oif31kp50tvn6k.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterProgress',
   );
 }

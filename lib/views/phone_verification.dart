@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_progress/views/Signup.dart';
+import 'package:flutter_progress/views/register_view.dart';
 
 import '../firebase_options.dart';
 
@@ -134,7 +134,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SignUp()));
+                              builder: (context) => const RegisterView()));
                     },
                     child: Text(otpCodeVisible ? "Next" : "verify"),
                   ),

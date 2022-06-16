@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:512018361981:ios:7c4dc41280ffd7078bcb14",
-  "FIREBASE_PROJECT_ID": "notes-flirt",
-  "GCM_SENDER_ID": "512018361981"
+  "GOOGLE_APP_ID": "1:1076653947330:ios:cf9666442afa7c24d6be5b",
+  "FIREBASE_PROJECT_ID": "atta-web-app-a5135",
+  "GCM_SENDER_ID": "1076653947330"
 }

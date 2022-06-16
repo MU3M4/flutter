@@ -2,14 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
-import 'package:flutter_progress/views/fix_car.dart';
+import 'package:flutter_progress/views/forgot_password.dart';
+import 'package:flutter_progress/views/home_screen.dart';
 import 'dart:developer' as devtools show log;
 import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/map_screen.dart';
-//import 'package:flutter_progress/views/notes.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
-import 'package:flutter_progress/views/select_garage.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
 import 'firebase_options.dart';
@@ -26,14 +25,16 @@ void main() async {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: const MapScreen(),
+      home: const Splash(),
       // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
       routes: {
         phoneRoute: (context) => const PhoneAuth(),
         loginRoute: (context) => const LoginView(),
-        //mapRoute: (context) => const MapScreen(),
+        mapRoute: (context) => const MapScreen(),
         registerRoute: (context) => const RegisterView(),
-        garageRoute: (context) => const SelectGarage(),
+        homeRoute:(context) => const HomeScreen(),
+        forgotRoute:(context) => const ForgotPassword(),
+        
       },
     ),
   );

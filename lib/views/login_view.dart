@@ -142,13 +142,21 @@ class _LoginViewState extends State<LoginView> {
                   child: const Text("Login"),
                 ),
                 TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        registerRoute,
-                        (route) => false,
-                      );
-                    },
-                    child: const Text("Not Registered? Register Here!"))
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      registerRoute,
+                      (route) => false,
+                    );
+                  },
+                  child: const Text("Not Registered? Register Here!"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil(forgotRoute, (route) => false,);
+                  },
+                  child: const Text('Forgot Password?'),
+                ),
               ],
             ),
           );
