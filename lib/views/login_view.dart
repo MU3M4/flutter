@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
-import 'dart:developer' as devtools show log;
 import '../firebase_options.dart';
 
 class LoginView extends StatefulWidget {
@@ -66,98 +65,101 @@ class _LoginViewState extends State<LoginView> {
               break;
           }
           return Center(
-            child: Column(
-              children: <Widget>[
-                TextField(
-                  controller: _email,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.orange),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                children: <Widget>[
+                  TextField(
+                    controller: _email,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.orange),
+                      ),
+                      prefixIcon: const Icon(Icons.mail),
+                      hintText: 'Email Address',
                     ),
-                    prefixIcon: const Icon(Icons.mail),
-                    hintText: 'Email Address',
+                    textInputAction: TextInputAction.next,
                   ),
-                  textInputAction: TextInputAction.next,
-                ),
-                TextField(
-                  controller: _password,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.orange),
+                  TextField(
+                    controller: _password,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.orange),
+                      ),
+                      hintText: 'Password',
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                            _isObscure ? Icons.visibility : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                      ),
                     ),
-                    hintText: 'Password',
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off),
-                      onPressed: () {
-                        setState(() {
-                          _isObscure = !_isObscure;
-                        });
-                      },
-                    ),
+                    textInputAction: TextInputAction.done,
                   ),
-                  textInputAction: TextInputAction.done,
-                ),
-                TextButton(
-                  onPressed: () async {
-                    final email = _email.text;
-                    final password = _password.text;
-                    try {
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
+                  TextButton(
+                    onPressed: () async {
+                      final email = _email.text;
+                      final password = _password.text;
+                      try {
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: email,
+                          password: password,
+                        );
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          mapRoute,
+                          (route) => false,
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          await showErrorDialog(
+                            context,
+                            'user not found',
+                          );
+                        } else if (e.code == 'wrong-password') {
+                          await showErrorDialog(
+                            context,
+                            'Wrong credentials',
+                          );
+                        } else {
+                          await showErrorDialog(
+                            context,
+                            'Error: ${e.code}',
+                          );
+                        }
+                      }
+                    },
+                    child: const Text("Login"),
+                  ),
+                  TextButton(
+                    onPressed: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                        mapRoute,
+                        registerRoute,
                         (route) => false,
                       );
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'user-not-found') {
-                        await showErrorDialog(
-                          context,
-                          'user not found',
-                        );
-                      } else if (e.code == 'wrong-password') {
-                        await showErrorDialog(
-                          context,
-                          'Wrong credentials',
-                        );
-                      } else {
-                        await showErrorDialog(
-                          context,
-                          'Error: ${e.code}',
-                        );
-                      }
-                    }
-                  },
-                  child: const Text("Login"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      registerRoute,
-                      (route) => false,
-                    );
-                  },
-                  child: const Text("Not Registered? Register Here!"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil(forgotRoute, (route) => false,);
-                  },
-                  child: const Text('Forgot Password?'),
-                ),
-              ],
+                    },
+                    child: const Text("Not Registered? Register Here!"),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil(forgotRoute, (route) => false,);
+                    },
+                    child: const Text('Forgot Password?'),
+                  ),
+                ],
+              ),
             ),
           );
           //default:return const Text('Loading...');
