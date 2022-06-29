@@ -18,8 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        centerTitle: true,
         title: Image.asset(
-          '',
+          'lib/assets/images/splash.jpg',
           height: 70,
         ),
         elevation: 0,
@@ -46,13 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: const [
               Expanded(
                 child: ActionContainerLarge(
-                    img: 'assets/images/appointment.jpeg',
+                    img: 'lib/assets/images/appointment.jpeg',
                     title: 'Appointment'),
               ),
               SizedBox(width: 20),
               Expanded(
                 child: ActionContainerLarge(
-                    img: 'assets/images/fix.jpeg', title: 'Fix Car'),
+                    img: 'lib/assets/images/fix.jpeg', title: 'Fix Car'),
               ),
             ],
           ),
@@ -61,28 +62,28 @@ class _HomeScreenState extends State<HomeScreen> {
             children: const [
               Expanded(
                 child: ActionContainersSmall(
-                  img: '',
+                  img: 'lib/assets/images/bus.jpg',
                   title: 'Car Profile',
                 ),
               ),
               SizedBox(width: 10),
               Expanded(
                 child: ActionContainersSmall(
-                  img: '',
+                  img: 'lib/assets/images/suv.jpg',
                   title: 'Car Profile',
                 ),
               ),
               SizedBox(width: 10),
               Expanded(
                 child: ActionContainersSmall(
-                  img: '',
+                  img: 'lib/assets/images/suv.jpg',
                   title: 'Car Profile',
                 ),
               ),
               SizedBox(width: 10),
               Expanded(
                 child: ActionContainersSmall(
-                  img: '',
+                  img: 'lib/assets/images/car.jpg',
                   title: 'Car Profile',
                 ),
               ),
@@ -92,9 +93,15 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 20),
           TextField(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> const SearchScreen(startPosition: null, endPosition: null,),
-              fullscreenDialog: true,
-              ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>  SearchScreen(
+                    // startPosition: null,
+                    // endPosition: null,
+                  ),
+                  fullscreenDialog: true,
+                ),
               );
             },
             autofocus: false,
@@ -108,12 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
               border: InputBorder.none,
             ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: ((context) => const MapScreen())));
-              },
-              child: const Text('Google Maps'))
+          // ElevatedButton(
+          //     onPressed: () {
+          //       Navigator.of(context).push(MaterialPageRoute(
+          //           builder: ((context) => const MapScreen())));
+          //     },
+          //     child: const Text('Google Maps'))
         ]),
       ),
     );

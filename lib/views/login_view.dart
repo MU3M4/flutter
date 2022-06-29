@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
+import 'package:flutter_progress/main.dart';
+import 'package:flutter_progress/views/home_screen.dart';
 import '../firebase_options.dart';
 
 class LoginView extends StatefulWidget {
@@ -69,46 +71,58 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: <Widget>[
-                  TextField(
-                    controller: _email,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.orange),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _email,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.orange),
+                        ),
+                        prefixIcon: const Icon(Icons.mail),
+                        hintText: 'Email Address',
                       ),
-                      prefixIcon: const Icon(Icons.mail),
-                      hintText: 'Email Address',
+                      textInputAction: TextInputAction.next,
                     ),
-                    textInputAction: TextInputAction.next,
                   ),
-                  TextField(
-                    controller: _password,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.orange),
+                  const SizedBox(
+                height: 15,
+              ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _password,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.orange),
+                        ),
+                        hintText: 'Password',
+                        prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                              _isObscure ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                        ),
                       ),
-                      hintText: 'Password',
-                      prefixIcon: const Icon(Icons.lock),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                            _isObscure ? Icons.visibility : Icons.visibility_off),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        },
-                      ),
+                      textInputAction: TextInputAction.done,
                     ),
-                    textInputAction: TextInputAction.done,
                   ),
-                  TextButton(
+                  const SizedBox(
+                height: 15,
+              ),
+                  ElevatedButton(
                     onPressed: () async {
                       final email = _email.text;
                       final password = _password.text;
@@ -118,7 +132,7 @@ class _LoginViewState extends State<LoginView> {
                           password: password,
                         );
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                          mapRoute,
+                          homeRoute,
                           (route) => false,
                         );
                       } on FirebaseAuthException catch (e) {
@@ -142,6 +156,9 @@ class _LoginViewState extends State<LoginView> {
                     },
                     child: const Text("Login"),
                   ),
+                  const SizedBox(
+                height: 15,
+              ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
@@ -151,6 +168,9 @@ class _LoginViewState extends State<LoginView> {
                     },
                     child: const Text("Not Registered? Register Here!"),
                   ),
+                  const SizedBox(
+                height: 15,
+              ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context)

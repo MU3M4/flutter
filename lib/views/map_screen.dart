@@ -10,13 +10,11 @@ import 'map_utils.dart';
 //import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 
 class MapScreen extends StatefulWidget {
+  final DetailsResult? startPosition;
+  final DetailsResult? endPosition;
   const MapScreen(
-      {Key? key, DetailsResult? endPosition, DetailsResult? startPosition})
+      {Key? key, this. endPosition, this. startPosition})
       : super(key: key);
-
-  get startPosition => null;
-
-  get endPosition => null;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -92,7 +90,7 @@ class _MapScreenState extends State<MapScreen> {
           )),
       body: Stack(children: [
         LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints){
+            builder: (BuildContext context, BoxConstraints constraints) {
           return SizedBox(
             height: constraints.maxHeight / 2,
             child: GoogleMap(

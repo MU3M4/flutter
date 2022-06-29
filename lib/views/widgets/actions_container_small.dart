@@ -10,6 +10,7 @@ class ActionContainersSmall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: 100,
         decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(5),
@@ -19,7 +20,7 @@ class ActionContainersSmall extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(img, height: 30),
+              Image.asset(img, height: 50),
               Text(
                 title,
                 style: const TextStyle(fontWeight: FontWeight.bold),

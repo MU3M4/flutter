@@ -33,7 +33,6 @@ void main() async {
         registerRoute: (context) => const RegisterView(),
         homeRoute:(context) => const HomeScreen(),
         forgotRoute:(context) =>  ForgotPassword(),
-        
       },
     ),
   );

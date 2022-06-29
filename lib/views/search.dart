@@ -1,212 +1,101 @@
 import 'dart:async';
-
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_progress/views/map_screen.dart';
-import 'package:google_place/google_place.dart';
+import 'package:google_maps_webservice/places.dart';
+import 'package:google_api_headers/google_api_headers.dart';
+
+
+
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key, required this.startPosition, required this.endPosition}) : super(key: key );
-  final DetailsResult? startPosition;
-  final DetailsResult? endPosition;
+  // SearchScreen(
+  //   {Key? key,  required })
+  //     : super(key: key);
+  // final DetailsResult? startPosition;
+  // final DetailsResult? endPosition;
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
+const kGoogleApiKey = 'AIzaSyAH89SmA9RnEzXN7TiwCpe2UNXccmOuZfg';
+final homeScaffoldKey = GlobalKey<ScaffoldState>();
+
 class _SearchScreenState extends State<SearchScreen> {
-  final _startSearchFieldController = TextEditingController();
-  final _endSearchFieldController = TextEditingController();
-
-//DetailsResult is used to give the user details about a place.
-//the details include the latlng position and so much more...
-
-  DetailsResult? startPosition;
-  DetailsResult? endPosition;
-
-// Used to focus on a particular text field
-
-  late FocusNode startFocusNode;
-  late FocusNode endFocusNode;
-
-// import the google place
-//used to highlight places on the Google Map API
-// Enable the Places API in Google Cloud to function properly.
-
-  late GooglePlace googlePlace;
-  List<AutocompletePrediction> predictions = [];
-  Timer? _debounce;
-  @override
-  void initState() {
-    
-    super.initState();
-    String apiKEY = 'AIzaSyAH89SmA9RnEzXN7TiwCpe2UNXccmOuZfg';
-    googlePlace = GooglePlace(apiKEY);
-
-    startFocusNode = FocusNode();
-    endFocusNode = FocusNode();
-  }
-
-  @override
-  void dispose() {
-    
-    super.dispose();
-    startFocusNode.dispose();
-    endFocusNode.dispose();
-  }
-
-  void autoCompleteSearch(String value) async {
-    var result = await googlePlace.autocomplete.get(value);
-    if (result != null && result.predictions != null && mounted) {
-      print(result.predictions!.first.description);
-      setState(() {
-        predictions = result.predictions!;
-      });
-    }
-  }
+  static const CameraPosition initialCameraPosition =
+      CameraPosition(target: LatLng(-1.286389, 36.817223), zoom: 14.5);
+  Set<Marker> markersList = {};
+  late GoogleMapController googleMapController;
+  final Mode _mode = Mode.overlay;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: homeScaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: const BackButton(color: Colors.black),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _startSearchFieldController,
-              focusNode: startFocusNode,
-              autofocus: false,
-              style: const TextStyle(fontSize: 24),
-              decoration: InputDecoration(
-                  hintText: 'Starting Point?',
-                  hintStyle: const TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 24),
-                  filled: true,
-                  fillColor: Colors.grey[300],
-                  border: InputBorder.none,
-                  suffixIcon: _startSearchFieldController.text.isNotEmpty
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              predictions = [];
-                              _startSearchFieldController.clear();
-                            });
-                          },
-                          icon: const Icon(Icons.clear_outlined),
-                        )
-                      : null),
-              onChanged: (value) {
-                if (_debounce?.isActive ?? false) _debounce!.cancel();
-                _debounce = Timer(const Duration(milliseconds: 1000), () {
-                  if (value.isNotEmpty) {
-                    //call the places api
-                    autoCompleteSearch(value);
-                  } else {
-                    //clear the textfield
-                    setState(() {
-                      predictions = [];
-                      startPosition = null;
-                    });
-                  }
-                });
-              },
-            ),
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: predictions.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: const CircleAvatar(
-                      child: Icon(
-                        Icons.pin_drop,
-                        color: Colors.white,
-                      ),
-                    ),
-                    title: Text(predictions[index].description.toString()),
-                    onTap: () async {
-                      final placeId = predictions[index].placeId!;
-                      final details = await googlePlace.details.get(placeId);
-                      if (details != null &&
-                          details.result != null &&
-                          mounted) {
-                        if (startFocusNode.hasFocus) {
-                          setState(() {
-                            startPosition = details.result;
-                            _startSearchFieldController.text =
-                                details.result!.name!;
-                            predictions = [];
-                          });
-                        } else {
-                          setState(() {
-                            endPosition = details.result;
-                            _endSearchFieldController.text =
-                                details.result!.name!;
-                            predictions = [];
-                          });
-                        }
-                        if (startPosition != null && endPosition != null) {
-                          print('navigate');
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => MapScreen(
-                                  startPosition: startPosition,
-                                  endPosition: endPosition)),
-                            ),
-                          );
-                        }
-                      }
-                    },
-                  );
-                }),
-            const SizedBox(height: 10),
-            TextField(
-                controller: _endSearchFieldController,
-                autofocus: false,
-                focusNode: endFocusNode,
-                enabled: _startSearchFieldController.text.isNotEmpty &&
-                    startPosition != null,
-                style: const TextStyle(fontSize: 24),
-                decoration: InputDecoration(
-                    hintText: 'End Point?',
-                    hintStyle: const TextStyle(
-                        fontWeight: FontWeight.w500, fontSize: 24),
-                    filled: true,
-                    fillColor: Colors.grey[300],
-                    border: InputBorder.none,
-                    suffixIcon: _endSearchFieldController.text.isNotEmpty
-                        ? IconButton(
-                            onPressed: () {
-                              setState(() {
-                                predictions = [];
-                                _endSearchFieldController.clear();
-                              });
-                            },
-                            icon: const Icon(Icons.clear_outlined),
-                          )
-                        : null),
-                onChanged: (value) {
-                  if (_debounce?.isActive ?? false) _debounce!.cancel();
-                  _debounce = Timer(const Duration(milliseconds: 1000), () {
-                    if (value.isNotEmpty) {
-                      //call the places api
-                      autoCompleteSearch(value);
-                    } else {
-                      //clear the textfield
-                      setState(() {
-                        predictions = [];
-                        endPosition = null;
-                      });
-                    }
-                  });
-                }),
-          ],
+      body: Stack(children: [
+        GoogleMap(
+          initialCameraPosition: initialCameraPosition,
+          markers: markersList,
+          mapType: MapType.normal,
+          onMapCreated: (GoogleMapController controller) {
+            googleMapController = controller;
+          },
         ),
-      ),
+        ElevatedButton(
+          onPressed: _handlePressButton,
+          child: const Text('Search Places'),
+        ),
+      ]),
     );
   }
-}
+
+  Future<void> _handlePressButton() async {
+    Prediction? p = await PlacesAutocomplete.show(
+        context: context,
+        apiKey: kGoogleApiKey,
+        onError: onError,
+        mode: _mode,
+        language: 'en',
+        strictbounds: false,
+        types: [""],
+        decoration: InputDecoration(
+            // ignore: prefer_const_constructors
+            hintText: 'Search',
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20), borderSide: const BorderSide(color: Colors.white))),
+       components: [new Component(Component.country, "ke")]);
+
+    displayPrediction(p!, homeScaffoldKey.currentState);
+  }
+
+  void onError(PlacesAutocompleteResponse response) {
+    homeScaffoldKey.currentState!
+        .showSnackBar(SnackBar(content: Text(response.errorMessage!)));
+  }
+  
+  Future <void> displayPrediction(Prediction p, ScaffoldState? currentState) async {
+    GoogleMapsPlaces places = GoogleMapsPlaces(
+      apiKey: kGoogleApiKey,
+      apiHeaders: await const GoogleApiHeaders().getHeaders(),
+    );
+      PlacesDetailsResponse detail = await places.getDetailsByPlaceId(p.placeId!);
+
+      final lat = detail.result.geometry!.location.lat;
+      final lng = detail.result.geometry!.location.lng;
+
+      markersList.clear();
+      markersList.add(Marker(markerId: const MarkerId("0"), position: LatLng(lat, lng), infoWindow:InfoWindow(title: detail.result.name)));
+
+      setState(() {
+      });
+
+      googleMapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat,lng), 14.0));
+    }
+  }
+  
