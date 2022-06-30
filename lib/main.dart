@@ -22,7 +22,7 @@ void main() async {
       title: 'Flutter Google Maps',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primarySwatch: Colors.deepOrange,
       ),
       home: const Splash(),
       // initialRoute: phoneRoute: (content) => const PhoneAuth(),};

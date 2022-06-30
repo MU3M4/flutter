@@ -35,7 +35,7 @@ class _SplashState extends State<Splash> {
     return AnimatedSplashScreen(
       splash: 'lib/assets/images/splash.jpg',
       duration: 3000,
-      nextScreen: const RegisterView(),
+      nextScreen: RegisterView(),
       splashTransition: SplashTransition.slideTransition,
       pageTransitionType: PageTransitionType.leftToRight,
       backgroundColor: Colors.black,

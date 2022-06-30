@@ -63,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
         mode: _mode,
         language: 'en',
         strictbounds: false,
-        types: [""],
+        types: ["garage"],
         decoration: InputDecoration(
             // ignore: prefer_const_constructors
             hintText: 'Search',
