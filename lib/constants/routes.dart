@@ -7,3 +7,4 @@ const garageRoute = '/garage/';
 const mapRoute = '/map/';
 const homeRoute = '/home/';
 const forgotRoute = '/forgot/';
+const hiddenRoute = '/hidden/';

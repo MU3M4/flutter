@@ -132,7 +132,7 @@ class _LoginViewState extends State<LoginView> {
                           password: password,
                         );
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                          homeRoute,
+                          hiddenRoute,
                           (route) => false,
                         );
                       } on FirebaseAuthException catch (e) {

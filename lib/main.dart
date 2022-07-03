@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
 import 'package:flutter_progress/views/forgot_password.dart';
+import 'package:flutter_progress/views/hidden_drawer.dart';
 import 'package:flutter_progress/views/home_screen.dart';
 import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/map_screen.dart';
@@ -33,6 +34,7 @@ void main() async {
         registerRoute: (context) => const RegisterView(),
         homeRoute:(context) => const HomeScreen(),
         forgotRoute:(context) =>  ForgotPassword(),
+        hiddenRoute:(context) => const HiddenDrawer(),
       },
     ),
   );
@@ -54,5 +56,7 @@ class HomePage extends StatelessWidget {
       }
     )
     );
+    
   }
+  
      

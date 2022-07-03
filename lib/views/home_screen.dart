@@ -13,6 +13,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // late Database db;
+  // List docs = [];
+  // initialise() {
+  //   db = Database();
+  //   db.initiliase();
+  //   db.read().then((value) => {
+  //         setState(() {
+  //           docs = value;
+  //         })
+  //       });
+  // }
+
+  // @override
+  // void initState() {
+  //   initialise();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,23 +148,25 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.black,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-            child: const GNav( 
-              backgroundColor: Colors.black,
-              color: Colors.white,
-              activeColor: Colors.grey,
-              tabBackgroundColor: Colors.white10,
-              padding:EdgeInsets.all(16),
-              gap: 6,
-            tabs: [
-              GButton(icon: Icons.home,
-              text:  'Home',),
-              GButton(icon: Icons.account_box,
-              text: 'Account'),
-              GButton(icon: Icons.search,
-              text: 'Search',),
-              GButton(icon: Icons.map, 
-              text: 'Map'),
-            ]),
+            child: const GNav(
+                backgroundColor: Colors.black,
+                color: Colors.white,
+                activeColor: Colors.grey,
+                tabBackgroundColor: Colors.white10,
+                padding: EdgeInsets.all(16),
+                gap: 6,
+                tabs: [
+                  GButton(
+                    icon: Icons.home,
+                    text: 'Home',
+                  ),
+                  GButton(icon: Icons.account_box, text: 'Account'),
+                  GButton(
+                    icon: Icons.search,
+                    text: 'Search',
+                  ),
+                  GButton(icon: Icons.map, text: 'Map'),
+                ]),
           ),
         ));
   }

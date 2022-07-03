@@ -47,8 +47,8 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       backgroundColorMenu: Colors.orange.shade200,
       screens: _pages,
       initPositionSelected: 0,
-      slidePercent: 20,
-      contentCornerRadius: 100,
+      slidePercent: 40,
+      //contentCornerRadius: 100,
     );
   }
 }
