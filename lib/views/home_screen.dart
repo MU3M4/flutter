@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progress/views/current_location.dart';
 import 'package:flutter_progress/views/map_screen.dart';
 import 'package:flutter_progress/views/search.dart';
 import 'package:flutter_progress/views/widgets/actions_container_small.dart';
 import 'package:flutter_progress/views/widgets/actions_containers_large.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'location_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -116,10 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SearchScreen(
-                          // startPosition: null,
-                          // endPosition: null,
-                          ),
+                      builder: (context) => const CurrentLocation(),
                       fullscreenDialog: true,
                     ),
                   );
@@ -147,26 +146,32 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: Container(
           color: Colors.black,
           child: Padding(
+            
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
             child: const GNav(
-                backgroundColor: Colors.black,
-                color: Colors.white,
-                activeColor: Colors.grey,
-                tabBackgroundColor: Colors.white10,
-                padding: EdgeInsets.all(16),
-                gap: 6,
-                tabs: [
-                  GButton(
-                    icon: Icons.home,
-                    text: 'Home',
-                  ),
-                  GButton(icon: Icons.account_box, text: 'Account'),
-                  GButton(
-                    icon: Icons.search,
-                    text: 'Search',
-                  ),
-                  GButton(icon: Icons.map, text: 'Map'),
-                ]),
+              backgroundColor: Colors.black,
+              color: Colors.white,
+              activeColor: Colors.grey,
+              tabBackgroundColor: Colors.white10,
+              padding: EdgeInsets.all(16),
+              gap: 6,
+              tabs: [
+                GButton(
+                  icon: Icons.home,
+                  text: 'Home',
+                ),
+                GButton(icon: Icons.account_box, text: 'Account'),
+                GButton(
+                  icon: Icons.search,
+                  text: 'Search',
+                ),
+                GButton(
+                  icon: Icons.map,
+                  text: 'Map',
+                ),
+              ],
+            ),
+            
           ),
         ));
   }

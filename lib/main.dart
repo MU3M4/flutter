@@ -5,22 +5,29 @@ import 'package:flutter_progress/constants/routes.dart';
 import 'package:flutter_progress/views/forgot_password.dart';
 import 'package:flutter_progress/views/hidden_drawer.dart';
 import 'package:flutter_progress/views/home_screen.dart';
+import 'package:flutter_progress/views/location_controller.dart';
 import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/map_screen.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/state_manager.dart';
 import 'firebase_options.dart';
+import 'package:get/get.dart';
+import 'package:flutter_progress/views/location_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Get.put(LocationController());
   runApp(
     MaterialApp(
-      title: 'Flutter Google Maps',
+      title: 'Atta',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
@@ -32,9 +39,10 @@ void main() async {
         loginRoute: (context) => const LoginView(),
         mapRoute: (context) => const MapScreen(),
         registerRoute: (context) => const RegisterView(),
-        homeRoute:(context) => const HomeScreen(),
-        forgotRoute:(context) =>  ForgotPassword(),
-        hiddenRoute:(context) => const HiddenDrawer(),
+        homeRoute: (context) => const HomeScreen(),
+        forgotRoute: (context) => ForgotPassword(),
+        hiddenRoute: (context) => const HiddenDrawer(),
+        //locationRoute: (context) => LocationController(),
       },
     ),
   );
@@ -45,18 +53,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot){
-        if (snapshot.hasData){
-          return const VerifyEmailView();
-        } else{
-          return const LoginView();
-        }
-      }
-    )
-    );
-    
-  }
-  
-     
+        body: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return const VerifyEmailView();
+              } else {
+                return const LoginView();
+              }
+            }),
+      );
+}

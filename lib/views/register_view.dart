@@ -60,8 +60,7 @@ class _RegisterViewState extends State<RegisterView> {
     super.dispose();
   }
 
-  final CollectionReference _attaUsers =
-      FirebaseFirestore.instance.collection('atta-users');
+  
   Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
     if (documentSnapshot != null) {
       _fname.text = documentSnapshot['First Name'];
@@ -82,6 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _attaUsers = FirebaseFirestore.instance.collection('atta-users');
     debugShowCheckedModeBanner:
     false;
     return Scaffold(
