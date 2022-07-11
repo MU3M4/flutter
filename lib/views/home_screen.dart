@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progress/views/appointment.dart';
 import 'package:flutter_progress/views/current_location.dart';
+import 'package:flutter_progress/views/fix_car.dart';
 import 'package:flutter_progress/views/map_screen.dart';
 import 'package:flutter_progress/views/search.dart';
 import 'package:flutter_progress/views/widgets/actions_container_small.dart';
@@ -65,75 +67,109 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Row(
-                children: const [
-                  Expanded(
-                    child: ActionContainerLarge(
-                        img: 'lib/assets/images/appointment.jpeg',
-                        title: 'Appointment'),
-                  ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: ActionContainerLarge(
-                        img: 'lib/assets/images/fix.jpeg', title: 'Fix Car'),
-                  ),
-                ],
+              GestureDetector(
+                onTap:() {
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => const AppointmentDetails())));
+                },
+                child: Image.asset("lib/assets/images/appointment.jpeg",
+                    height: 200,
+                    width: 400,
+                    colorBlendMode: BlendMode.darken,
+                    semanticLabel: 'Appointment'),
               ),
               const SizedBox(height: 20),
-              Row(
-                children: const [
-                  Expanded(
-                    child: ActionContainersSmall(
-                      img: 'lib/assets/images/bus.jpg',
-                      title: 'Car Profile',
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: ActionContainersSmall(
-                      img: 'lib/assets/images/suv.jpg',
-                      title: 'Car Profile',
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: ActionContainersSmall(
-                      img: 'lib/assets/images/suv.jpg',
-                      title: 'Car Profile',
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: ActionContainersSmall(
-                      img: 'lib/assets/images/car.jpg',
-                      title: 'Car Profile',
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
-              ),
-              const SizedBox(height: 20),
-              TextField(
+              GestureDetector(
                 onTap: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CurrentLocation(),
-                      fullscreenDialog: true,
-                    ),
-                  );
+                      context, MaterialPageRoute(builder: (context)=> const FixCar()));
                 },
-                autofocus: false,
-                showCursor: false,
-                decoration: InputDecoration(
-                  hintText: 'Where to?',
-                  hintStyle: const TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 24),
-                  filled: true,
-                  fillColor: Colors.grey[300],
-                  border: InputBorder.none,
+                child: Image.asset(
+                  'lib/assets/images/fix.jpeg',
+                  height: 200,
+                  width: 400,
+                  fit: BoxFit.contain,
+                  colorBlendMode: BlendMode.darken,
+                  semanticLabel: 'Fix Car',
                 ),
               ),
+              const SizedBox(height: 20),
+            
+              // Row(
+              //   children: const [
+              //     GestureDetector(
+              //       onTap:(){
+
+              //       },
+              //       child: Expanded(
+                  
+                      
+              //           child: ActionContainerLarge(
+              //               img: 'lib/assets/images/appointment.jpeg',
+              //               title: 'Appointment'),
+              //         ),
+              //     ),
+              //     ),
+
+              //     SizedBox(width: 20),
+              //     Expanded(
+
+              //       child: ActionContainerLarge(
+              //           img: 'lib/assets/images/fix.jpeg', title: 'Fix Car'),
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(height: 20),
+              // Row(
+              //   children: const [
+              //     Expanded(
+              //       child: ActionContainersSmall(
+              //         img: 'lib/assets/images/bus.jpg',
+              //         title: 'Car Profile',
+              //       ),
+              //     ),
+              //     SizedBox(width: 10),
+              //     Expanded(
+              //       child: ActionContainersSmall(
+              //         img: 'lib/assets/images/suv.jpg',
+              //         title: 'Car Profile',
+              //       ),
+              //     ),
+              //     SizedBox(width: 10),
+              //     Expanded(
+              //       child: ActionContainersSmall(
+              //         img: 'lib/assets/images/suv.jpg',
+              //         title: 'Car Profile',
+              //       ),
+              //     ),
+              //     SizedBox(width: 10),
+              //     Expanded(
+              //       child: ActionContainersSmall(
+              //         img: 'lib/assets/images/car.jpg',
+              //         title: 'Car Profile',
+              //       ),
+
+              // const SizedBox(height: 20),
+              // TextField(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => SearchScreen(),
+              //         fullscreenDialog: true,
+              //       ),
+              //     );
+              //   },
+              //   autofocus: false,
+              //   showCursor: false,
+              //   decoration: InputDecoration(
+              //     hintText: 'Where to?',
+              //     hintStyle: const TextStyle(
+              //         fontWeight: FontWeight.w500, fontSize: 24),
+              //     filled: true,
+              //     fillColor: Colors.grey[300],
+              //     border: InputBorder.none,
+              //   ),
+              // ),
               // ElevatedButton(
               //     onPressed: () {
               //       Navigator.of(context).push(MaterialPageRoute(
@@ -146,7 +182,6 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: Container(
           color: Colors.black,
           child: Padding(
-            
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
             child: const GNav(
               backgroundColor: Colors.black,
@@ -171,7 +206,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            
           ),
         ));
   }

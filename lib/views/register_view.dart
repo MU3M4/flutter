@@ -44,7 +44,7 @@ class _RegisterViewState extends State<RegisterView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _isObscure = true;
-  
+
   get documentSnapshot => null;
 
   @override
@@ -60,7 +60,6 @@ class _RegisterViewState extends State<RegisterView> {
     super.dispose();
   }
 
-  
   Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
     if (documentSnapshot != null) {
       _fname.text = documentSnapshot['First Name'];
@@ -81,7 +80,8 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _attaUsers = FirebaseFirestore.instance.collection('atta-users');
+    final CollectionReference _attaUsers =
+        FirebaseFirestore.instance.collection('atta-users');
     debugShowCheckedModeBanner:
     false;
     return Scaffold(
@@ -422,6 +422,7 @@ class _RegisterViewState extends State<RegisterView> {
                             final userCredential = await FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
                                     email: email, password: password);
+                           // User updateUser = FirebaseAuth.instance.currentUser;
                             devtools.log(userCredential.toString());
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
