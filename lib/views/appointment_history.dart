@@ -14,7 +14,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text("Appointment History"),
+        title: const Text("Appointment History"),
       )
     );
   }

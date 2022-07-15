@@ -5,26 +5,20 @@ import 'package:flutter_progress/constants/routes.dart';
 import 'package:flutter_progress/views/forgot_password.dart';
 import 'package:flutter_progress/views/hidden_drawer.dart';
 import 'package:flutter_progress/views/home_screen.dart';
-import 'package:flutter_progress/views/location_controller.dart';
 import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/map_screen.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
-import 'package:get/instance_manager.dart';
-import 'package:get/state_manager.dart';
 import 'firebase_options.dart';
-import 'package:get/get.dart';
-import 'package:flutter_progress/views/location_controller.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // Get.put(LocationController());
   runApp(
     MaterialApp(
       title: 'Atta',

@@ -1,7 +1,9 @@
 import 'dart:html';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/car_type.dart';
+import 'package:flutter_progress/views/login_view.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -12,36 +14,16 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   // String _lname, _fname;
-  late final TextEditingController _fname;
-  late final TextEditingController _lname;
-  late final TextEditingController _email;
-  late final TextEditingController _password;
-  late final TextEditingController _cpassword;
+  var fname = "";
+  var lname = "";
+  var email = "";
+  var pwd = "";
+  var cpwd = "";
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isObscure = true;
-
-  @override
-  void initState() {
-    _fname = TextEditingController();
-    _lname = TextEditingController();
-    _email = TextEditingController();
-    _password = TextEditingController();
-    _cpassword = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _fname.dispose();
-    _lname.dispose();
-    _email.dispose();
-    _password.dispose();
-    _cpassword.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Details'),
@@ -57,6 +39,11 @@ class _SignUpState extends State<SignUp> {
       ),
       body: Center(
         child: SingleChildScrollView(
+          // UserImage(onFileChanged: (imageUrl) {
+          //   setState(() {
+          //     this.imageUrl = imageUrl;
+          //   });
+          // }),
           child: Form(
             key: _formKey,
             child: Column(
@@ -65,7 +52,6 @@ class _SignUpState extends State<SignUp> {
               children: <Widget>[
                 //first name textformfield
                 TextFormField(
-                  controller: _fname,
                   //used to check on whether the textformfield is empty and return a message to the user.
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -88,6 +74,9 @@ class _SignUpState extends State<SignUp> {
                       borderSide: const BorderSide(color: Colors.orange),
                     ),
                   ),
+                  onChanged: (value) {
+                    fname = value;
+                  },
 
                   textInputAction: TextInputAction.next,
                 ),
@@ -96,7 +85,6 @@ class _SignUpState extends State<SignUp> {
                 ),
                 //last name textfield
                 TextFormField(
-                  controller: _lname,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'please enter your last name';
@@ -116,6 +104,9 @@ class _SignUpState extends State<SignUp> {
                       borderSide: const BorderSide(color: Colors.orange),
                     ),
                   ),
+                  onChanged: (value) {
+                    lname = value;
+                  },
                   textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(
@@ -123,7 +114,6 @@ class _SignUpState extends State<SignUp> {
                 ),
                 // email textformfield
                 TextFormField(
-                  controller: _email,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'please enter email address';
@@ -148,6 +138,9 @@ class _SignUpState extends State<SignUp> {
                       borderSide: const BorderSide(color: Colors.orange),
                     ),
                   ),
+                  onChanged: (value) {
+                    email = value;
+                  },
                   textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(
@@ -155,7 +148,6 @@ class _SignUpState extends State<SignUp> {
                 ),
                 //password field
                 TextFormField(
-                  controller: _password,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'please enter your password';
@@ -164,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                   },
                   enableSuggestions: false,
                   autocorrect: false,
-                  obscureText: _isObscure,
+                  obscureText: true,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock),
@@ -176,51 +168,66 @@ class _SignUpState extends State<SignUp> {
                       borderSide: const BorderSide(color: Colors.orange),
                     ),
                   ),
+                  onChanged: (value) {
+                    pwd = value;
+                  },
                 ),
                 const SizedBox(
                   height: 25,
                 ),
                 //confirm password field
                 TextFormField(
-                  controller: _cpassword,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'please confirm your password';
-                    }
-                    if (_password.text != _cpassword.text) {
-                      return 'passwords do not match';
-                    }
-                    return null;
-                  },
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  obscureText: _isObscure,
-                  textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.lock),
-                    hintText: 'Confirm Password',
-                    contentPadding:
-                        const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.orange),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'please confirm your password';
+                      }
+                      if (pwd != cpwd) {
+                        return 'passwords do not match';
+                      }
+                      return null;
+                    },
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    obscureText: true,
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.lock),
+                      hintText: 'Confirm Password',
+                      contentPadding:
+                          const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.orange),
+                      ),
                     ),
-                  ),
-                ),
+                    onChanged: (value) {
+                      cpwd = value;
+                    }),
                 const SizedBox(
                   height: 25,
                 ),
                 ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        //                   ScaffoldMessenger.of(context).showSnackBar(
-                        // const SnackBar(content: Text('Processing Data')),
-                       // CreateUser();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Uploading Data')));
+                        SignUp();
+                        // users
+                        //     .add({
+                        //       "fname": fname,
+                        //       "lname": lname,
+                        //       "email": email,
+                        //       "pwd": pwd
+                        //     })
+                        //     .then((value) => print("User is added"))
+                        //     .catchError(
+                        //         (error) => print("Failed to Add User: $error"));
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) => const CarType()),
+                            builder: ((context) => const LoginView()),
                           ),
                         );
                       } else {
@@ -234,5 +241,60 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  Future SignUp() async {
+    setState(() async {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: pwd,
+        );
+        await FirebaseFirestore.instance
+            .collection('users')
+            .add({"fname": fname, "lname": lname, "email": email, "pwd": pwd})
+            .then((value) => print("User is added"))
+            .catchError((error) => print("Failed to Add User: $error"));
+      } on FirebaseAuthException catch (e) {
+        _handleSignUpError(e);
+        setState(() {});
+      }
+    });
+  }
+
+  void _handleSignUpError(FirebaseAuthException e) {
+    String messageToDisplay;
+    switch (e.code) {
+      case 'email-already-in-use':
+        messageToDisplay = 'This email is already in use';
+        break;
+      case 'invalid-email':
+        messageToDisplay = 'This email you\'ve is invalid';
+        break;
+      case 'operation-not-allowed':
+        messageToDisplay = 'This operation is not allowed';
+        break;
+      case 'weak-password':
+        messageToDisplay = 'The password you\'ve entered is weak';
+        break;
+      default:
+        messageToDisplay = 'An unknown error occured';
+        break;
+    }
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: const Text('Sign Up Failed'),
+              content: Text(
+                messageToDisplay,
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("OK"))
+              ],
+            ));
   }
 }

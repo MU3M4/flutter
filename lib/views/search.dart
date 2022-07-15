@@ -56,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
         // ),
         ElevatedButton(
           onPressed: _handlePressButton,
-          child: const Text('Search Places'),
+          child: const Text('Search Garages'),
         ),
       ]),
     );
@@ -70,14 +70,14 @@ class _SearchScreenState extends State<SearchScreen> {
         mode: _mode,
         language: 'en',
         strictbounds: false,
-        types: ["garage"],
+        types: [""],
         decoration: InputDecoration(
             // ignore: prefer_const_constructors
             hintText: 'Search',
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(color: Colors.white))),
-        components: [new Component(Component.country, "ke")]);
+        components: [new Component(Component.country, "")]);
 
     displayPrediction(p!, homeScaffoldKey.currentState);
   }

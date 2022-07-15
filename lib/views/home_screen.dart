@@ -65,118 +65,121 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap:() {
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) => const AppointmentDetails())));
-                },
-                child: Image.asset("lib/assets/images/appointment.jpeg",
+          child: Center(
+            child: Column(
+              children: [
+                
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context)=> const FixCar()));
+                  },
+                  child: Image.asset(
+                    'lib/assets/images/fix.jpeg',
                     height: 200,
                     width: 400,
+                    fit: BoxFit.contain,
                     colorBlendMode: BlendMode.darken,
-                    semanticLabel: 'Appointment'),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context)=> const FixCar()));
-                },
-                child: Image.asset(
-                  'lib/assets/images/fix.jpeg',
-                  height: 200,
-                  width: 400,
-                  fit: BoxFit.contain,
-                  colorBlendMode: BlendMode.darken,
-                  semanticLabel: 'Fix Car',
+                    semanticLabel: 'Fix Car',
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-            
-              // Row(
-              //   children: const [
-              //     GestureDetector(
-              //       onTap:(){
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap:() {
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => const AppointmentDetails())));
+                  },
+                  child: Image.asset("lib/assets/images/appointment.jpeg",
+                      height: 200,
+                      width: 400,
+                      colorBlendMode: BlendMode.darken,
+                      semanticLabel: 'Appointment'),
+                ),
+              
+                // Row(
+                //   children: const [
+                //     GestureDetector(
+                //       onTap:(){
 
-              //       },
-              //       child: Expanded(
-                  
-                      
-              //           child: ActionContainerLarge(
-              //               img: 'lib/assets/images/appointment.jpeg',
-              //               title: 'Appointment'),
-              //         ),
-              //     ),
-              //     ),
+                //       },
+                //       child: Expanded(
+                    
+                        
+                //           child: ActionContainerLarge(
+                //               img: 'lib/assets/images/appointment.jpeg',
+                //               title: 'Appointment'),
+                //         ),
+                //     ),
+                //     ),
 
-              //     SizedBox(width: 20),
-              //     Expanded(
+                //     SizedBox(width: 20),
+                //     Expanded(
 
-              //       child: ActionContainerLarge(
-              //           img: 'lib/assets/images/fix.jpeg', title: 'Fix Car'),
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(height: 20),
-              // Row(
-              //   children: const [
-              //     Expanded(
-              //       child: ActionContainersSmall(
-              //         img: 'lib/assets/images/bus.jpg',
-              //         title: 'Car Profile',
-              //       ),
-              //     ),
-              //     SizedBox(width: 10),
-              //     Expanded(
-              //       child: ActionContainersSmall(
-              //         img: 'lib/assets/images/suv.jpg',
-              //         title: 'Car Profile',
-              //       ),
-              //     ),
-              //     SizedBox(width: 10),
-              //     Expanded(
-              //       child: ActionContainersSmall(
-              //         img: 'lib/assets/images/suv.jpg',
-              //         title: 'Car Profile',
-              //       ),
-              //     ),
-              //     SizedBox(width: 10),
-              //     Expanded(
-              //       child: ActionContainersSmall(
-              //         img: 'lib/assets/images/car.jpg',
-              //         title: 'Car Profile',
-              //       ),
+                //       child: ActionContainerLarge(
+                //           img: 'lib/assets/images/fix.jpeg', title: 'Fix Car'),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(height: 20),
+                // Row(
+                //   children: const [
+                //     Expanded(
+                //       child: ActionContainersSmall(
+                //         img: 'lib/assets/images/bus.jpg',
+                //         title: 'Car Profile',
+                //       ),
+                //     ),
+                //     SizedBox(width: 10),
+                //     Expanded(
+                //       child: ActionContainersSmall(
+                //         img: 'lib/assets/images/suv.jpg',
+                //         title: 'Car Profile',
+                //       ),
+                //     ),
+                //     SizedBox(width: 10),
+                //     Expanded(
+                //       child: ActionContainersSmall(
+                //         img: 'lib/assets/images/suv.jpg',
+                //         title: 'Car Profile',
+                //       ),
+                //     ),
+                //     SizedBox(width: 10),
+                //     Expanded(
+                //       child: ActionContainersSmall(
+                //         img: 'lib/assets/images/car.jpg',
+                //         title: 'Car Profile',
+                //       ),
 
-              // const SizedBox(height: 20),
-              // TextField(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => SearchScreen(),
-              //         fullscreenDialog: true,
-              //       ),
-              //     );
-              //   },
-              //   autofocus: false,
-              //   showCursor: false,
-              //   decoration: InputDecoration(
-              //     hintText: 'Where to?',
-              //     hintStyle: const TextStyle(
-              //         fontWeight: FontWeight.w500, fontSize: 24),
-              //     filled: true,
-              //     fillColor: Colors.grey[300],
-              //     border: InputBorder.none,
-              //   ),
-              // ),
-              // ElevatedButton(
-              //     onPressed: () {
-              //       Navigator.of(context).push(MaterialPageRoute(
-              //           builder: ((context) => const MapScreen())));
-              //     },
-              //     child: const Text('Google Maps'))
-            ],
+                // const SizedBox(height: 20),
+                // TextField(
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => SearchScreen(),
+                //         fullscreenDialog: true,
+                //       ),
+                //     );
+                //   },
+                //   autofocus: false,
+                //   showCursor: false,
+                //   decoration: InputDecoration(
+                //     hintText: 'Where to?',
+                //     hintStyle: const TextStyle(
+                //         fontWeight: FontWeight.w500, fontSize: 24),
+                //     filled: true,
+                //     fillColor: Colors.grey[300],
+                //     border: InputBorder.none,
+                //   ),
+                // ),
+                // ElevatedButton(
+                //     onPressed: () {
+                //       Navigator.of(context).push(MaterialPageRoute(
+                //           builder: ((context) => const MapScreen())));
+                //     },
+                //     child: const Text('Google Maps'))
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: Container(

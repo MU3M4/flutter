@@ -37,7 +37,7 @@ dependencies:
   firebase_core: ^1.14.1
   firebase_auth: ^3.3.14
   firebase_analytics: ^9.1.5
-  cloud_firestore: ^3.1.12
+  cloud_firestore: ^3.3.0
   country_picker: ^2.0.15
   otp_text_field: ^1.1.3
   animated_splash_screen: ^1.2.0
@@ -64,6 +64,15 @@ dependencies:
   flutter_typeahead: ^4.0.0
   get: ^4.6.5
   flutter_lints: ^2.0.1
+  intl: ^0.17.0
+  dropdown_button2: ^1.6.3
+  provider: ^6.0.3
+  google_fonts: ^3.0.1
+  image_picker: ^0.8.5+3
+  firebase_storage: ^10.3.2
+  touchable_opacity: ^1.2.0
+  avatar_glow: ^2.0.2
+  network_to_file_image: ^4.0.1
 
 dev_dependencies:
   flutter_test:
