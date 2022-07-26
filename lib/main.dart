@@ -1,14 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
-import 'package:flutter_progress/views/forgot_password.dart';
-import 'package:flutter_progress/views/hidden_drawer.dart';
+import 'package:flutter_progress/views/appointment.dart';
+import 'package:flutter_progress/views/batteryservice.dart';
+import 'package:flutter_progress/views/forgot_password.dart'; 
 import 'package:flutter_progress/views/home_screen.dart';
 import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/map_screen.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
+import 'package:flutter_progress/views/select_garage.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
 import 'firebase_options.dart';
@@ -19,6 +22,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  
   runApp(
     MaterialApp(
       title: 'Atta',
@@ -35,12 +39,17 @@ void main() async {
         registerRoute: (context) => const RegisterView(),
         homeRoute: (context) => const HomeScreen(),
         forgotRoute: (context) => ForgotPassword(),
-        hiddenRoute: (context) => const HiddenDrawer(),
+        garageRoute: (context) => const SelectGarage(),
+        appointmentRoute: (context) => const AppointmentDetails(), 
+        batteryRoute: (context) => const BatteryServices(),
+        
         //locationRoute: (context) => LocationController(),
       },
     ),
   );
+
 }
+DatabaseReference attaUsersRef = FirebaseDatabase.instance.ref().child("users");
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -37,15 +37,7 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.orange,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+       
       ),
       body: FutureBuilder(
         future: Firebase.initializeApp(
@@ -71,52 +63,56 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _email,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.orange),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: _email,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(color: Colors.orange),
+                          ),
+                          prefixIcon: const Icon(Icons.mail),
+                          hintText: 'Email Address',
                         ),
-                        prefixIcon: const Icon(Icons.mail),
-                        hintText: 'Email Address',
+                        textInputAction: TextInputAction.next,
                       ),
-                      textInputAction: TextInputAction.next,
                     ),
                   ),
                   const SizedBox(
                 height: 15,
               ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _password,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.orange),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: _password,
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(color: Colors.orange),
+                          ),
+                          hintText: 'Password',
+                          prefixIcon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                                _isObscure ? Icons.visibility : Icons.visibility_off),
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                          ),
                         ),
-                        hintText: 'Password',
-                        prefixIcon: const Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                              _isObscure ? Icons.visibility : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              _isObscure = !_isObscure;
-                            });
-                          },
-                        ),
+                        textInputAction: TextInputAction.done,
                       ),
-                      textInputAction: TextInputAction.done,
                     ),
                   ),
                   const SizedBox(
@@ -132,7 +128,7 @@ class _LoginViewState extends State<LoginView> {
                           password: password,
                         );
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                          hiddenRoute,
+                          homeRoute,
                           (route) => false,
                         );
                       } on FirebaseAuthException catch (e) {
