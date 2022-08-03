@@ -22,6 +22,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
     final hours = time.hour.toString().padLeft(2, '0');
     final minutes = time.minute.toString().padLeft(2, '0');
     return Scaffold(
+     // backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: const Text('Book An Appointment'),
         elevation: 0,
@@ -48,12 +49,14 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
       //   _aGarages.add(Garage(garageName: "Max Auto", image: "", ratings: 5.0, specialty "Brakes", location: "Juja"));
       //   return _aGarages;
       // },
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+        child: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('${date.year}/${date.month}/${date.day}',
               style: const TextStyle(fontSize: 32)),
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
           ElevatedButton(
             child: const Text('Select Appointment Date'),
             onPressed: () async {
@@ -69,6 +72,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
               setState(() => date = newDate);
             },
           ),
+          const SizedBox(height: 10,),
           Text(
             '$hours: $minutes',
             style: const TextStyle(fontSize: 32),
@@ -84,34 +88,38 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
               setState(() => time = newTime);
             },
           ),
-          Row(
-            children: [
-              ElevatedButton.icon(
-                icon: const Icon(Icons.garage),
+          const SizedBox(height: 10),
+
+              ElevatedButton(
+
                 onPressed: () {},
-                label: const Text('visit garage'),
+                child: const Text('Visit Garage')
               ),
-              ElevatedButton.icon(
-                icon: const Icon(Icons.home),
+              const SizedBox(width: 10,),
+              ElevatedButton(
+
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: ((context) => const CurrentLocation())));
                 },
-                label: const Text('Home Visit'),
-              )
-            ],
-          ),
-          const TextField(
+                child: const Text('Home Visit', ),
+
+              ),
+          const SizedBox(height: 10),
+
+           const TextField(
             decoration: InputDecoration(
               hintText: 'Enter Location',
               prefixIcon: Icon(Icons.gps_fixed),
               suffixIcon: Icon(Icons.edit),
             ),
           ),
+          const SizedBox(height: 10,),
           ElevatedButton(onPressed: () {}, child: const Text('Confirm'))
         ],
+      ),
       ),
     );
   }

@@ -35,8 +35,10 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: const Text('Login'),
+        centerTitle: true,
        
       ),
       body: FutureBuilder(
@@ -59,9 +61,11 @@ class _LoginViewState extends State<LoginView> {
               break;
           }
           return Center(
+
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Center(
                     child: Padding(
@@ -84,7 +88,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   const SizedBox(
-                height: 15,
+                height: 10,
               ),
                   Center(
                     child: Padding(
@@ -100,23 +104,23 @@ class _LoginViewState extends State<LoginView> {
                             borderSide: const BorderSide(color: Colors.orange),
                           ),
                           hintText: 'Password',
-                          prefixIcon: const Icon(Icons.lock),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                                _isObscure ? Icons.visibility : Icons.visibility_off),
-                            onPressed: () {
-                              setState(() {
-                                _isObscure = !_isObscure;
-                              });
-                            },
-                          ),
+                          // prefixIcon: const Icon(Icons.lock),
+                          // suffixIcon: IconButton(
+                          //   icon: Icon(
+                          //       _isObscure ? Icons.visibility : Icons.visibility_off),
+                          //   onPressed: () {
+                          //     setState(() {
+                          //       _isObscure = !_isObscure;
+                          //     });
+                          //   },
+                          // ),
                         ),
                         textInputAction: TextInputAction.done,
                       ),
                     ),
                   ),
                   const SizedBox(
-                height: 15,
+                height: 5,
               ),
                   ElevatedButton(
                     onPressed: () async {
@@ -153,7 +157,7 @@ class _LoginViewState extends State<LoginView> {
                     child: const Text("Login"),
                   ),
                   const SizedBox(
-                height: 15,
+                height: 5,
               ),
                   TextButton(
                     onPressed: () {
@@ -165,7 +169,7 @@ class _LoginViewState extends State<LoginView> {
                     child: const Text("Not Registered? Register Here!"),
                   ),
                   const SizedBox(
-                height: 15,
+                height: 5,
               ),
                   TextButton(
                     onPressed: () {

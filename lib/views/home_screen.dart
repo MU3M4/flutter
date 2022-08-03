@@ -37,47 +37,53 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.black,
             tooltip: "Account Info",
           ),
+          IconButton(
+            onPressed: (){},
+            icon: const Icon(Icons.notifications),
+            color: Colors.black,
+            tooltip: "Notifications",
+          )
         ],
       ),
       body: Column(
         children: [
-          Container(
-            height: 230,
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 23, 31, 141),
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(50)),
-            ),
-            // color: Color(0xFF363f93),
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 80,
-                  left: 0,
-                  child: Container(
-                    height: 100,
-                    width: 300,
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 212, 211, 203),
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(50),
-                        bottomRight: Radius.circular(50),
-                      ),
-                    ),
-                  ),
-                ),
-                const Positioned(
-                  top: 110,
-                  left: 20,
-                  child: Text(
-                    'Search Car Problem',
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: height * 0.05,
-          ),
+          // Container(
+          //   height: 230,
+          //   decoration: const BoxDecoration(
+          //     color: Colors.grey,
+          //     borderRadius: BorderRadius.only(bottomRight: Radius.circular(50)),
+          //   ),
+          //   // color: Color(0xFF363f93),
+          //   child: Stack(
+          //     children: [
+          //       Positioned(
+          //         top: 80,
+          //         left: 0,
+          //         child: Container(
+          //           height: 100,
+          //           width: 300,
+          //           decoration: const BoxDecoration(
+          //             color: Color.fromARGB(255, 212, 211, 203),
+          //             borderRadius: BorderRadius.only(
+          //               topRight: Radius.circular(50),
+          //               bottomRight: Radius.circular(50),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //       const Positioned(
+          //         top: 110,
+          //         left: 20,
+          //         child: Text(
+          //           'Search Car Problem',
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: height * 0.05,
+          // ),
           const Center(
             child: Text(
               'Services',
