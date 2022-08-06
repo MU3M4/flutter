@@ -134,7 +134,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RegisterView()));
+                              builder: (context) => const RegistrationView()));
                     },
                     child: Text(otpCodeVisible ? "Next" : "verify"),
                   ),

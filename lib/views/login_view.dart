@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
-import 'package:flutter_progress/main.dart';
-import 'package:flutter_progress/views/home_screen.dart';
 import '../firebase_options.dart';
 
 class LoginView extends StatefulWidget {
@@ -16,13 +14,14 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
-  bool _isObscure = true;
+
 
   @override
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
     super.initState();
+
   }
 
   @override
@@ -34,12 +33,12 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
-      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: const Text('Login'),
         centerTitle: true,
-       
       ),
       body: FutureBuilder(
         future: Firebase.initializeApp(
@@ -61,7 +60,6 @@ class _LoginViewState extends State<LoginView> {
               break;
           }
           return Center(
-
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
@@ -88,8 +86,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   const SizedBox(
-                height: 10,
-              ),
+                    height: 10,
+                  ),
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -120,8 +118,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   const SizedBox(
-                height: 5,
-              ),
+                    height: 5,
+                  ),
                   ElevatedButton(
                     onPressed: () async {
                       final email = _email.text;
@@ -157,8 +155,8 @@ class _LoginViewState extends State<LoginView> {
                     child: const Text("Login"),
                   ),
                   const SizedBox(
-                height: 5,
-              ),
+                    height: 5,
+                  ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
@@ -169,12 +167,14 @@ class _LoginViewState extends State<LoginView> {
                     child: const Text("Not Registered? Register Here!"),
                   ),
                   const SizedBox(
-                height: 5,
-              ),
+                    height: 5,
+                  ),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil(forgotRoute, (route) => false,);
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        forgotRoute,
+                        (route) => false,
+                      );
                     },
                     child: const Text('Forgot Password?'),
                   ),
@@ -197,7 +197,7 @@ Future<void> showErrorDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('An error occured'),
+          title: const Text('An error occurred'),
           content: Text(text),
           actions: [
             TextButton(

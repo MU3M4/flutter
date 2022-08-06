@@ -36,7 +36,7 @@ void main() async {
         phoneRoute: (context) => const PhoneAuth(),
         loginRoute: (context) => const LoginView(),
         mapRoute: (context) => const MapScreen(),
-        registerRoute: (context) => const RegisterView(),
+        registerRoute: (context) => const RegistrationView(),
         homeRoute: (context) => const HomeScreen(),
         forgotRoute: (context) => ForgotPassword(),
         garageRoute: (context) => const SelectGarage(),
