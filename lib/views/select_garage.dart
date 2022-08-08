@@ -45,7 +45,7 @@ class _SelectGarageState extends State<SelectGarage> {
                           elevation: 10.0,
                           child: ListTile(
                             title: Text(snapshot.value.toString()),
-                            subtitle: Text(''),
+
                             contentPadding: const EdgeInsets.all(20),
                             dense: true,
                             trailing: const Icon(Icons.arrow_forward_ios),

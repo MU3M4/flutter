@@ -1,6 +1,7 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_progress/views/map_screen.dart';
-
+import 'package:flutter_progress/main.dart';
+import 'package:flutter_progress/views/home_screen.dart';
 
 class CarType extends StatefulWidget {
   const CarType({Key? key}) : super(key: key);
@@ -10,105 +11,147 @@ class CarType extends StatefulWidget {
 }
 
 class _CarTypeState extends State<CarType> {
-  late final TextEditingController _year;
-  late final TextEditingController _appmodel;
-  late final TextEditingController _numberplate;
-  @override
-  void initState() {
-    _year = TextEditingController();
-    _appmodel = TextEditingController();
-    _numberplate = TextEditingController();
-    super.initState();
-  }
+  final fb = FirebaseDatabase.instance;
 
-  @override
-  void dispose() {
-    _year.dispose();
-    _appmodel.dispose();
-    _numberplate.dispose();
-    super.dispose();
-  }
+  var _yearController = new TextEditingController();
+  var _appModelController = new TextEditingController();
+  var _numberPlateController = new TextEditingController();
+  var _makeController = new TextEditingController();
+  var _modelController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    //final ref = fb.ref().child("car");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Car Type'),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.orange,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        centerTitle: true,
       ),
-      body: Column(children: <Widget>[
-        // year textfield
-        TextField(
-          controller: _year,
-          enableSuggestions: false,
-          keyboardType: TextInputType.number,
-          decoration: InputDecoration(
-            hintText: 'Year',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.orange),
+      body: Form(
+        child: Column(children: <Widget>[
+          Row(
+            children: [
+              TextFormField(
+                controller: _makeController,
+                enableSuggestions: false,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    hintText: 'make',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.deepOrange),
+                    )),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              TextFormField(
+                controller: _modelController,
+                enableSuggestions: false,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    hintText: 'model',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.deepOrange),
+                    )),
+              )
+            ],
+          ),
+          // year textfield
+          TextFormField(
+            controller: _yearController,
+            enableSuggestions: false,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              hintText: 'Year',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Colors.orange),
+              ),
             ),
           ),
-        ),
-        //space in between the two fields
-        const SizedBox(
-          height: 25,
-        ),
-        //applied model textfield
-        TextField(
-          controller: _appmodel,
-          enableSuggestions: false,
-          keyboardType: TextInputType.name,
-          decoration: InputDecoration(
-            hintText: 'Applied Model',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.orange),
+          //space in between the two fields
+          const SizedBox(
+            height: 10,
+          ),
+          //applied model textfield
+          TextFormField(
+            controller: _appModelController,
+            enableSuggestions: false,
+            keyboardType: TextInputType.name,
+            decoration: InputDecoration(
+              hintText: 'Applied Model',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Colors.deepOrange),
+              ),
             ),
           ),
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        //numberplate textfield
-        TextField(
-          controller: _numberplate,
-          enableSuggestions: false,
-          decoration: InputDecoration(
-            hintText: 'Number Plate',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.orange),
+          const SizedBox(
+            height: 10,
+          ),
+          //numberplate textfield
+          TextFormField(
+            controller: _numberPlateController,
+            enableSuggestions: false,
+            decoration: InputDecoration(
+              hintText: 'Number Plate',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Colors.deepOrange),
+              ),
             ),
           ),
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        //add car textbutton
-        TextButton(
-          onPressed: () {},
-          child: const Text('ADD CAR'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: ((context) => const MapScreen()),
-                          ));
-          },
-          child: const Text('Continue'),
-        ),
-      ]),
+          const SizedBox(
+            height: 10,
+          ),
+          //add car textbutton
+          TextButton(
+            onPressed: () {
+              if (_yearController.text.isNotEmpty &&
+                  _appModelController.text.isNotEmpty &&
+                  _numberPlateController.text.isNotEmpty &&
+                  _modelController.text.isNotEmpty &&
+                  _makeController.text.isNotEmpty) {
+                insertData(
+                    _yearController.text,
+                    _appModelController.text,
+                    _numberPlateController.text,
+                    _modelController.text,
+                    _makeController.text);
+              }
+            },
+            child: const Text('ADD CAR'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) => const HomeScreen()),
+                  ));
+            },
+            child: const Text('Continue'),
+          ),
+        ]),
+      ),
     );
+  }
+
+  void insertData(String year, String appmodel, String numberplate,
+      String model, String make) {
+    fb.ref().child("car").push().set({
+      "year": year,
+      "appmodel": appmodel,
+      "numberplate": numberplate,
+      "model": model,
+      "make": make,
+    });
+    _yearController.clear();
+    _appModelController.clear();
+    _makeController.clear();
+    _numberPlateController.clear();
+    _modelController.clear();
   }
 }
