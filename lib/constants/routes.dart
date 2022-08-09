@@ -10,3 +10,4 @@ const forgotRoute = '/forgot/';
 const hiddenRoute = '/hidden/';
 const locationRoute = '/location/';
 const appointmentRoute = '/appointment/';
+const carRoute = '/car/';

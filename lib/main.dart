@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
 import 'package:flutter_progress/views/appointment.dart';
 import 'package:flutter_progress/views/batteryservice.dart';
+import 'package:flutter_progress/views/car_type.dart';
 import 'package:flutter_progress/views/forgot_password.dart'; 
 import 'package:flutter_progress/views/home_screen.dart';
 import 'package:flutter_progress/views/login_view.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_progress/views/select_garage.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
 import 'firebase_options.dart';
+import 'package:get/get.dart';
 
 
 void main() async {
@@ -24,7 +26,7 @@ void main() async {
   );
   
   runApp(
-    MaterialApp(
+    GetMaterialApp(
       title: 'Atta',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -42,6 +44,7 @@ void main() async {
         garageRoute: (context) => const SelectGarage(),
         appointmentRoute: (context) => const AppointmentDetails(), 
         batteryRoute: (context) => const BatteryServices(),
+        carRoute: (context) => const CarType(),
         
         //locationRoute: (context) => LocationController(),
       },

@@ -27,8 +27,7 @@ class _CarTypeState extends State<CarType> {
         title: const Text('Car Type'),
         centerTitle: true,
       ),
-      body: Form(
-        child: Column(children: <Widget>[
+      body:  Column(children: <Widget>[
           Row(
             children: [
               TextFormField(
@@ -135,7 +134,7 @@ class _CarTypeState extends State<CarType> {
             child: const Text('Continue'),
           ),
         ]),
-      ),
+
     );
   }
 

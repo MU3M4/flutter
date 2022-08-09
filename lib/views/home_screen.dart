@@ -3,6 +3,8 @@ import 'package:flutter_progress/views/batteryservice.dart';
 import 'package:flutter_progress/views/brakeservices.dart';
 import 'package:flutter_progress/views/clutchtransmissionservices.dart';
 import 'package:flutter_progress/views/navigation_drawer.dart';
+import 'package:flutter_progress/views/windowservices.dart';
+import 'package:flutter_progress/views/wiperservices.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -64,283 +66,453 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-        body: Column(
-          children: [
-            const Center(
-              child: Text(
-                'Services',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
+        body:  Column(
+            children: [
+              const Center(
+                child: Text(
+                  'Services',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            // ignore: avoid_unnecessary_containers
-            const SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              child: ListView(
-                children: [
-                  Container(
-                    height: 230,
-                    child: Stack(children: [
-                      Positioned(
-                        top: 35,
-                        left: 20,
-                        child: Material(
-                          child: Container(
-                            height: 180.0,
-                            width: width * 0.9,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(0.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    offset: const Offset(-10.0, 10.0),
-                                    blurRadius: 20.0,
-                                    spreadRadius: 4.0),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: 30,
-                        child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const BrakeServices())),
-                          child: Card(
-                            elevation: 10.0,
-                            shadowColor: Colors.grey.withOpacity(0.5),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Container(
-                              height: 200,
-                              width: 320,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                image: const DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage(
-                                      'lib/assets/images/brakes.png'),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 60,
-                        left: 200,
-                        child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const BrakeServices())),
-                          child: Container(
-                            height: 150,
-                            width: 160,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const <Widget>[
-                                  Text("Brake Services",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.orange,
-                                          fontWeight: FontWeight.bold)),
-                                  Divider(color: Colors.black),
-                                  Text("Click for more info",
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.bold)),
-                                ]),
-                          ),
-                        ),
-                      ),
-                    ]),
-                  ),
-                  Container(
-                    height: 230,
-                    child: Stack(children: [
-                      Positioned(
-                        top: 35,
-                        left: 20,
-                        child: Material(
-                          child: Container(
-                            height: 180.0,
-                            width: width * 0.9,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(0.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    offset: const Offset(-10.0, 10.0),
-                                    blurRadius: 20.0,
-                                    spreadRadius: 4.0),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: 30,
-                        child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ClutchTransmissionServices())),
-                          child: Card(
-                            elevation: 10.0,
-                            shadowColor: Colors.grey.withOpacity(0.5),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Container(
-                              height: 200,
-                              width: 320,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                image: const DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage(
-                                      'lib/assets/images/clutchandtransmission.png'),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 60,
-                        left: 200,
-                        child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ClutchTransmissionServices())),
-                          child: Container(
-                            height: 150,
-                            width: 160,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const <Widget>[
-                                  Text("Clutch and Transmission Services",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.orange,
-                                          fontWeight: FontWeight.bold)),
-                                  Divider(color: Colors.black),
-                                  Text("Click for more info",
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.bold)),
-                                ]),
-                          ),
-                        ),
-                      ),
-                    ]),
-                  ),
-                  Container(
-                    height: 230,
-                    child: Stack(children: [
-                      Positioned(
-                        top: 35,
-                        left: 20,
-                        child: Material(
-                          child: Container(
-                            height: 180.0,
-                            width: width * 0.9,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(0.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    offset: const Offset(-10.0, 10.0),
-                                    blurRadius: 20.0,
-                                    spreadRadius: 4.0),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: 30,
-                        child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const BatteryServices())),
-                          child: Card(
-                            elevation: 10.0,
-                            shadowColor: Colors.grey.withOpacity(0.5),
-                            // shape: RoundedRectangleBorder(
-                            //   borderRadius: BorderRadius.circular(15),
-                            // ),
-                            child: Container(
-                              height: 200,
-                              width: 320,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                image: const DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage(
-                                      'lib/assets/images/battery.png'),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 60,
-                        left: 200,
-                        child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const BatteryServices())),
-                          child: Container(
-                            height: 150,
-                            width: 160,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const <Widget>[
-                                  Text("Battery Services",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.orange,
-                                          fontWeight: FontWeight.bold)),
-                                  Divider(color: Colors.black),
-                                  Text("Click for more info",
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.bold)),
-                                ]),
-                          ),
-                        ),
-                      ),
-                    ]),
-                  ),
-                ],
+              // ignore: avoid_unnecessary_containers
+              const SizedBox(
+                height: 10,
               ),
-            ),
-          ],
+              Expanded(
+                child: ListView(
+                  children: [
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const BrakeServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/brakes.png'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const BrakeServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Brake Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ClutchTransmissionServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/clutchandtransmission.png'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ClutchTransmissionServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Clutch and Transmission Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const BatteryServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/battery.png'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const BatteryServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Battery Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const WiperServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/Wiper.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const WindowsServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Window Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const WindowsServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/Windows.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const WiperServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Wiper Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
     );
   }
 }
