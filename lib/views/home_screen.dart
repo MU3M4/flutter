@@ -4,12 +4,20 @@ import 'package:flutter_progress/views/brakeservices.dart';
 import 'package:flutter_progress/views/clutchtransmissionservices.dart';
 import 'package:flutter_progress/views/engineservices.dart';
 import 'package:flutter_progress/views/exhaustservices.dart';
+import 'package:flutter_progress/views/fuel_system.dart';
 import 'package:flutter_progress/views/lights_services.dart';
 import 'package:flutter_progress/views/navigation_drawer.dart';
+import 'package:flutter_progress/views/sensors.dart';
+import 'package:flutter_progress/views/suspension_and_steering.dart';
 import 'package:flutter_progress/views/tyre_services.dart';
 import 'package:flutter_progress/views/windowservices.dart';
 import 'package:flutter_progress/views/wiperservices.dart';
 
+import 'door.dart';
+import 'filters_services.dart';
+import 'fluids_services.dart';
+import 'heating_and_ac.dart';
+import 'hoses_services.dart';
 import 'ignition_services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -374,6 +382,91 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
+                                    const DoorServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/Door.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const DoorServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Door Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
                                     const EngineServices())),
                             child: Card(
                               elevation: 10.0,
@@ -497,6 +590,432 @@ class _HomeScreenState extends State<HomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: const <Widget>[
                                     Text("Exhaust Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const FilterServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/Filters.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const FilterServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Filters Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const FluidServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/Fluids.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const FluidServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Fluids Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const FuelSystemServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/FuelSystem.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const FuelSystemServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Fuel System Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const HeatingAC())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/heatingandAc.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const HeatingAC())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Heating and AC Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const HosesServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/hoses.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const HosesServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Hoses Services",
                                         style: TextStyle(
                                             fontSize: 20,
                                             color: Colors.orange,
@@ -837,6 +1356,176 @@ class _HomeScreenState extends State<HomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: const <Widget>[
                                     Text("Mirror Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const SensorsServices())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/sensors.png'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const SensorsServices())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Sensor Services",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold)),
+                                    Divider(color: Colors.black),
+                                    Text("Click for more info",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      height: 230,
+                      child: Stack(children: [
+                        Positioned(
+                          top: 35,
+                          left: 20,
+                          child: Material(
+                            child: Container(
+                              height: 180.0,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      offset: const Offset(-10.0, 10.0),
+                                      blurRadius: 20.0,
+                                      spreadRadius: 4.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const SuspensionSteering())),
+                            child: Card(
+                              elevation: 10.0,
+                              shadowColor: Colors.grey.withOpacity(0.5),
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(15),
+                              // ),
+                              child: Container(
+                                height: 200,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        'lib/assets/images/SuspensionandSteering.jpg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          left: 200,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const SuspensionSteering())),
+                            child: Container(
+                              height: 150,
+                              width: 160,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const <Widget>[
+                                    Text("Suspension and Steering Services",
                                         style: TextStyle(
                                             fontSize: 20,
                                             color: Colors.orange,

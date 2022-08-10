@@ -122,7 +122,12 @@ flutter:
       - lib/assets/images/hoses.jpg
       - lib/assets/images/Lights.jpg
       - lib/assets/images/SuspensionandSteering.jpg
-      - lib/assets/images/hearingandAc.jpg
+      - lib/assets/images/heatingandAc.jpg
+      - lib/assets/images/Door.jpg
+      - lib/assets/images/Fluids.jpg
+      - lib/assets/images/Filters.jpg
+      - lib/assets/images/Carswitches.jpg
+      - lib/assets/images/sensors.jpg
 
 
   #   - images/a_dot_burr.jpeg

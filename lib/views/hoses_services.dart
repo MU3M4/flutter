@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/select_garage.dart';
 
-class IgnitionServices extends StatefulWidget {
-  const IgnitionServices({Key? key}) : super(key: key);
+class HosesServices extends StatefulWidget {
+  const HosesServices({Key? key}) : super(key: key);
 
   @override
-  State<IgnitionServices> createState() => _IgnitionServicesState();
+  State<HosesServices> createState() => _HosesServicesState();
 }
 
-class _IgnitionServicesState extends State<IgnitionServices> {
+class _HosesServicesState extends State<HosesServices> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ignition Services'),
+        title: const Text('Hoses Services'),
         centerTitle: true,
       ),
       body: Expanded(
@@ -21,11 +21,11 @@ class _IgnitionServicesState extends State<IgnitionServices> {
           children: <Widget>[
             Container(
               color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 10,
                 child: ListTile(
-                  title: const Text('Ballast Resistor Replacement'),
+                  title: const Text('Car AC Low Pressure Hose Replacement'),
                   subtitle: const Text('Long Press for more info'),
                   trailing: const Icon(Icons.add_circle),
                   contentPadding: const EdgeInsets.all(20),
@@ -42,11 +42,11 @@ class _IgnitionServicesState extends State<IgnitionServices> {
             ),
             Container(
               color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 10,
                 child: ListTile(
-                  title: const Text('Distributor Cap and Rotor Replacement'),
+                  title: const Text('Air Injection Hose Replacement'),
                   subtitle: const Text('Long Press for more info'),
                   trailing: const Icon(Icons.add_circle),
                   contentPadding: const EdgeInsets.all(20),
@@ -63,11 +63,11 @@ class _IgnitionServicesState extends State<IgnitionServices> {
             ),
             Container(
               color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 10,
                 child: ListTile(
-                  title: const Text('Electronic Ignition Pickup Replacement'),
+                  title: const Text('Brake Hose Replacement'),
                   subtitle: const Text('Long Press for more info'),
                   trailing: const Icon(Icons.add_circle),
                   contentPadding: const EdgeInsets.all(20),
@@ -84,11 +84,11 @@ class _IgnitionServicesState extends State<IgnitionServices> {
             ),
             Container(
               color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 10,
                 child: ListTile(
-                  title: const Text('Ignition Cable (Spark Plug Wires) Replacement'),
+                  title: const Text('Exhaust Gas Recirculation(EGR) Tube Replacement'),
                   subtitle: const Text('Long Press for more info'),
                   trailing: const Icon(Icons.add_circle),
                   contentPadding: const EdgeInsets.all(20),
@@ -105,11 +105,11 @@ class _IgnitionServicesState extends State<IgnitionServices> {
             ),
             Container(
               color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 10,
                 child: ListTile(
-                  title: const Text('Ignition Coil Replacement'),
+                  title: const Text('Car Heater Bypass Tube Replacement'),
                   subtitle: const Text('Long Press for more info'),
                   trailing: const Icon(Icons.add_circle),
                   contentPadding: const EdgeInsets.all(20),
@@ -126,11 +126,11 @@ class _IgnitionServicesState extends State<IgnitionServices> {
             ),
             Container(
               color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 10,
                 child: ListTile(
-                  title: const Text('Ignition Ignitor Replacement'),
+                  title: const Text('Power Steering Pressure Hose Replacement'),
                   subtitle: const Text('Long Press for more info'),
                   trailing: const Icon(Icons.add_circle),
                   contentPadding: const EdgeInsets.all(20),
@@ -147,53 +147,11 @@ class _IgnitionServicesState extends State<IgnitionServices> {
             ),
             Container(
               color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 10,
                 child: ListTile(
-                  title: const Text('Ignition Relay Replacement'),
-                  subtitle: const Text('Long Press for more info'),
-                  trailing: const Icon(Icons.add_circle),
-                  contentPadding: const EdgeInsets.all(20),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  dense: true,
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const SelectGarage()))),
-                  onLongPress: () {},
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
-              child: Card(
-                elevation: 10,
-                child: ListTile(
-                  title: const Text('Ignition Switch Replacement'),
-                  subtitle: const Text('Long Press for more info'),
-                  trailing: const Icon(Icons.add_circle),
-                  contentPadding: const EdgeInsets.all(20),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  dense: true,
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const SelectGarage()))),
-                  onLongPress: () {},
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.grey[200],
-              padding: const EdgeInsets.all(20),
-              child: Card(
-                elevation: 10,
-                child: ListTile(
-                  title: const Text('Spark Plug Replacement'),
+                  title: const Text('Radiator Hose Repair'),
                   subtitle: const Text('Long Press for more info'),
                   trailing: const Icon(Icons.add_circle),
                   contentPadding: const EdgeInsets.all(20),
