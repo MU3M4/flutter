@@ -15,7 +15,8 @@ class _WindowsServicesState extends State<WindowsServices> {
         title: const Text('Windows Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body:
+        Expanded(
         child: ListView(
           children: <Widget>[
             Container(
@@ -63,6 +64,7 @@ class _WindowsServicesState extends State<WindowsServices> {
           ],
         )
       ),
+
     );
   }
 }
