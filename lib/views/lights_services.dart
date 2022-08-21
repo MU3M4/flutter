@@ -15,7 +15,7 @@ class _LightServicesState extends State<LightServices> {
         title: const Text('Light Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Container(

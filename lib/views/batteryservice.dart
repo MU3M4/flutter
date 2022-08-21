@@ -19,7 +19,7 @@ class _BatteryServicesState extends State<BatteryServices> {
       ),
       
        body: 
-        Expanded(
+        Center(
           child: ListView(
             children: <Widget> [
              Container(

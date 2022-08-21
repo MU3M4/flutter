@@ -16,7 +16,7 @@ class _IgnitionServicesState extends State<IgnitionServices> {
         title: const Text('Ignition Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Container(

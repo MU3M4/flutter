@@ -16,7 +16,7 @@ class _DoorServicesState extends State<DoorServices> {
         title: const Text('Door Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
          children: <Widget>[
            Container(

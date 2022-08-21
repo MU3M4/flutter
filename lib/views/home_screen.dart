@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/batteryservice.dart';
 import 'package:flutter_progress/views/brakeservices.dart';
@@ -42,6 +43,7 @@ ThemeData _darkTheme = ThemeData(
 );
 
 class _HomeScreenState extends State<HomeScreen> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     // theme: _iconBool ? _darkTheme : _lightTheme;
@@ -51,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return MaterialApp(
       theme: _iconBool ? _darkTheme : _lightTheme,
       home: Scaffold(
-        drawer: const NavigationDrawer(),
+        drawer:  NavigationDrawer(),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,

@@ -15,13 +15,11 @@ class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
 
-
   @override
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
     super.initState();
-
   }
 
   @override
@@ -33,180 +31,165 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              //
-              break;
-            case ConnectionState.waiting:
-              //
-              break;
-            case ConnectionState.active:
-              //
-              break;
-            case ConnectionState.done:
-              //
-              break;
-          }
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        controller: _email,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.orange),
-                          ),
-                          prefixIcon: const Icon(Icons.mail),
-                          hintText: 'Email Address',
+      body:   Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                //logo
+                Expanded(
+                  child: Image.asset(
+                    'lib/assets/images/splash.jpg',
+                    height: 100,
+                    width: 100,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'HELLO AGAIN!',
+                  style: TextStyle(fontSize: 52),
+                ),
+                const SizedBox(height: 10),
+                const Text('Welcome back, you\'ve been missed!',
+                    style: TextStyle(fontSize: 18)),
+                const SizedBox(height: 50),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _email,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.orange),
                         ),
-                        textInputAction: TextInputAction.next,
+                        prefixIcon: const Icon(Icons.mail),
+                        hintText: 'Email Address',
+                        labelText: 'email',
                       ),
+                      textInputAction: TextInputAction.next,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        controller: _password,
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.orange),
-                          ),
-                          hintText: 'Password',
-                          // prefixIcon: const Icon(Icons.lock),
-                          // suffixIcon: IconButton(
-                          //   icon: Icon(
-                          //       _isObscure ? Icons.visibility : Icons.visibility_off),
-                          //   onPressed: () {
-                          //     setState(() {
-                          //       _isObscure = !_isObscure;
-                          //     });
-                          //   },
-                          // ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _password,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.orange),
                         ),
-                        textInputAction: TextInputAction.done,
+                        hintText: 'Password',
+                        labelText: 'Password',
                       ),
+                      textInputAction: TextInputAction.done,
                     ),
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final email = _email.text;
-                      final password = _password.text;
-                      try {
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: email,
-                          password: password,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    final User? user = FirebaseAuth.instance.currentUser;
+                    final uid = user?.uid;
+                    final email = _email.text.trim();
+                    final password = _password.text.trim();
+                    try {
+                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                        email: _email.text.trim(),
+                        password: _password.text.trim(),
+                      );
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        homeRoute,
+                        (route) => false,
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        await showErrorDialog(
+                          context,
+                          'user not found',
                         );
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                          homeRoute,
-                          (route) => false,
+                      } else if (e.code == 'wrong-password') {
+                        await showErrorDialog(
+                          context,
+                          'Wrong credentials',
                         );
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          await showErrorDialog(
-                            context,
-                            'user not found',
-                          );
-                        } else if (e.code == 'wrong-password') {
-                          await showErrorDialog(
-                            context,
-                            'Wrong credentials',
-                          );
-                        } else {
-                          await showErrorDialog(
-                            context,
-                            'Error: ${e.code}',
-                          );
-                        }
+                      } else {
+                        await showErrorDialog(
+                          context,
+                          'Error: ${e.code}',
+                        );
                       }
-                    },
-                    child: const Text("Login"),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        registerRoute,
-                        (route) => false,
-                      );
-                    },
-                    child: const Text("Not Registered? Register Here!"),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        forgotRoute,
-                        (route) => false,
-                      );
-                    },
-                    child: const Text('Forgot Password?'),
-                  ),
-                ],
-              ),
+                    }
+                  },
+                  child: const Text("Login"),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      registerRoute,
+                      (route) => false,
+                    );
+                  },
+                  child: const Text("Not Registered? Register Here!"),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      forgotRoute,
+                      (route) => false,
+                    );
+                  },
+                  child: const Text('Forgot Password?'),
+                ),
+              ],
             ),
-          );
-          //default:return const Text('Loading...');
-        },
-      ),
+
+
+
     );
   }
-}
 
-Future<void> showErrorDialog(
-  BuildContext context,
-  String text,
-) {
-  return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('An error occurred'),
-          content: Text(text),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      });
+  Future<void> showErrorDialog(
+    BuildContext context,
+    String text,
+  ) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('An error occurred'),
+            content: Text(text),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        });
+  }
 }

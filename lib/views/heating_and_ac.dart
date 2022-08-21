@@ -16,7 +16,7 @@ class _HeatingACState extends State<HeatingAC> {
         title: const Text('Heating and AC Services'),
         centerTitle: true,
       ),
-      body: Expanded(child: ListView(
+      body: Center(child: ListView(
         children: <Widget>[
           Container(
             color: Colors.grey[200],

@@ -15,7 +15,7 @@ class _WiperServicesState extends State<WiperServices> {
         title: const Text('Wiper Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Container(

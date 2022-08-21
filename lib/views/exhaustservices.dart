@@ -15,7 +15,7 @@ class _ExhaustServicesState extends State<ExhaustServices> {
         title: const Text('Exhaust Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Container(

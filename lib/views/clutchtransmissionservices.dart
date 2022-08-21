@@ -20,7 +20,7 @@ class _ClutchTransmissionServicesState
         title: const Text('Clutch and Transmission Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
           child: ListView(
             children: [
               Container(

@@ -16,7 +16,7 @@ class _SensorsServicesState extends State<SensorsServices> {
         title: const Text('Car Sensor Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(children: <Widget>[
           Container(
             color: Colors.grey[200],

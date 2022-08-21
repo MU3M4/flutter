@@ -16,9 +16,7 @@ class _BrakeServicesState extends State<BrakeServices> {
         title: const Text('Brake Services'),
         centerTitle: true,
       ),
-      body: Container(
-        color: Colors.grey[200],
-        padding: const EdgeInsets.all(20),
+      body: Center(
         child: ListView(children: <Widget>[
           Container(
             color: Colors.grey[200],
@@ -462,6 +460,7 @@ class _BrakeServicesState extends State<BrakeServices> {
             ),
           ),
         ]),
+
       ),
     );
   }

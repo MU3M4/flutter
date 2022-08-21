@@ -16,7 +16,7 @@ class _SuspensionSteeringState extends State<SuspensionSteering> {
         title: const Text('Suspension and Steering Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Container(

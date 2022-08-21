@@ -16,7 +16,7 @@ class _MirrorServicesState extends State<MirrorServices> {
         title: const Text('Mirror Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Container(

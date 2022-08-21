@@ -16,7 +16,7 @@ class _FluidServicesState extends State<FluidServices> {
         title: const Text('Fluids Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
         Container(

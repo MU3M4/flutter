@@ -16,7 +16,7 @@ class _FilterServicesState extends State<FilterServices> {
         title: const Text('Filter Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
         Container(

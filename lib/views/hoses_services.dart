@@ -16,7 +16,7 @@ class _HosesServicesState extends State<HosesServices> {
         title: const Text('Hoses Services'),
         centerTitle: true,
       ),
-      body: Expanded(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Container(

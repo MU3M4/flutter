@@ -1,9 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_progress/main.dart';
-import 'package:flutter_progress/views/car_type.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 import '../constants/routes.dart';
 import 'login_view.dart';
@@ -16,6 +16,8 @@ class RegistrationView extends StatefulWidget {
 }
 
 class _RegistrationViewState extends State<RegistrationView> {
+  var selectedGender;
+  List<String> gender = <String>['Male', 'Female', 'Non-binary'];
   // late String cpass, email, pass, name, key;
   final _email = TextEditingController();
   final _pass = TextEditingController();
@@ -24,6 +26,46 @@ class _RegistrationViewState extends State<RegistrationView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final fb = FirebaseDatabase.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _pass.dispose();
+    _name.dispose();
+    _cpass.dispose();
+    super.dispose();
+  }
+
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _email.text.trim(),
+        password: _pass.text.trim(),
+      );
+      addUserDetails(
+        _name.text.trim(),
+        _email.text.trim(),
+      );
+    }
+  }
+
+  Future addUserDetails(
+    String fullName,
+    String email,
+  ) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'Full Name': fullName,
+      'email': email,
+    });
+  }
+
+  bool passwordConfirmed() {
+    if (_pass.text.trim() == _cpass.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +81,14 @@ class _RegistrationViewState extends State<RegistrationView> {
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 10),
-                Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: Image.asset(
-                        'lib/assets/images/splash.jpg',
-                        height: 100,
-                        width: 100,
-                      ),
-                    ),
-                  ],
+                const Text(
+                  'HELLO THERE!',
+                  style: TextStyle(fontSize: 52),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
+                const Text('Register Below With Your Details',
+                    style: TextStyle(fontSize: 18)),
+                const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
@@ -80,6 +115,28 @@ class _RegistrationViewState extends State<RegistrationView> {
                       icon: Icon(Icons.person),
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                DropdownButton<String>(
+                  icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                  items: gender
+                      .map(
+                        (String value) => DropdownMenuItem(
+                          value: value,
+                          child: Text(value),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (selectedGenderType) {
+                    setState(() {
+                      selectedGender = selectedGenderType;
+                    });
+                  },
+                  value: selectedGender,
+                  isExpanded: false,
+                  hint: const Text('Gender'),
                 ),
                 TextFormField(
                   controller: _email,
@@ -185,24 +242,32 @@ class _RegistrationViewState extends State<RegistrationView> {
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () async {
-                    UserCredential result =
-                        await _auth.createUserWithEmailAndPassword(
-                            email: _email.text, password: _pass.text);
+                  onPressed: ()  {
+                    signUp();
+                    addUserDetails(
+                      _name.text.trim(),
+                      _email.text.trim(),
+                    );
+                    // UserCredential result =
+                    //     await _auth.createUserWithEmailAndPassword(
+                    //         email: _email.text.trim(),
+                    //         password: _pass.text.trim());
                     Navigator.of(context).pushNamedAndRemoveUntil(
                       carRoute,
                       (route) => false,
                     );
-                    if (result != null) {
-                      User user = FirebaseAuth.instance.currentUser!;
-                      ref.child(user.uid).set({
-                        "name": _name,
-                        "password": _pass,
-                        "email": _email,
-                      });
-                    }
-                  },
-                  child: const Text('Sign Up'),
+                    // if (result != null) {
+                    //   User user = FirebaseAuth.instance.currentUser!;
+                    //   ref.child(user.uid).set({
+                    //     "name": _name,
+                    //     "password": _pass,
+                    //     "email": _email,
+
+
+                    }, child: const Text('Sign Up'),
+
+
+                  //child: const Text('Sign Up'),
                 ),
                 TextButton(
                   onPressed: () {

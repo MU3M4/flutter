@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/about_us.dart';
 import 'package:flutter_progress/views/account_details.dart';
@@ -8,10 +9,13 @@ import 'package:flutter_progress/views/drawer_items.dart';
 import 'package:flutter_progress/views/settings.dart';
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
 
+  final user = FirebaseAuth.instance.currentUser!;
+
+   NavigationDrawer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    //final user = FirebaseAuth.instance.currentUser!;
     return Drawer(
         child: Material(
       color: Colors.black,
@@ -24,30 +28,26 @@ class NavigationDrawer extends StatelessWidget {
             icon: Icons.person,
             onPressed: () => onItemPressed(context, index: 0),
           ),
-          DrawerItems(
-            name: 'chats',
-            icon: Icons.chat,
-            onPressed: () => onItemPressed(context, index: 1),
-          ),
+
           DrawerItems(
             name: 'Settings',
             icon: Icons.settings,
-            onPressed: () => onItemPressed(context, index: 2),
+            onPressed: () => onItemPressed(context, index: 1),
           ),
           DrawerItems(
             name: 'Car Profile',
             icon: Icons.car_repair,
-            onPressed: () => onItemPressed(context, index: 3),
+            onPressed: () => onItemPressed(context, index: 2),
           ),
           DrawerItems(
             name: 'About Us',
             icon: Icons.home,
-            onPressed: () => onItemPressed(context, index: 4),
+            onPressed: () => onItemPressed(context, index: 3),
           ),
           DrawerItems(
             name: 'logout',
             icon: Icons.logout,
-            onPressed: () => onItemPressed(context, index: 5),
+            onPressed: () {FirebaseAuth.instance.signOut();},
           ),
         ]),
       ),
@@ -61,9 +61,19 @@ class NavigationDrawer extends StatelessWidget {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const AccountDetails()));
         break;
-      default:
-        Navigator.pop(context);
+      case 1:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const SettingsPage()));
         break;
+      case 2:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const CarProfile()));
+        break;
+      case 3:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AboutUs()));
+        break;
+
     }
   }
 
@@ -80,16 +90,9 @@ class NavigationDrawer extends StatelessWidget {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children:  [
             Text(
-              'Emmanuel',
-              style: TextStyle(fontSize: 14, color: Colors.white),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'emmanuelmuemam@gmail.com',
+              'Signed in as: /n ' + user.email!,
               style: TextStyle(fontSize: 14, color: Colors.white),
             ),
           ],

@@ -16,7 +16,7 @@ import 'package:flutter_progress/views/select_garage.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
 import 'firebase_options.dart';
-import 'package:get/get.dart';
+
 
 
 void main() async {
@@ -26,7 +26,7 @@ void main() async {
   );
   
   runApp(
-    GetMaterialApp(
+    MaterialApp(
       title: 'Atta',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

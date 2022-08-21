@@ -16,7 +16,7 @@ class _WindowsServicesState extends State<WindowsServices> {
         centerTitle: true,
       ),
       body:
-        Expanded(
+        Center(
         child: ListView(
           children: <Widget>[
             Container(
