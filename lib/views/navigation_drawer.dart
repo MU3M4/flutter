@@ -92,8 +92,8 @@ class NavigationDrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:  [
             Text(
-              'Signed in as: /n ' + user.email!,
-              style: TextStyle(fontSize: 14, color: Colors.white),
+              'Signed in as: ' + user.email!,
+              style: const TextStyle(fontSize: 14, color: Colors.white),
             ),
           ],
         )

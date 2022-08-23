@@ -46,6 +46,9 @@ class _RegistrationViewState extends State<RegistrationView> {
         _name.text.trim(),
         _email.text.trim(),
       );
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          carRoute,
+      (route) => false);
     }
   }
 
@@ -241,34 +244,56 @@ class _RegistrationViewState extends State<RegistrationView> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: ()  {
-                    signUp();
-                    addUserDetails(
-                      _name.text.trim(),
-                      _email.text.trim(),
-                    );
-                    // UserCredential result =
-                    //     await _auth.createUserWithEmailAndPassword(
-                    //         email: _email.text.trim(),
-                    //         password: _pass.text.trim());
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      carRoute,
-                      (route) => false,
-                    );
-                    // if (result != null) {
-                    //   User user = FirebaseAuth.instance.currentUser!;
-                    //   ref.child(user.uid).set({
-                    //     "name": _name,
-                    //     "password": _pass,
-                    //     "email": _email,
-
-
-                    }, child: const Text('Sign Up'),
-
-
-                  //child: const Text('Sign Up'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: GestureDetector(
+                    onTap: signUp,
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.deepOrange,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
+                // ElevatedButton(
+                //   onPressed: ()  {
+                //     signUp();
+                //     addUserDetails(
+                //       _name.text.trim(),
+                //       _email.text.trim(),
+                //     );
+                //     // UserCredential result =
+                //     //     await _auth.createUserWithEmailAndPassword(
+                //     //         email: _email.text.trim(),
+                //     //         password: _pass.text.trim());
+                //     Navigator.of(context).pushNamedAndRemoveUntil(
+                //       carRoute,
+                //       (route) => false,
+                //     );
+                //     // if (result != null) {
+                //     //   User user = FirebaseAuth.instance.currentUser!;
+                //     //   ref.child(user.uid).set({
+                //     //     "name": _name,
+                //     //     "password": _pass,
+                //     //     "email": _email,
+                //
+                //
+                //     }, child: const Text('Sign Up'),
+                //
+                //
+                //   //child: const Text('Sign Up'),
+                // ),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
