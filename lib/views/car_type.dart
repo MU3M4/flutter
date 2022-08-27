@@ -1,7 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/home_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CarType extends StatefulWidget {
   const CarType({Key? key}) : super(key: key);
@@ -493,7 +492,7 @@ class _CarTypeState extends State<CarType> {
                 items: dataset.keys.map((e) {
                   return DropdownMenuItem<String?>(
                     value: e,
-                    child: Text('$e'),
+                    child: Text(e),
                   );
                 }).toList(),
                 onChanged: onCarModelChanged,
@@ -509,7 +508,7 @@ class _CarTypeState extends State<CarType> {
                 items: (dataset[selectedCarModel] ?? []).map((e) {
                   return DropdownMenuItem<String?>(
                     value: e,
-                    child: Text('$e'),
+                    child: Text(e),
                   );
                 }).toList(),
                 onChanged: (val) {

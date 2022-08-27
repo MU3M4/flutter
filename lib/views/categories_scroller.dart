@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CategoriesScroller extends StatelessWidget {
   CategoriesScroller({Key? key}) : super(key: key);
@@ -48,7 +46,7 @@ class CategoriesScroller extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 20),
                     height: categoryHeight,
                     decoration: BoxDecoration(
-                      color: Colors.orange.shade400,borderRadius: BorderRadius.all(Radius.circular(20.0))
+                      color: Colors.orange.shade400,borderRadius: const BorderRadius.all(Radius.circular(20.0))
                     ),
                     child: Padding(
                         padding: const EdgeInsets.all(12.0),
@@ -170,7 +168,7 @@ class CategoriesScroller extends StatelessWidget {
                             ]))),
                 Expanded(child: ListView.builder(
                   itemCount: itemsData.length,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: ((context, index) {
                   return itemsData[index];
                 })))

@@ -12,7 +12,7 @@ class _FixCarState extends State<FixCar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fix Car'),
+        title: const Text('Fix Car'),
         centerTitle: true,
       )
     );

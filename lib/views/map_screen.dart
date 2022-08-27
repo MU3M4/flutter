@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_progress/views/location_controller.dart';
 import 'package:get/get.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/src/details/details_result.dart';
+import 'package:trust_location/trust_location.dart';
 
 import 'map_utils.dart';
 //import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
@@ -21,6 +22,9 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  String? latitude;
+  String? longitude;
+  bool? isMock;
   late CameraPosition _initialPosition;
   final Completer<GoogleMapController> _controller = Completer();
   Map<PolylineId, Polyline> polylines = {};
@@ -28,6 +32,7 @@ class _MapScreenState extends State<MapScreen> {
   PolylinePoints polylinePoints = PolylinePoints();
   @override
   void initState() {
+    requestPermission();
     super.initState();
     _initialPosition = CameraPosition(
       target: LatLng(widget.startPosition!.geometry!.location!.lat!,
@@ -35,9 +40,32 @@ class _MapScreenState extends State<MapScreen> {
       zoom: 14.5,
     );
   }
+  void requestPermission() async{
+    final permission = await Permission.location.request();
+    if(permission == PermissionStatus.granted){
+      TrustLocation.start(10);
+      getLocation();
+    } else if (permission == PermissionStatus.denied){
+      await Permission.location.request();
+    }
+  }
+ void getLocation() async{
+    try{
+      TrustLocation.onChange.listen((result){
 
+        setState(() {
+          latitude = result.latitude;
+          longitude = result.longitude;
+          isMock = result.isMockLocation;
+        });
+
+      });
+    }catch (e){
+      print('error');
+    }
+ }
   _addPolyLine() {
-    PolylineId id = PolylineId("poly");
+    PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id,
         color: Colors.black,
@@ -56,15 +84,15 @@ class _MapScreenState extends State<MapScreen> {
             widget.endPosition!.geometry!.location!.lng!),
         travelMode: TravelMode.driving);
     if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
+      for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    Set<Marker> _markers = {
+    Set<Marker> markers = {
       Marker(
         markerId: const MarkerId('start'),
         position: LatLng(widget.startPosition!.geometry!.location!.lat!,
@@ -97,13 +125,13 @@ class _MapScreenState extends State<MapScreen> {
               child: GoogleMap(
                 polylines: Set<Polyline>.of(polylines.values),
                 initialCameraPosition: _initialPosition,
-                markers: Set.from(_markers),
+                markers: Set.from(markers),
                 mapType: MapType.normal,
                 onMapCreated: (GoogleMapController controller) {
                   Future.delayed(const Duration(milliseconds: 2000), () {
                     controller.animateCamera(CameraUpdate.newLatLngBounds(
                         MapUtils.boundsFromLatLngList(
-                            _markers.map((loc) => loc.position).toList()),
+                            markers.map((loc) => loc.position).toList()),
                         1));
                     _getPolyline();
                   });

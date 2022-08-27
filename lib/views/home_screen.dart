@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: ListView(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const BatteryServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -245,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const BrakeServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -268,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -330,7 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const ClutchTransmissionServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -353,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -415,7 +415,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const DoorServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -438,7 +438,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -500,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const EngineServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -523,7 +523,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -585,7 +585,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const ExhaustServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -608,7 +608,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -670,7 +670,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const FilterServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -693,7 +693,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -755,7 +755,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const FluidServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -778,7 +778,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -840,7 +840,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const FuelSystemServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -864,7 +864,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ]),
                     ),
 
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -926,7 +926,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const HeatingAC())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -949,7 +949,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1011,7 +1011,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const HosesServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1034,7 +1034,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1096,7 +1096,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const LightServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1119,7 +1119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1181,7 +1181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const IgnitionServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1204,7 +1204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1266,7 +1266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const LightServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1289,7 +1289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1351,7 +1351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const LightServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1374,7 +1374,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1436,7 +1436,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const SensorsServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1459,7 +1459,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1521,7 +1521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const SuspensionSteering())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1544,7 +1544,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1606,7 +1606,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const TyreServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1629,7 +1629,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1691,7 +1691,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const WindowsServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(
@@ -1714,7 +1714,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: Stack(children: [
                         Positioned(
@@ -1776,7 +1776,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                     const WiperServices())),
-                            child: Container(
+                            child: SizedBox(
                               height: 150,
                               width: 160,
                               child: Column(

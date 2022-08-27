@@ -12,7 +12,7 @@ class _FuelSystemServicesState extends State<FuelSystemServices> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Fuel System Services'),
+      appBar: AppBar(title: const Text('Fuel System Services'),
       centerTitle: true,),
       body: Center(
         child: ListView(

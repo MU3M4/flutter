@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/appointment_history.dart';
 import 'package:flutter_progress/views/current_location.dart';
-import 'package:flutter_progress/views/garage.dart';
 import 'package:flutter_progress/views/search.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class AppointmentDetails extends StatefulWidget {
   const AppointmentDetails({Key? key}) : super(key: key);

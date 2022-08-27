@@ -80,8 +80,8 @@ class ForgotPassword extends StatelessWidget {
             const SizedBox(height: 10),
             MaterialButton(
               onPressed: passwordReset,
-              child: const Text('Reset Password'),
               color: Colors.deepOrange,
+              child: const Text('Reset Password'),
             )
           ],
         ));

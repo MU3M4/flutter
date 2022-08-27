@@ -3,11 +3,7 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:dio/dio.dart';
 import 'package:google_api_headers/google_api_headers.dart';
-import 'package:search_map_location/utils/google_search/place.dart';
-import 'package:search_map_location/widget/search_widget.dart';
-import 'package:search_map_location/search_map_location.dart';
 
 class SearchScreen extends StatefulWidget {
   // SearchScreen(
@@ -77,7 +73,7 @@ class _SearchScreenState extends State<SearchScreen> {
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(color: Colors.white))),
-        components: [new Component(Component.country, "")]);
+        components: [Component(Component.country, "")]);
 
     displayPrediction(p!, homeScaffoldKey.currentState);
   }

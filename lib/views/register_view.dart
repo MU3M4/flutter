@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 
 import '../constants/routes.dart';
 import 'login_view.dart';
@@ -24,8 +24,18 @@ class _RegistrationViewState extends State<RegistrationView> {
   final _name = TextEditingController();
   final _cpass = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  CollectionReference reference = FirebaseFirestore.instance.collection('users');
   final fb = FirebaseDatabase.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  void verifyEmail() {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (!(user!.emailVerified)) {
+      user!.sendEmailVerification();
+    } else {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(phoneRoute, (route) => false);
+    }
+  }
 
   @override
   void dispose() {
@@ -38,17 +48,23 @@ class _RegistrationViewState extends State<RegistrationView> {
 
   Future signUp() async {
     if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: _email.text.trim(),
         password: _pass.text.trim(),
-      );
+      )
+          .then((value) {
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(value.user!.uid)
+            .set({"email": value.user!.email, "name": value.user!.displayName});
+      });
       addUserDetails(
         _name.text.trim(),
         _email.text.trim(),
       );
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          carRoute,
-      (route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(phoneRoute, (route) => false);
     }
   }
 
@@ -97,16 +113,11 @@ class _RegistrationViewState extends State<RegistrationView> {
                   child: TextFormField(
                     controller: _name,
                     validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        Fluttertoast.showToast(
-                          msg: "please enter your full name",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.redAccent,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
+                      if (val!.isEmpty ||
+                          !RegExp(r'^[a-z A-Z]+$').hasMatch(val)) {
+                        return "Enter Correct Name";
+                      } else {
+                        return null;
                       }
                     },
                     decoration: const InputDecoration(
@@ -141,34 +152,18 @@ class _RegistrationViewState extends State<RegistrationView> {
                   isExpanded: false,
                   hint: const Text('Gender'),
                 ),
+                const SizedBox(height: 10),
                 TextFormField(
                   controller: _email,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      Fluttertoast.showToast(
-                        msg: "please enter email address",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.redAccent,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
+                  // regular expression validates the format of the email address
+                  validator: (val) {
+                    if (val!.isEmpty ||
+                        !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                            .hasMatch(val!)) {
+                      return "Enter a valid email address";
+                    } else {
+                      return null;
                     }
-                    //regular expression validates the format of the email address
-                    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                        .hasMatch(value!)) {
-                      Fluttertoast.showToast(
-                        msg: "please enter a valid email address",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.redAccent,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                    }
-                    return null;
                   },
                   decoration: const InputDecoration(
                     hintText: ' Email Address',
@@ -179,6 +174,8 @@ class _RegistrationViewState extends State<RegistrationView> {
                     icon: Icon(Icons.email),
                   ),
                 ),
+                const SizedBox(height: 10),
+
                 TextFormField(
                   obscureText: true,
                   controller: _pass,
@@ -194,6 +191,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                         fontSize: 16.0,
                       );
                     }
+                    return null;
                   },
                   decoration: const InputDecoration(
                     hintText: ' password',
@@ -232,6 +230,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                           fontSize: 16.0,
                         );
                       }
+                      return null;
                     },
                     decoration: const InputDecoration(
                       hintText: 'confirm password',
@@ -244,58 +243,76 @@ class _RegistrationViewState extends State<RegistrationView> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GestureDetector(
-                    onTap: signUp,
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.deepOrange,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                // ElevatedButton(
-                //   onPressed: ()  {
-                //     signUp();
-                //     addUserDetails(
-                //       _name.text.trim(),
-                //       _email.text.trim(),
-                //     );
-                //     // UserCredential result =
-                //     //     await _auth.createUserWithEmailAndPassword(
-                //     //         email: _email.text.trim(),
-                //     //         password: _pass.text.trim());
-                //     Navigator.of(context).pushNamedAndRemoveUntil(
-                //       carRoute,
-                //       (route) => false,
-                //     );
-                //     // if (result != null) {
-                //     //   User user = FirebaseAuth.instance.currentUser!;
-                //     //   ref.child(user.uid).set({
-                //     //     "name": _name,
-                //     //     "password": _pass,
-                //     //     "email": _email,
-                //
-                //
-                //     }, child: const Text('Sign Up'),
-                //
-                //
-                //   //child: const Text('Sign Up'),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                //   child: GestureDetector(
+                //     onTap: verifyEmail,
+                //     child: Container(
+                //       padding: const EdgeInsets.all(20),
+                //       decoration: BoxDecoration(
+                //         color: Colors.deepOrange,
+                //         borderRadius: BorderRadius.circular(12),
+                //       ),
+                //       child: const Center(
+                //         child: Text(
+                //           'Sign Up',
+                //           style: TextStyle(
+                //               color: Colors.white,
+                //               fontWeight: FontWeight.bold,
+                //               fontSize: 18),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
                 // ),
-                TextButton(
+                ElevatedButton(
+                  onPressed: ()  async{
+                    if(_formKey.currentState!.validate()){
+                      String emailAddress = _email.text.trim();
+                      String nameText = _name.text;
+                      String genderType = selectedGender;
+
+                      Map<String, String> dataToSend = {
+                        "email": emailAddress,
+                        "name": nameText,
+                        "gender": genderType,
+                      };
+                        reference.add(dataToSend);
+                    }
+                    verifyEmail();
+                    signUp();
+                    addUserDetails(
+                      _name.text.trim(),
+                      _email.text.trim(),
+                    );
+                    // UserCredential result =
+                    //     await _auth.createUserWithEmailAndPassword(
+                    //         email: _email.text.trim(),
+                    //         password: _pass.text.trim());
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      carRoute,
+                      (route) => false,
+                    );
+                    // if (result != null) {
+                    //   User user = FirebaseAuth.instance.currentUser!;
+                    //   ref.child(user.uid).set({
+                    //     "name": _name,
+                    //     "password": _pass,
+                    //     "email": _email,
+
+
+                    }, child: const Text('Sign Up'),
+
+
+                  //child: const Text('Sign Up'),
+                ),
+                ElevatedButton(
                   onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      final snackBar = SnackBar(
+                          content: Text('Submitting Registration Form'));
+                      _formKey.currentState!.save();
+                    }
                     Navigator.push(
                         context,
                         MaterialPageRoute(
