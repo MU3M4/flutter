@@ -86,6 +86,8 @@ dependencies:
   firebase_messaging: ^13.0.0
   trust_location: ^2.0.13
   permission_handler: ^10.0.0
+  onesignal_flutter: ^3.4.1
+  google_sign_in: ^5.4.1
 
 dev_dependencies:
   flutter_test:
@@ -135,6 +137,7 @@ flutter:
       - lib/assets/images/Filters.jpg
       - lib/assets/images/Carswitches.jpg
       - lib/assets/images/sensors.png
+      - lib/assets/images/google.png
 
 
   #   - images/a_dot_burr.jpeg

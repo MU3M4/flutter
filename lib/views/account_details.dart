@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/ItemDetails.dart';
+import 'package:flutter_progress/views/auth/auth.dart';
 
 class AccountDetails extends StatelessWidget {
   AccountDetails({Key? key}) : super(key: key) {
@@ -18,37 +20,46 @@ class AccountDetails extends StatelessWidget {
         title: const Text('Account Details'),
         centerTitle: true,
       ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: _stream,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                  child: Text('Some error has occurred ${snapshot.error}'));
-            }
-            if (snapshot.hasData) {
-              QuerySnapshot querySnapshot = snapshot.data;
-              List<QueryDocumentSnapshot> documents = querySnapshot.docs;
-              List<Map> accountDetails = documents.map((e) => {
-                'id': e.id,
-                'name': e['name'],
-                'email': e['email'],
-
-              }).toList();
-              return ListView.builder(
-                itemCount: accountDetails.length,
-                  itemBuilder: (BuildContext context, int index){
-                  Map thisItem = accountDetails[index];
-                  return ListTile(
-                    title: Text('${thisItem['name']}'),
-                    subtitle: Text('${thisItem['email']}'),
-                    onTap: (){
-                      // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemDetails(thisItem['id'],)));
-                    },
-                  );
-                  });
-            }
-            return Center(child: CircularProgressIndicator());
-          }),
+      body: Container(
+        color: Colors.white,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              FirebaseAuth.instance.currentUser!.email!,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              FirebaseAuth.instance.currentUser!.email!,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87),
+            ),
+            const SizedBox(height: 10),
+            MaterialButton(
+                padding: const EdgeInsets.all(10),
+                color: Colors.deepOrange,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                child: const Text(
+                  'Log Out',
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+                onPressed: () {
+                  signOut();
+                }),
+          ],
+        ),
+      ),
     );
   }
 }

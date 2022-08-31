@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class MechanicProfile extends StatefulWidget {
   const MechanicProfile({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class MechanicProfile extends StatefulWidget {
 }
 
 class _MechanicProfileState extends State<MechanicProfile> {
+  static final String oneSignalAppId = '048cb7d8-66ee-4423-999a-d96a5269148a';
   /// Create a [AndroidNotificationChannel] for heads up notifications
   late AndroidNotificationChannel channel;
   TextEditingController username = TextEditingController();
@@ -30,6 +32,7 @@ class _MechanicProfileState extends State<MechanicProfile> {
     listenFCM();
     getToken();
     requestPermission();
+    initPlatformState();
     FirebaseMessaging.instance.subscribeToTopic('Car Service');
     super.initState();
   }
@@ -152,7 +155,9 @@ class _MechanicProfileState extends State<MechanicProfile> {
       );
     }
   }
-
+Future<void> initPlatformState() async{
+    OneSignal.shared.setAppId(oneSignalAppId);
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(

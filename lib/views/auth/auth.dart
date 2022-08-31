@@ -3,46 +3,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
 import 'package:flutter_progress/views/car_type.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:flutter_progress/views/home_screen.dart';
+import 'package:flutter_progress/views/login_view.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthEnt {
   final FirebaseAuth auth = FirebaseAuth.instance;
- Future<void> verifyPhoneNumber(String phoneNumber, BuildContext context, Function setData)async{
-   PhoneVerificationCompleted verificationCompleted =(PhoneAuthCredential phoneAuthCredential) async{
-   showSnackBar(context, 'Verification completed');
-   };
-   PhoneVerificationFailed verificationFailed = (FirebaseAuthException exception){
-     showSnackBar(context, exception.toString());
-   };
-   PhoneCodeSent codeSent = (String verificationID, [int? forceResendingtoken]){
-     showSnackBar(context, 'Verification Code sent on the phone number');
-     setData(verificationID);
-   };
-   PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout = (String verificationID){
-     showSnackBar(context, 'Timeout');
-   };
-   try{
-     await auth.verifyPhoneNumber(phoneNumber: phoneNumber, verificationCompleted: verificationCompleted, verificationFailed: verificationFailed, codeSent: codeSent, codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-   }
-   catch(e){
-     
-   }
- }
- Future<void> signInWithPhoneNumber(String verificationId, String smsCode, BuildContext context)async{
-   try{
-     AuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+  //handle auth state
+  handleAuthState() {
 
-     UserCredential userCredential = await auth.signInWithCredential(credential);
-     //storeTokenAndData(userCredential);
-     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (builder)=> const CarType()), (route) => false);
-     showSnackBar(context, 'Registered Successfully');
-   }catch(e){
-     showSnackBar(context, e.toString());
-   }
- }
-void showSnackBar(BuildContext context, String text){
-   final snackBar = SnackBar(content: Text(text));
-   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    return StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, snapshot) {
+      if (snapshot.hasData) {
+        return const HomeScreen();
+      } else {
+        return const LoginView();
+      }
+    });
+  }
+  //signInWithGoogle()
+  signInWithGoogle()async {
+    //Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn(
+        scopes: <String>["email"]).signIn();
+    //Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth = await googleUser!
+        .authentication;
+    //Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    //Once signed In, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+
+  }
+  }
+
+  //signOut()
+signOut(){
+  FirebaseAuth.instance.signOut();
 }
 
-}
+

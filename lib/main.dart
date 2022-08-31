@@ -16,31 +16,26 @@ import 'package:flutter_progress/views/register_view.dart';
 import 'package:flutter_progress/views/select_garage.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'firebase_options.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
 
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  print('Handling a background message ${message.messageId}');
-}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // Set the background messaging handler early on, as a named top-level function
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+
 
   runApp(
     MaterialApp(
       title: 'Atta',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
+       ),
       home: const Splash(),
       // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
       routes: {

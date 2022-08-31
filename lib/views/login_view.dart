@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+import 'auth/auth.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
+
+
 
   @override
   void initState() {
@@ -29,20 +34,28 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
         centerTitle: true,
       ),
       body:   Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 //logo
                 Expanded(
-                  child: Image.asset(
-                    'lib/assets/images/splash.jpg',
-                    height: 100,
-                    width: 100,
+                  child: GestureDetector(
+                    onTap: (){
+                      AuthEnt().signInWithGoogle();
+                    },
+                    child: const Image(
+                      image: AssetImage(
+                      'lib/assets/images/google.png',),
+
+                      width: 100,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),

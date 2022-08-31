@@ -269,7 +269,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                             wait = true;
                             buttonName = "Resend";
                           });
-                          await authClass.verifyPhoneNumber("$InternationalPhoneNumberInput.text", context, setData);
+                         // await authClass.verifyPhoneNumber("$InternationalPhoneNumberInput.text", context, setData);
                         },
                   child: Text(
                     buttonName,
@@ -281,7 +281,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    authClass.signInWithPhoneNumber(verificationIdFinal, smsCode, context);
+
 
                   },
                   child: const Text('Lets Go'),

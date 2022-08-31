@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../constants/routes.dart';
 import 'login_view.dart';
@@ -18,7 +19,8 @@ class RegistrationView extends StatefulWidget {
 class _RegistrationViewState extends State<RegistrationView> {
   var selectedGender;
   List<String> gender = <String>['Male', 'Female', 'Non-binary'];
-  // late String cpass, email, pass, name, key;
+  //late String cpass, email, pass, name, key;
+
   final _email = TextEditingController();
   final _pass = TextEditingController();
   final _name = TextEditingController();
@@ -30,7 +32,7 @@ class _RegistrationViewState extends State<RegistrationView> {
   void verifyEmail() {
     User? user = FirebaseAuth.instance.currentUser;
     if (!(user!.emailVerified)) {
-      user!.sendEmailVerification();
+      user.sendEmailVerification();
     } else {
       Navigator.of(context)
           .pushNamedAndRemoveUntil(phoneRoute, (route) => false);
@@ -159,7 +161,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                   validator: (val) {
                     if (val!.isEmpty ||
                         !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
-                            .hasMatch(val!)) {
+                            .hasMatch(val)) {
                       return "Enter a valid email address";
                     } else {
                       return null;
