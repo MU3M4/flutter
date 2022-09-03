@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
     Prediction? p = await PlacesAutocomplete.show(
         context: context,
         apiKey: kGoogleApiKey,
-        onError: onError,
+        //onError: onError,
         mode: _mode,
         language: 'en',
         strictbounds: false,
@@ -78,10 +78,10 @@ class _SearchScreenState extends State<SearchScreen> {
     displayPrediction(p!, homeScaffoldKey.currentState);
   }
 
-  void onError(PlacesAutocompleteResponse response) {
-    homeScaffoldKey.currentState!
-        .showSnackBar(SnackBar(content: Text(response.errorMessage!)));
-  }
+  // void onError(PlacesAutocompleteResponse response) {
+  //   homeScaffoldKey.currentState!
+  //       .showSnackBar(SnackBar(content: Text(response.errorMessage!)));
+  // }
 
   Future<void> displayPrediction(
       Prediction p, ScaffoldState? currentState) async {

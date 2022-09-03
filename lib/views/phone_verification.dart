@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_progress/constants/routes.dart';
 import 'package:flutter_progress/views/login_view.dart';
+import 'package:flutter_progress/views/otp.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -46,273 +47,53 @@ class _PhoneAuthState extends State<PhoneAuth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Phone Number'),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        appBar: AppBar(
+          title: const Text('Phone Authentication'),
+          centerTitle: true,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              'lib/assets/images/splash.jpg',
-              height: 100,
-              width: 100,
-            ),
-            const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Text(
-                'REGISTER',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Text(
-                'Enter your phone number, we will send an OTP code to verify',
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0xffeeeeee),
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.black.withOpacity(0.13))),
-                child: Stack(
-                  children: [
-                    InternationalPhoneNumberInput(
-                      onInputChanged: (value) {},
-                      cursorColor: Colors.black,
-                      formatInput: false,
-                      selectorConfig: const SelectorConfig(
-                        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                      ),
-                      inputDecoration: InputDecoration(
-                        contentPadding:
-                            const EdgeInsets.only(bottom: 15, left: 0),
-                        border: InputBorder.none,
-                        hintText: 'Input Phone Number',
-                        hintStyle: TextStyle(
-                          color: Colors.grey[500],
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 90,
-                      top: 8,
-                      child: Container(
-                        height: 40,
-                        width: 1,
-                        color: Colors.white.withOpacity(0.13),
-                      ),
-                    ),
-                  ],
+            Container(
+              margin: const EdgeInsets.only(top: 60),
+              child: const Center(
+                child: Text(
+                  'Phone Authentication',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 30,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey,
-                      margin: const EdgeInsets.symmetric(horizontal: 12),
-                    ),
+            Container(
+              margin: const EdgeInsets.only(top: 40, right: 10, left: 10),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Phone Number',
+                  prefix: Padding(
+                    padding: EdgeInsets.all(4),
+                    child: Text('+254'),
                   ),
-                  const Text(
-                    'Enter the 6-Digit OTP',
-                    style: TextStyle(fontSize: 17, color: Colors.black),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey,
-                      margin: const EdgeInsets.symmetric(horizontal: 12),
-                    ),
-                  ),
-                ],
+                ),
+                maxLength: 10,
+                keyboardType: TextInputType.number,
+                controller: _phone,
               ),
             ),
-            const SizedBox(height: 10),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: [
-            //     SizedBox(
-            //
-            //       height: 68,
-            //       width: 64,
-            //       child: TextFormField(
-            //         onChanged: (value){
-            //           if (value.length ==1){
-            //             FocusScope.of(context).nextFocus();
-            //           }
-            //         },
-            //         onSaved: (pin1){},
-            //         style: Theme.of(context).textTheme.headline6,
-            //         keyboardType: TextInputType.number,
-            //         textAlign: TextAlign.center,
-            //         inputFormatters: [
-            //           LengthLimitingTextInputFormatter(1),
-            //           FilteringTextInputFormatter.digitsOnly
-            //         ],
-            //       ),
-            //     ),
-            //     SizedBox(
-            //       height: 68,
-            //       width: 64,
-            //       child: TextFormField(
-            //         onChanged: (value){
-            //           if (value.length ==1){
-            //             FocusScope.of(context).nextFocus();
-            //           }
-            //         },
-            //         onSaved: (pin2){},
-            //         style: Theme.of(context).textTheme.headline6,
-            //         keyboardType: TextInputType.number,
-            //         textAlign: TextAlign.center,
-            //         inputFormatters: [
-            //           LengthLimitingTextInputFormatter(1),
-            //           FilteringTextInputFormatter.digitsOnly
-            //         ],
-            //       ),
-            //     ),
-            //     SizedBox(
-            //       height: 68,
-            //       width: 64,
-            //       child: TextFormField(
-            //         onChanged: (value){
-            //           if (value.length ==1){
-            //             FocusScope.of(context).nextFocus();
-            //           }
-            //         },
-            //         onSaved: (pin3){},
-            //         style: Theme.of(context).textTheme.headline6,
-            //         keyboardType: TextInputType.number,
-            //         textAlign: TextAlign.center,
-            //         inputFormatters: [
-            //           LengthLimitingTextInputFormatter(1),
-            //           FilteringTextInputFormatter.digitsOnly
-            //         ],
-            //       ),
-            //     ),
-            //     SizedBox(
-            //       height: 68,
-            //       width: 64,
-            //       child: TextFormField(
-            //         onChanged: (value){
-            //           if (value.length ==1){
-            //             FocusScope.of(context).nextFocus();
-            //           }
-            //         },
-            //         onSaved: (pin4){},
-            //         style: Theme.of(context).textTheme.headline6,
-            //         keyboardType: TextInputType.number,
-            //         textAlign: TextAlign.center,
-            //         inputFormatters: [
-            //           LengthLimitingTextInputFormatter(1),
-            //           FilteringTextInputFormatter.digitsOnly
-            //         ],
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            otpField(),
-            const SizedBox(
-              height: 40,
-            ),
-            RichText(
-              text: TextSpan(children: [
-                const TextSpan(
-                  text: "Send OTP again in",
-                  style: TextStyle(fontSize: 17, color: Colors.deepOrange),
+            Container(
+              margin: const EdgeInsets.all(10),
+              width: double.infinity,
+              child: ElevatedButton(
+                child: const Text(
+                  'Next',
+                  style: TextStyle(color: Colors.white),
                 ),
-                TextSpan(
-                  text: "00:$start",
-                  style: const TextStyle(fontSize: 17, color: Colors.black),
-                ),
-                const TextSpan(
-                  text: 'sec',
-                  style: TextStyle(fontSize: 17, color: Colors.deepOrange),
-                ),
-              ]),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: wait
-                      ? null
-                      : () async{
-                          startTimer();
-                          setState(() {
-                            start = 30;
-                            wait = true;
-                            buttonName = "Resend";
-                          });
-                         // await authClass.verifyPhoneNumber("$InternationalPhoneNumberInput.text", context, setData);
-                        },
-                  child: Text(
-                    buttonName,
-                    style: TextStyle(color: wait ? Colors.grey : Colors.white),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-
-
-                  },
-                  child: const Text('Lets Go'),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Already have an Account?',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (builder) => const LoginView()));
-                  },
-                  child: const Text('Login'),
-                ),
-              ],
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => OtpPage(phone: _phone.text))));
+                },
+              ),
             ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 
   void startTimer() {
@@ -349,10 +130,11 @@ class _PhoneAuthState extends State<PhoneAuth> {
       },
     );
   }
-  void setData(verificationId){
-setState(() {
-  verificationIdFinal = verificationId;
-});
-startTimer();
+
+  void setData(verificationId) {
+    setState(() {
+      verificationIdFinal = verificationId;
+    });
+    startTimer();
   }
 }

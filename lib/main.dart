@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/constants/routes.dart';
 import 'package:flutter_progress/views/appointment.dart';
@@ -11,13 +10,12 @@ import 'package:flutter_progress/views/forgot_password.dart';
 import 'package:flutter_progress/views/home_screen.dart';
 import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/map_screen.dart';
+import 'package:flutter_progress/views/otp.dart';
 import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
 import 'package:flutter_progress/views/select_garage.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
 import 'package:flutter_progress/views/verify_email_view.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'firebase_options.dart';
 
 
@@ -40,6 +38,7 @@ Future<void> main() async {
       // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
       routes: {
         phoneRoute: (context) => const PhoneAuth(),
+        otpRoute: (context) => const OtpPage(phone: ''),
         loginRoute: (context) => const LoginView(),
         mapRoute: (context) => const MapScreen(),
         registerRoute: (context) => const RegistrationView(),
