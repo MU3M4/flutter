@@ -33,6 +33,7 @@ Future<void> main() async {
       title: 'Atta',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
        ),
       home: const Splash(),
       // initialRoute: phoneRoute: (content) => const PhoneAuth(),};

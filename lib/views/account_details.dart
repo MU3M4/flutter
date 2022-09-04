@@ -137,6 +137,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                     }).then((value) {
                   setState(() {
                     birth = DateFormat("MM/DD/YYYY").format(value!);
+                    
                   });
                 });
               },
