@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class ItemDetails extends StatelessWidget {
-  ItemDetails({Key? key, required this.itemId, required this.reference})
+class itemDetails extends StatelessWidget {
+  itemDetails({Key? key, required this.itemId, required this.reference})
       : super(key: key) {
     reference = FirebaseFirestore.instance.collection('users').doc(itemId);
     _futureData = reference.get();

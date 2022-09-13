@@ -1,8 +1,8 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress/event.dart';
 import 'package:flutter_progress/views/appointment_history.dart';
-import 'package:flutter_progress/views/current_location.dart';
 import 'package:flutter_progress/views/search.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AppointmentDetails extends StatefulWidget {
   const AppointmentDetails({Key? key}) : super(key: key);
@@ -12,21 +12,33 @@ class AppointmentDetails extends StatefulWidget {
 }
 
 class _AppointmentDetailsState extends State<AppointmentDetails> {
- DatabaseReference ref = FirebaseDatabase.instance.ref();
-  TextEditingController _timeController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
-  // ignore: prefer_final_fields
-  DateTime date = DateTime(2022, 07, 21);
-  TimeOfDay time = const TimeOfDay(hour: 10, minute: 30);
-  // List<Garage> _aGarages = List<Garage>();
+  final TextEditingController _appointmentController = TextEditingController();
+  late Map<DateTime, List<Event>> selectedEvents;
+  CalendarFormat format = CalendarFormat.month;
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
+  @override
+  void initState() {
+    selectedEvents = {};
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _appointmentController.dispose();
+    super.dispose();
+  }
+
+  List<Event> _getEventsFromDay(DateTime date) {
+    return selectedEvents[date] ?? [];
+  }
+
   @override
   Widget build(BuildContext context) {
-    final hours = time.hour.toString().padLeft(2, '0');
-    final minutes = time.minute.toString().padLeft(2, '0');
     return Scaffold(
-      // backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: const Text('Book An Appointment'),
+        title: const Text('Appointment Calendar'),
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
@@ -46,111 +58,125 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
               icon: const Icon(Icons.search))
         ],
       ),
-      // List<Garage> _getAttaGarages(){
-      //   List<Garage> _aGarages = List<Garage>();
-      //   _aGarages.add(Garage(garageName: "Max Auto", image: "", ratings: 5.0, specialty "Brakes", location: "Juja"));
-      //   return _aGarages;
-      // },
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Text('${date.year}/${date.month}/${date.day}',
-            //     style: const TextStyle(fontSize: 32)),
-            // const SizedBox(height: 10),
-            // ElevatedButton(
-            //   child: const Text('Select Appointment Date'),
-            //   onPressed: () async {
-            //     DateTime? newDate = await showDatePicker(
-            //       context: context,
-            //       initialDate: date,
-            //       firstDate: DateTime(1900),
-            //       lastDate: DateTime(2100),
-            //     );
-            //     // if 'Cancel  => null
-            //     if (newDate == null) return;
-            //     //if 'OK' => DateTime
-            //     setState(() => date = newDate);
-            //   },
-            // ),
-            // const SizedBox(height: 10,),
-            // Text(
-            //   '$hours: $minutes',
-            //   style: const TextStyle(fontSize: 32),
-            // ),
-            // ElevatedButton(
-            //   child: const Text('Select Appointment Time'),
-            //   onPressed: () async {
-            //     TimeOfDay? newTime =
-            //         await showTimePicker(context: context, initialTime: time);
-            //     // if 'Cancel  => null
-            //     if (newTime == null) return;
-            //     //if 'OK' => DateTime
-            //     setState(() => time = newTime);
-            //   },
-            // ),
-            TextFormField(
-              controller: _timeController,
-              decoration: const InputDecoration(
-                hintText: 'Set Your appointment Time',
+      body: Column(
+        children: [
+          TableCalendar(
+            focusedDay: selectedDay,
+            firstDay: DateTime(1990),
+            lastDay: DateTime(2100),
+            calendarFormat: format,
+            //changing the date
+            onFormatChanged: (CalendarFormat _format) {
+              setState(() {
+                format = _format;
+              });
+            },
+            startingDayOfWeek: StartingDayOfWeek.sunday,
+            daysOfWeekVisible: true,
+            onDaySelected: (DateTime selectDay, focusDay) {
+              setState(() {
+                selectedDay = selectDay;
+                focusedDay = focusDay;
+              });
+              print(focusedDay);
+            },
+            selectedDayPredicate: (DateTime date) {
+              return isSameDay(selectedDay, date);
+            },
+            eventLoader: _getEventsFromDay,
+            //Styling the calendar
+            calendarStyle: CalendarStyle(
+              isTodayHighlighted: true,
+              selectedDecoration: BoxDecoration(
+                color: Colors.deepOrange,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              selectedTextStyle: const TextStyle(color: Colors.white),
+              todayDecoration: BoxDecoration(
+                color: Colors.blue,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              defaultDecoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              weekendDecoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5.0),
               ),
             ),
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: _dateController,
-              decoration: const InputDecoration(
-                hintText: 'Set Your Appointment Date',
-                labelText: 'DD/MM/YYYY',
+            headerStyle: HeaderStyle(
+              formatButtonVisible: true,
+              titleCentered: true,
+              formatButtonShowsNext: false,
+              formatButtonDecoration: BoxDecoration(
+                color: Colors.deepOrange,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              formatButtonTextStyle: const TextStyle(
+                color: Colors.white,
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: const Text('Visit Garage')),
-            const SizedBox(
-              width: 10,
+          ),
+          ..._getEventsFromDay(selectedDay).map(
+            (Event event) => ListTile(
+              title: Text(event.title),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => const CurrentLocation())));
-              },
-              child: const Text(
-                'Home Visit',
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Add an appointment'),
+            content: TextFormField(
+              controller: _appointmentController,
+              minLines: 2,
+              maxLines: 5,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-
-            const TextField(
-              decoration: InputDecoration(
-                hintText: 'Enter Location',
-                prefixIcon: Icon(Icons.gps_fixed),
-                suffixIcon: Icon(Icons.edit),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
+              TextButton(
                 onPressed: () {
-                  if (_timeController.text.isNotEmpty &&
-                      _dateController.text.isNotEmpty) {
-                    insertData(_timeController.text, _dateController.text);
+                  if (_appointmentController.text.isEmpty) {
+                  } else {
+                    if (selectedEvents[selectedDay] != null) {
+                      selectedEvents[selectedDay]?.add(
+                        Event(title: _appointmentController.text),
+                      );
+                    } else {
+                      selectedEvents[selectedDay] = [
+                        Event(title: _appointmentController.text),
+                      ];
+                    }
                   }
+                  Navigator.pop(context);
+                  _appointmentController.clear();
+                  setState(() {
+                    
+                  });
+                  return;
                 },
-                child: const Text('Confirm'))
-          ],
+                child: const Text(
+                  'Ok',
+                ),
+              ),
+            ],
+          ),
         ),
+        label: const Text(
+          'Add Appointment',
+        ),
+        icon: const Icon(Icons.add),
       ),
     );
-  }
-
-  void insertData(String time, String date) {
-    ref.child('appointments').set({
-      'time': time,
-      'date': date,
-    });
-    _timeController.clear();
-    _dateController.clear();
   }
 }

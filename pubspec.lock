@@ -155,13 +155,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.2"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -737,6 +730,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.1"
+  international_phone_input:
+    dependency: "direct main"
+    description:
+      name: international_phone_input
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   intl:
     dependency: "direct main"
     description:
@@ -744,13 +744,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.0"
-  intl_phone_number_input:
+  intl_phone_field:
     dependency: "direct main"
     description:
-      name: intl_phone_number_input
+      name: intl_phone_field
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.0+2"
+    version: "3.1.0"
   js:
     dependency: transitive
     description:
@@ -773,33 +773,12 @@ packages:
     source: hosted
     version: "4.6.0"
   libphonenumber:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: libphonenumber
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  libphonenumber_platform_interface:
-    dependency: transitive
-    description:
-      name: libphonenumber_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.1"
-  libphonenumber_plugin:
-    dependency: transitive
-    description:
-      name: libphonenumber_plugin
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.3"
-  libphonenumber_web:
-    dependency: transitive
-    description:
-      name: libphonenumber_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0+1"
   lints:
     dependency: transitive
     description:
@@ -1052,6 +1031,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0"
+  phone_number:
+    dependency: "direct main"
+    description:
+      name: phone_number
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  pin_code_fields:
+    dependency: "direct main"
+    description:
+      name: pin_code_fields
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.4.0"
   pinput:
     dependency: "direct main"
     description:
@@ -1143,6 +1136,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  simple_gesture_detector:
+    dependency: transitive
+    description:
+      name: simple_gesture_detector
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -1204,6 +1204,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
+  table_calendar:
+    dependency: "direct main"
+    description:
+      name: table_calendar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.7"
   term_glyph:
     dependency: transitive
     description:

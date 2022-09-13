@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/user.dart';
@@ -118,8 +117,8 @@ class _AccountDetailsState extends State<AccountDetails> {
                             ),
                             textButtonTheme: TextButtonThemeData(
                               style: TextButton.styleFrom(
-                                foregroundColor: Colors.black54,
-                              ),
+                                  // foregroundColor: Colors.black54,
+                                  ),
                             ),
                             textTheme: const TextTheme(
                               headline4: TextStyle(
@@ -137,7 +136,6 @@ class _AccountDetailsState extends State<AccountDetails> {
                     }).then((value) {
                   setState(() {
                     birth = DateFormat("MM/DD/YYYY").format(value!);
-                    
                   });
                 });
               },

@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_progress/constants/routes.dart';
 import 'package:flutter_progress/views/login_view.dart';
 import 'package:flutter_progress/views/otp.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'auth/auth.dart';
@@ -17,7 +16,7 @@ class PhoneAuth extends StatefulWidget {
 }
 
 class _PhoneAuthState extends State<PhoneAuth> {
-  late final TextEditingController _phone;
+  String? _phone;
   late final TextEditingController _otp;
   FirebaseAuth auth = FirebaseAuth.instance;
   String verificationIDReceived = "";
@@ -26,17 +25,17 @@ class _PhoneAuthState extends State<PhoneAuth> {
   AuthEnt authClass = AuthEnt();
   String verificationIdFinal = "";
   String smsCode = "";
+  String otpPin = '';
 
   @override
   void initState() {
-    _phone = TextEditingController();
     _otp = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _phone.dispose();
+    phoneController.dispose();
     _otp.dispose();
     super.dispose();
   }
@@ -47,53 +46,81 @@ class _PhoneAuthState extends State<PhoneAuth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Phone Authentication'),
-          centerTitle: true,
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 60),
-              child: const Center(
-                child: Text(
-                  'Phone Authentication',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
-                ),
+      appBar: AppBar(
+        title: const Text('Phone Authentication'),
+        centerTitle: true,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 60),
+            child: const Center(
+              child: Text(
+                'Phone Authentication',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 40, right: 10, left: 10),
-              child: TextField(
-                decoration: const InputDecoration(
-                  hintText: 'Phone Number',
-                  prefix: Padding(
-                    padding: EdgeInsets.all(4),
-                    child: Text('+254'),
-                  ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 40, right: 10, left: 10),
+            child: IntlPhoneField(
+              decoration: InputDecoration(
+                labelText: 'Phone Number',
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(),
                 ),
-                maxLength: 10,
-                keyboardType: TextInputType.number,
-                controller: _phone,
               ),
+              initialCountryCode: 'KE',
+              onChanged: (_phone) {
+                print(_phone.completeNumber);
+              },
             ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              width: double.infinity,
-              child: ElevatedButton(
-                child: const Text(
-                  'Next',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) => OtpPage(phone: _phone.text))));
-                },
+            // child: TextFormField(
+            //   style: const TextStyle(
+            //     fontSize: 22.0,
+            //   ),
+            //   onSaved: (value) => _phone = value,
+            //   decoration: const InputDecoration(
+            //     hintText: 'Phone Number',
+            //     prefix: Padding(
+            //       padding: EdgeInsets.all(4),
+            //       child: Text('+254'),
+            //     ),
+            //   ),
+            //     maxLength: 9,
+            //     keyboardType: TextInputType.number,
+            //     controller: phoneController,
+          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            width: double.infinity,
+            child: ElevatedButton(
+              child: const Text(
+                'Next',
+                style: TextStyle(color: Colors.white),
               ),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: ((context) =>
+                        OtpPage(phone: phoneController.text))));
+              },
             ),
-          ],
-        ));
+          ),
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: ((context) => const LoginView())));
+            },
+            child: const Text(
+              'Cancel',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void startTimer() {

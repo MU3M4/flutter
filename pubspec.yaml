@@ -1,5 +1,8 @@
 name: flutter_progress
 description: A new Flutter project.
+ 
+
+
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -74,7 +77,9 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.0.3
   flutter_lints: ^2.0.1
-  intl_phone_number_input: ^0.7.0+2
+  intl_phone_field: ^3.1.0
+  international_phone_input: ^1.0.4
+  phone_number: ^1.0.0
   dropdown_button2: ^1.6.3
   provider: ^6.0.3
   google_fonts: ^3.0.1
@@ -93,11 +98,15 @@ dependencies:
   permission_handler: ^10.0.0
   onesignal_flutter: ^3.4.1
   google_sign_in: ^5.4.1
+  pin_code_fields: ^7.4.0
+  table_calendar: ^3.0.7
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+dependency_overrides:
+  libphonenumber: ^2.0.2
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
