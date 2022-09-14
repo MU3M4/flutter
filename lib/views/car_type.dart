@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/home_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CarType extends StatefulWidget {
   const CarType({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class CarType extends StatefulWidget {
 
 class _CarTypeState extends State<CarType> {
   final fb = FirebaseDatabase.instance;
+
   final List<String> carModel = [
     'Audi',
     'BMW',
@@ -474,6 +477,7 @@ class _CarTypeState extends State<CarType> {
   @override
   Widget build(BuildContext context) {
     //final ref = fb.ref().child("car");
+    final ref = fb.ref().child('Attausers/car');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Car Type'),
@@ -488,14 +492,14 @@ class _CarTypeState extends State<CarType> {
               height: 10,
             ),
             DropdownButton<String?>(
-                value: selectedCarModel,
-                items: dataset.keys.map((e) {
-                  return DropdownMenuItem<String?>(
-                    value: e,
-                    child: Text(e),
-                  );
-                }).toList(),
-                onChanged: onCarModelChanged,
+              value: selectedCarModel,
+              items: dataset.keys.map((e) {
+                return DropdownMenuItem<String?>(
+                  value: e,
+                  child: Text(e),
+                );
+              }).toList(),
+              onChanged: onCarModelChanged,
               hint: const Text('car model'),
             ),
 
@@ -512,29 +516,10 @@ class _CarTypeState extends State<CarType> {
                   );
                 }).toList(),
                 onChanged: (val) {
-
                   setState(() {
                     selectedCarMake = val!;
-
                   });
-
-                }
-
-                ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: TextFormField(
-            //     controller: _modelController,
-            //     enableSuggestions: false,
-            //     keyboardType: TextInputType.text,
-            //     decoration: InputDecoration(
-            //         hintText: 'model',
-            //         border: OutlineInputBorder(
-            //           borderRadius: BorderRadius.circular(10),
-            //           borderSide: const BorderSide(color: Colors.deepOrange),
-            //         )),
-            //   ),
-            // ),
+                }),
 
             const SizedBox(
               height: 10,
@@ -606,7 +591,10 @@ class _CarTypeState extends State<CarType> {
                     _yearController.text,
                     _appModelController.text,
                     _numberPlateController.text,
+                    selectedCarMake,
+                    selectedCarModel,
                   );
+                  Fluttertoast.showToast(msg: 'Success');
                 }
               },
               child: const Text('ADD CAR'),
@@ -631,11 +619,16 @@ class _CarTypeState extends State<CarType> {
     String year,
     String appmodel,
     String numberplate,
+    selectedCarMake,
+    selectedCarModel,
   ) {
-    fb.ref().child("car").push().set({
+    User user = FirebaseAuth.instance.currentUser!;
+    fb.ref().child(user.uid).push().set({
       "year": year,
       "appmodel": appmodel,
       "numberplate": numberplate,
+      "carmodel": selectedCarModel,
+      "carMake": selectedCarMake,
     });
     _yearController.clear();
     _appModelController.clear();

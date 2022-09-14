@@ -46,37 +46,7 @@ class _RegistrationViewState extends State<RegistrationView> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                      tileColor: Colors.deepOrange,
-                      leading: const CircleAvatar(
-                        backgroundImage: AssetImage(
-                          'lib/assets/images/google.png',
-                        ),
-                      ),
-                      title: const Text('Sign up with Google'),
-                      onTap: () {
-                        AuthEnt().signInWithGoogle();
-                      }),
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    tileColor: Colors.deepOrange,
-                    leading: const Icon(Icons.phone),
-                    title: const Text('Register With Phone Number'),
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PhoneAuth()),
-                          (route) => false);
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
+               
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(

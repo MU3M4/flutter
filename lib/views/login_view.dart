@@ -43,38 +43,6 @@ class _LoginViewState extends State<LoginView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              tileColor: Colors.deepOrange,
-                dense: true,
-                visualDensity: const VisualDensity(vertical: 3),
-                leading: const CircleAvatar(
-                  backgroundImage: AssetImage(
-                    'lib/assets/images/google.png',
-                  ),
-                ),
-                title: const Text('Sign in with Google'),
-                onTap: () {
-                  AuthEnt().signInWithGoogle();
-                }),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              tileColor: Colors.deepOrange,
-              dense: true,
-              visualDensity: const VisualDensity(vertical: 3),
-              leading: const Icon(Icons.phone),
-              title: const Text('Continue With Phone Number'),
-              onTap: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const PhoneAuth()),
-                    (route) => false);
-              },
-            ),
-          ),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -127,12 +95,12 @@ class _LoginViewState extends State<LoginView> {
                     msg: 'Please fill in the blank textfields');
                 return;
               }
-              ProgressDialog progressDialog = ProgressDialog(
-                context,
-                title: const Text('Logging In'),
-                message: const Text('Please Wait'),
-              );
-              progressDialog.show();
+              // ProgressDialog progressDialog = ProgressDialog(
+              //   context,
+              //   title: const Text('Logging In'),
+              //   message: const Text('Please Wait'),
+              // );
+              // progressDialog.show();
               try {
                 FirebaseAuth auth = FirebaseAuth.instance;
                 UserCredential userCredential =
@@ -143,7 +111,8 @@ class _LoginViewState extends State<LoginView> {
                 //   password: _password.text.trim(),
                 // );
                 if (userCredential.user != null) {
-                  progressDialog.dismiss();
+                  // progressDialog.dismiss();
+                  Fluttertoast.showToast(msg: 'Success');
                   // ignore: use_build_context_synchronously
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     homeRoute,
@@ -153,7 +122,7 @@ class _LoginViewState extends State<LoginView> {
                   Fluttertoast.showToast(msg: "not found");
                 }
               } on FirebaseAuthException catch (e) {
-                progressDialog.dismiss();
+                
                 if (e.code == 'user-not-found') {
                   Fluttertoast.showToast(msg: "User is not found");
                 } else if (e.code == 'wrong-password') {

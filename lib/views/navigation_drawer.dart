@@ -22,8 +22,8 @@ class NavigationDrawer extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(24, 70, 14, 0),
         child: Column(children: [
           DrawerItems(
-            name: 'account',
-            icon: Icons.person,
+            name: 'Contact Us',
+            icon: Icons.contact_mail,
             onPressed: () => onItemPressed(context, index: 0),
           ),
           const SizedBox(height: 20),
@@ -34,8 +34,8 @@ class NavigationDrawer extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           DrawerItems(
-            name: 'Car Profile',
-            icon: Icons.car_repair,
+            name: 'Dark Mode',
+            icon: Icons.dark_mode,
             onPressed: () => onItemPressed(context, index: 2),
           ),
           const SizedBox(height: 20),
@@ -81,16 +81,16 @@ class NavigationDrawer extends StatelessWidget {
     Navigator.pop(context);
     switch (index) {
       case 0:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const AccountDetails()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AccountDetails()));
         break;
       case 1:
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const SettingsPage()));
         break;
       case 2:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CarType()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const CarType()));
         break;
       case 3:
         Navigator.push(
