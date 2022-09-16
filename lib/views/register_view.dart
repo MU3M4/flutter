@@ -220,12 +220,12 @@ class _RegistrationViewState extends State<RegistrationView> {
                         Fluttertoast.showToast(msg: 'Passwords do not match');
                         return;
                       }
-                      ProgressDialog progressDialog = ProgressDialog(
-                        context,
-                        title: const Text('Signing up'),
-                        message: const Text('Please wait'),
-                      );
-                      progressDialog.show();
+                      // ProgressDialog progressDialog = ProgressDialog(
+                      //   context,
+                      //   title: const Text('Signing up'),
+                      //   message: const Text('Please wait'),
+                      // );
+                      // progressDialog.show();
 
                       try {
                         UserCredential userCredential =
@@ -248,9 +248,9 @@ class _RegistrationViewState extends State<RegistrationView> {
                         } else {
                           Fluttertoast.showToast(msg: 'Failed');
                         }
-                        progressDialog.dismiss();
+                        
                       } on FirebaseAuthException catch (e) {
-                        progressDialog.dismiss();
+                        
                         if (e.code == 'email-already-in-use') {
                           Fluttertoast.showToast(
                               msg: 'email is already in use');
@@ -258,7 +258,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                           Fluttertoast.showToast(msg: 'The password is weak');
                         }
                       } catch (e) {
-                        progressDialog.dismiss();
+                        
                         Fluttertoast.showToast(msg: 'Something went wrong');
                       }
                     }),
