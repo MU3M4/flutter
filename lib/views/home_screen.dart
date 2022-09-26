@@ -43,9 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     TextEditingController _text = TextEditingController();
-    final ref = fb.ref().child('Attausers');
+    final ref = fb.ref().child('Attausers/servicesrequired');
     void insertData(String text) {
-      ref.child('appointments').set({
+      ref.child(user.uid).set({
         'message': _text,
       });
       _text.clear();
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Expanded(
               child: TabBarView(
                 children: [
-                  messageCenter(),
+                  MessageCenter(),
                   CurrentLocation(),
                   AppointmentDetails(),
                 ],

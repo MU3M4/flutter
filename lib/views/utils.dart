@@ -1,80 +1,22 @@
-import 'package:flutter/material.dart';
-
-import 'category.dart';
+import 'package:intl/intl.dart';
 
 class Utils {
-  static List<Category> getMockedCategories() {
-    return [
-      Category(
-          name: 'Mash Auto',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Atta Garage',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Info Track Auto',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Garageband Auto',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Bliss Garage Auto',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Moha Garage',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Drive inn Garage',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Toyota Kenya',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Grind Auto',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-          Category(
-          name: 'Grip Auto',
-          icon: '',
-          color: Colors.blue,
-          imgName: '',
-          subCategories: []
-          ),
-    ];
+  static String toDateTime(DateTime dateTime) {
+    final date = DateFormat.yMMMEd().format(dateTime);
+    final time = DateFormat.Hm().format(dateTime);
+    return '$date $time';
   }
+
+  static String toDate(DateTime dateTime) {
+    final date = DateFormat.yMMMEd().format(dateTime);
+    return '$date';
+  }
+
+  static String toTime(DateTime dateTime) {
+    final time = DateFormat.Hm().format(dateTime);
+    return '$time';
+  }
+
+  static DateTime removeTime(DateTime dateTime) =>
+      DateTime(dateTime.year, dateTime.month, dateTime.day);
 }

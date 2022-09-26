@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progress/views/about_us.dart';
+import 'package:flutter_progress/views/account_details.dart';
+import 'package:flutter_progress/views/car_type.dart';
+import 'package:flutter_progress/views/notifications_page.dart';
+import 'package:flutter_progress/views/payment_info.dart';
 import 'package:flutter_progress/views/select_garage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class messageCenter extends StatefulWidget {
-  const messageCenter({super.key});
+class MessageCenter extends StatefulWidget {
+  const MessageCenter({super.key});
 
   @override
-  State<messageCenter> createState() => _messageCenterState();
+  State<MessageCenter> createState() => _MessageCenterState();
 }
 
-class _messageCenterState extends State<messageCenter> {
-  TextEditingController _text = TextEditingController();
+class _MessageCenterState extends State<MessageCenter> {
+  final TextEditingController _text = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,36 +80,78 @@ class _messageCenterState extends State<messageCenter> {
       ),
       bottomNavigationBar: Container(
         color: Colors.black,
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
           child: GNav(
             backgroundColor: Colors.black12,
             color: Colors.white,
             activeColor: Colors.white,
             tabBackgroundColor: Colors.deepOrange,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             gap: 8,
             tabs: [
               GButton(
                 icon: Icons.person,
                 text: 'Account',
+                onPressed: () => onItemPressed(context, index: 0),
               ),
               GButton(
                 icon: Icons.account_balance_wallet,
                 text: 'payment info',
+                onPressed: () => onItemPressed(context, index: 1),
               ),
               GButton(
                 icon: Icons.notifications_active,
                 text: 'notifications',
+                onPressed: () => onItemPressed(context, index: 3),
               ),
               GButton(
                 icon: Icons.car_repair,
                 text: 'Car Profile',
+                onPressed: () => onItemPressed(context, index: 2),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void onItemPressed(BuildContext context, {required int index}) {
+    Navigator.pop(context);
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AccountDetails(),
+          ),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const PaymentInfo(),
+          ),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CarType(),
+          ),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const NotificationPage(),
+          ),
+        );
+        break;
+    }
   }
 }
