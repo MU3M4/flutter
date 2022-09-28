@@ -3,7 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_progress/views/appointment.dart';
+import 'package:flutter_progress/views/calendar/appointment.dart';
 import 'package:flutter_progress/views/current_location.dart';
 import 'package:flutter_progress/views/message.dart';
 import 'package:google_api_headers/google_api_headers.dart';

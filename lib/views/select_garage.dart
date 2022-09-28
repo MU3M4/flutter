@@ -18,7 +18,7 @@ class _SelectGarageState extends State<SelectGarage> {
   @override
   Widget build(BuildContext context) {
     // final ref = _database.ref();
-    final ref = dRef.ref().child('GarageInfo/MechanicDetails');
+    final ref = dRef.ref().child('GarageInfo/Garages');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Garage'),
@@ -45,7 +45,6 @@ class _SelectGarageState extends State<SelectGarage> {
                           elevation: 10.0,
                           child: ListTile(
                             title: Text(snapshot.value.toString()),
-
                             contentPadding: const EdgeInsets.all(20),
                             dense: true,
                             trailing: const Icon(Icons.arrow_forward_ios),

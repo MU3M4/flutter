@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_progress/views/appointment.dart';
+import 'package:flutter_progress/views/calendar/appointment.dart';
 
 class PossibleProblems extends StatefulWidget {
   const PossibleProblems({Key? key}) : super(key: key);
