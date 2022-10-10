@@ -1,19 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_progress/views/calendar/appointment.dart';
+import 'package:flutter_progress/views/chats_page.dart';
 import 'package:flutter_progress/views/current_location.dart';
 import 'package:flutter_progress/views/message.dart';
-import 'package:google_api_headers/google_api_headers.dart';
 import 'package:flutter_progress/views/navigation_drawer.dart';
-import 'package:flutter_progress/views/select_garage.dart';
-
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_webservice/places.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -89,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Expanded(
               child: TabBarView(
                 children: [
-                  MessageCenter(),
+                  ChatsScreen(),
                   CurrentLocation(),
                   AppointmentDetails(),
                 ],
@@ -97,7 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-       
       ),
     );
   }
