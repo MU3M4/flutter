@@ -1,15 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_progress/views/auth/auth.dart';
-import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_place/google_place.dart';
-import 'package:ndialog/ndialog.dart';
-import 'package:pinput/pinput.dart';
-
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../constants/routes.dart';
 import 'login_view.dart';
 
@@ -201,6 +194,18 @@ class _RegistrationViewState extends State<RegistrationView> {
                 ElevatedButton(
                     child: const Text('Sign Up'),
                     onPressed: () async {
+                      String tokenFromServer = "";
+
+OneSignal.shared.setEmail(email: email, emailAuthHashToken: tokenFromServer).then((result) {
+    //request succeeded
+}).catchError((error) {
+    //encountered an error
+});
+var status = await OneSignal.shared.getDeviceState();
+// String tokenId = status?.subscriptionStatus.userId;
+                      OneSignal.shared.getDeviceState().then((deviceState) {
+     print("OneSignal: device state: ${deviceState?.jsonRepresentation()}");
+});
                       if (email.isEmpty ||
                           name.isEmpty ||
                           pass.isEmpty ||
@@ -237,6 +242,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                             'fullName': name,
                             'email': email,
                             'phone': phone,
+                            // 'tokenid': tokenId,
                           });
                       
                           Fluttertoast.showToast(msg: 'Success');

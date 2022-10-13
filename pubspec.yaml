@@ -95,6 +95,7 @@ dependencies:
   network_to_file_image: ^4.0.1
   sliding_up_panel: ^2.0.0+1
   iconfont: ^2.0.0
+  flutter_launcher_icons: ^0.10.0
   sliding_sheet: ^0.5.2
   flutter_secure_storage: ^6.0.0
   firebase_in_app_messaging: ^0.6.0+23
@@ -169,3 +170,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons: 
+  image_path: "lib/assets/images/splash.jpg"
+  android: true
+  ios: true

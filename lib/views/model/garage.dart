@@ -4,12 +4,12 @@ part 'garage.g.dart';
 
 @JsonSerializable()
 class Garage {
-  String? description;
-  String? garageName;
+  late final String description;
+ late final String garageName;
 
-  String? latitude;
-  String? longitude;
-  String? officeNumber;
+ late final String latitude;
+ late final String longitude;
+ late final String officeNumber;
 
   Garage(
       {required this.description,
@@ -18,7 +18,7 @@ class Garage {
       required this.longitude,
       required this.officeNumber});
 
-  Garage.fromJson(Map<String, dynamic> json) {
+  Garage.fromJson(Map<String, dynamic> json, this.description, this.garageName, this.latitude, this.longitude, this.officeNumber) {
     description = json['Description'];
     garageName = json['GarageName'];
     latitude = json['Latitude'];
@@ -27,12 +27,12 @@ class Garage {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Description'] = this.description;
-    data['GarageName'] = this.garageName;
-    data['Latitude'] = this.latitude;
-    data['Longitude'] = this.longitude;
-    data['OfficeNumber'] = this.officeNumber;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Description'] = description;
+    data['GarageName'] = garageName;
+    data['Latitude'] = latitude;
+    data['Longitude'] = longitude;
+    data['OfficeNumber'] = officeNumber;
     return data;
   }
 }

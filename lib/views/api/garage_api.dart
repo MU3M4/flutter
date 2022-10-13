@@ -8,7 +8,7 @@ import '../model/garage.dart';
 
 class GaragesApi {
   static Future<List<Garage>> getGarages() async {
-    final url =
+    const url =
         'https://console.firebase.google.com/project/atta-web-app-a5135/database/atta-web-app-a5135-default-rtdb/data/~2FGarages';
    
     final response = await http.get(

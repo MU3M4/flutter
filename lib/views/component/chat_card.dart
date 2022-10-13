@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/model/chat.dart';
+
 class ChatsCard extends StatelessWidget {
   const ChatsCard({
     Key? key,
