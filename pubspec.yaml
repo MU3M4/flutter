@@ -86,6 +86,8 @@ dependencies:
   international_phone_input: ^1.0.4
   phone_number: ^1.0.0
   dropdown_button2: ^1.6.3
+  flutter_chat_ui: ^1.6.5
+  flutter_chat_types: ^3.5.0
   provider: ^6.0.3
   google_fonts: ^3.0.1
   image_picker: ^0.8.5+3

@@ -17,11 +17,6 @@ class _RegistrationViewState extends State<RegistrationView> {
   var selectedGender;
   List<String> gender = <String>['Male', 'Female', 'Non-binary'];
   late String cpass, phone, email, pass, name, key;
-
-  // final TextEditingController _email = TextEditingController();
-  // final TextEditingController _pass = TextEditingController();
-  // final TextEditingController _name = TextEditingController();
-  // final TextEditingController _cpass = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final fb = FirebaseDatabase.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -65,25 +60,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                   ),
                 ),
 
-                // DropdownButton<String>(
-                //   icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                //   items: gender
-                //       .map(
-                //         (String value) => DropdownMenuItem(
-                //           value: value,
-                //           child: Text(value),
-                //         ),
-                //       )
-                //       .toList(),
-                //   onChanged: (selectedGenderType) {
-                //     setState(() {
-                //       selectedGender = selectedGenderType;
-                //     });
-                //   },
-                //   value: selectedGender,
-                //   isExpanded: false,
-                //   hint: const Text('Gender'),
-                // ),
+               
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

@@ -13,25 +13,21 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-
-
 class _HomeScreenState extends State<HomeScreen> {
+  static const String oneSignalAppId = '048cb7d8-66ee-4423-999a-d96a5269148a';
   @override
   void initState() {
     super.initState();
-    configOneSignel();
+    initPlatformState();
   }
 
-  void configOneSignel() {
-    OneSignal.shared.setAppId('048cb7d8-66ee-4423-999a-d96a5269148a');
+  Future<void> initPlatformState() async {
+    OneSignal.shared.setAppId(oneSignalAppId);
   }
 
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
-  
-    
-
     return DefaultTabController(
       length: 3,
       child: Scaffold(
