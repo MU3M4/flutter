@@ -5,15 +5,19 @@ import 'package:flutter_progress/views/chats_page.dart';
 import 'package:flutter_progress/views/current_location.dart';
 import 'package:flutter_progress/views/navigation_drawer.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+   
+  const HomeScreen({Key? key, }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final StreamChatClient client;
+  late final Channel channel;
   static const String oneSignalAppId = '048cb7d8-66ee-4423-999a-d96a5269148a';
   @override
   void initState() {
@@ -25,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     OneSignal.shared.setAppId(oneSignalAppId);
   }
 
+ 
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_progress/main.dart';
+import 'package:flutter_progress/views/home_screen.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pinput/pinput.dart';
 
@@ -70,7 +71,7 @@ class _OtpPageState extends State<OtpPage> {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()),
+                              builder: (context) => const HomeScreen()),
                           (route) => false);
                     }
                   });
@@ -100,7 +101,7 @@ class _OtpPageState extends State<OtpPage> {
           if (value.user != null) {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                MaterialPageRoute(builder: (context) =>  HomeScreen()),
                 (route) => false);
           }
         });
