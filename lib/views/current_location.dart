@@ -19,6 +19,10 @@ class _CurrentLocationState extends State<CurrentLocation> {
   static const CameraPosition initialCameraPosition =
       CameraPosition(target: LatLng(-1.286389, 36.817223), zoom: 14.0);
   Set<Marker> markers = {};
+  // List<Marker> _marker = [];
+  // List<Marker> _list = const [
+  //   Marker(markerId: MarkerId('1'), position: LatLng())
+  // ];
   blackThemeGoogleMap() {
     newgoogleMapController!.setMapStyle('''
                     [
@@ -188,10 +192,6 @@ class _CurrentLocationState extends State<CurrentLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Current Location'),
-        centerTitle: true,
-      ),
       body: GoogleMap(
         initialCameraPosition: initialCameraPosition,
         markers: markers,
@@ -212,9 +212,52 @@ class _CurrentLocationState extends State<CurrentLocation> {
                   target: LatLng(position.latitude, position.longitude),
                   zoom: 14)));
           markers.clear();
-          markers.add(Marker(
+          markers.add(
+            Marker(
               markerId: const MarkerId('Current Location'),
-              position: LatLng(position.latitude, position.longitude)));
+              position: LatLng(position.latitude, position.longitude),
+              infoWindow: const InfoWindow(
+                title: 'My Position',
+              ),
+            ),
+          );
+          markers.add(
+            const Marker(
+              markerId: MarkerId('Mash AutoGarage'),
+              position: LatLng(-1.113418, 37.0224462),
+              infoWindow: InfoWindow(
+                title: 'Mash AutoGarage',
+              ),
+            ),
+          );
+          // markers.add(
+          //   const Marker(
+          //     markerId: MarkerId('Mash AutoGarage'),
+          //     position: LatLng(-1.113418, 37.0224462),
+          //     infoWindow: InfoWindow(
+          //       title: 'Mash AutoGarage',
+          //     ),
+          //   ),
+          // );
+          markers.add(
+            const Marker(
+              markerId: MarkerId('Test Garage'),
+              position: LatLng(-1.113418, 37.0224462),
+              infoWindow: InfoWindow(
+                title: 'Test Garage',
+              ),
+            ),
+          );
+          markers.add(
+            const Marker(
+              markerId: MarkerId('Tester Description'),
+              position: LatLng(-1.1132872999999999, 37.0216026),
+              infoWindow: InfoWindow(
+                title: 'Tester Description',
+              ),
+            ),
+          );
+
           setState(() {});
         },
         label: const Text('Current Location'),

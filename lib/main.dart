@@ -13,10 +13,9 @@ import 'package:flutter_progress/views/phone_verification.dart';
 import 'package:flutter_progress/views/register_view.dart';
 import 'package:flutter_progress/views/select_garage.dart';
 import 'package:flutter_progress/views/splash_screen.dart';
-import 'package:flutter_progress/views/verify_email_view.dart';
 import 'package:provider/provider.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<void> main() async {
   // final client = StreamChatClient('tx7k5vg6m6j5', logLevel: Level.INFO);
@@ -32,6 +31,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
 
   runApp(
     ChangeNotifierProvider(

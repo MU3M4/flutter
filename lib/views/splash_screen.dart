@@ -1,43 +1,40 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_progress/views/car_type.dart';
-import 'package:flutter_progress/views/main_page.dart';
-import 'package:flutter_progress/views/phone_verification.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:flutter_progress/views/component/logo.dart';
+import 'package:flutter_progress/views/component/termsandconditions.dart';
 
-import 'auth/auth.dart';
+import 'component/LetsStart.dart';
 
-
-class Splash extends StatefulWidget {
+class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);
 
-  @override
-  State<Splash> createState() => _SplashState();
-}
-
-class _SplashState extends State<Splash> {
 //   @override
-//   void initState() {
-//     super.initState();
-//     _navigatetohome();
-//   }
-
-// _navigatetohome() async{
-
-// await Future.delayed(const Duration(milliseconds: 1500), (){},);
-// Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => const PhoneAuth())));
-
-// }
-
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
-      splash: 'lib/assets/images/splash.jpg',
-      duration: 3000,
-      nextScreen: AuthEnt().handleAuthState(),
-      splashTransition: SplashTransition.slideTransition,
-      pageTransitionType: PageTransitionType.leftToRight,
-      backgroundColor: Colors.black,
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        image: DecorationImage(
+          image: AssetImage('lib/assets/images/splash.jpg'),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+            color: Colors.black.withOpacity(0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                 Logo(),
+                LetsStart(),
+              ],
+            )),
+      ),
     );
   }
 }
