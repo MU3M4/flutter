@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/account_details.dart';
 import 'package:flutter_progress/views/calls.dart';
+import 'package:flutter_progress/views/garage_profile.dart';
 import 'package:flutter_progress/views/message.dart';
 import 'package:flutter_progress/views/model/usermodel.dart';
 import 'package:flutter_progress/views/settings.dart';
@@ -47,7 +48,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
                   child: Card(
                     elevation: 5.0,
                     child: ListTile(
-                      leading: Image.network(''),
                       title:
                           Text(snapshot.child('GarageName').value.toString()),
                       subtitle:
@@ -59,9 +59,28 @@ class _ChatsScreenState extends State<ChatsScreen> {
                           borderRadius: BorderRadius.circular(20)),
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => MessageCenter())));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GarageProfile(
+                              garageUid: snapshot
+                                  .child('OfficeNumber')
+                                  .value
+                                  .toString(),
+                              garageName:
+                                  snapshot.child('GarageName').value.toString(),
+                            ),
+                          ),
+                          // MessageCenter(
+                          //       garageUid: snapshot
+                          //           .child('OfficeNumber')
+                          //           .value
+                          //           .toString(),
+                          //       garageName: snapshot
+                          //           .child('GarageName')
+                          //           .value
+                          //           .toString(),
+                          //     )),
+                        );
                       },
                     ),
                   ),
@@ -92,7 +111,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
             icon: Icon(Icons.person_outline), label: 'Profile'),
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
       ],
-      
       backgroundColor: Colors.grey,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.black.withOpacity(0.32),

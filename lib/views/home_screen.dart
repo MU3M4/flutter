@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-             Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   ChatsScreen(),

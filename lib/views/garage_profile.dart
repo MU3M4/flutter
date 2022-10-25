@@ -1,81 +1,111 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/calendar/appointment.dart';
 import 'package:flutter_progress/views/message.dart';
 
-class GarageProfile extends StatelessWidget {
-  const GarageProfile({super.key});
+class GarageProfile extends StatefulWidget {
+  final String garageUid;
+  final String garageName;
+  const GarageProfile(
+      {super.key, required this.garageUid, required this.garageName});
 
+  @override
+  State<GarageProfile> createState() =>
+      _GarageProfileState(this.garageUid, this.garageName);
+}
+
+class _GarageProfileState extends State<GarageProfile> {
+  final String garageUid;
+  final String garageName;
+  final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+  final double coverHeight = 280;
+  final double profileHeight = 144;
+
+  _GarageProfileState(this.garageUid, this.garageName);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey,
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(29.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.deepOrange,
-                radius: 63,
-              ),
-            ),
-            const Spacer(flex: 2),
-            Container(
-              height: 100,
-              width: double.infinity,
-              child: Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Call'),
+      body: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            top: 100,
+            child: buildProfileImage(),
+          ),
+          Positioned(
+            top: 250,
+            child: Column(
+              children: [
+                Text(
+                  garageName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                Center(
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('Call'),
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => MessageCenter(
+                                      garageUid: garageUid,
+                                      garageName: garageName))));
+                        },
+                        child: const Text('Text'),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      // //    builder: (context) => MessageCenter(currentUser: Widget.user, garageName: snapshot.child('GarageName').value.toString(), ),
-                      //   ),
-                      // );
-                    },
-                    child: const Text('Text'),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Column(
+          ),
+          Positioned(
+            bottom: 100,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => const AppointmentDetails())));
+              },
+              child: const Text('Book Appointment'),
+            ),
+          ),
+          Positioned(
+            bottom: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AppointmentDetails(),
-                      ),
-                    );
-                  },
-                  child: const Text('Book An Appointment'),
+                  onPressed: () {},
+                  child: const Text('Call Mechanic'),
                 ),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Call Mechanic'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Go To Garage'),
-                    ),
-                  ],
-                )
+                const SizedBox(width: 5),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Go to Garage'),
+                ),
               ],
-            )
-          ],
-        ));
+            ),
+          )
+        ],
+      ),
+    );
   }
+
+  Widget buildProfileImage() => CircleAvatar(
+        radius: profileHeight / 2,
+        backgroundColor: Colors.grey.shade800,
+        backgroundImage:
+            const NetworkImage('https://jooinn.com/images/business-4.jpg'),
+      );
 }

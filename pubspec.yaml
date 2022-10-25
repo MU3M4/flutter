@@ -98,6 +98,8 @@ dependencies:
   network_to_file_image: ^4.0.1
   sliding_up_panel: ^2.0.0+1
   iconfont: ^2.0.0
+  mobx: ^2.1.1
+  flutter_mobx: ^2.0.6+4
   flutter_launcher_icons: ^0.10.0
   sliding_sheet: ^0.5.2
   flutter_secure_storage: ^6.0.0
@@ -107,6 +109,7 @@ dependencies:
   permission_handler: ^10.0.0
   onesignal_flutter: ^3.4.1
   pin_code_fields: ^7.4.0
+  flutter_chat_bubble: ^2.0.0
   table_calendar: ^3.0.7
   dropdownfield2: ^1.0.7
   syncfusion_flutter_calendar: ^20.2.49
@@ -118,8 +121,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.0.0
+  build_runner: ^2.3.2
   json_serializable: ^6.0.0
+  mobx_codegen: ^2.0.7+3
 dependency_overrides:
   libphonenumber: ^2.0.2
   # The "flutter_lints" package below contains a set of recommended lints to
