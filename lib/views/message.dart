@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:cupertino_list_tile/cupertino_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_6.dart';
+import 'package:flutter_progress/views/chats_page.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class MessageCenter extends StatefulWidget {
   final String garageUid;
@@ -29,6 +31,7 @@ class _MessageCenterState extends State<MessageCenter> {
   @override
   void initState() {
     checkUser();
+    
     super.initState();
   }
 
@@ -204,4 +207,7 @@ class _MessageCenterState extends State<MessageCenter> {
       },
     );
   }
-}
+
+
+  }
+

@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-class TrackProgess extends StatefulWidget {
-  const TrackProgess({Key? key}) : super(key: key);
+class TrackProgress extends StatefulWidget {
+  const TrackProgress({Key? key}) : super(key: key);
 
   @override
-  State<TrackProgess> createState() => _TrackProgessState();
+  State<TrackProgress> createState() => _TrackProgressState();
 }
 
-class _TrackProgessState extends State<TrackProgess> {
+class _TrackProgressState extends State<TrackProgress> {
   final Completer<GoogleMapController> _controller = Completer();
 
   static const LatLng sourceLocation = LatLng(-1.102554, 37.013193);
@@ -77,7 +77,7 @@ class _TrackProgessState extends State<TrackProgess> {
         backgroundColor: Colors.white,
       ),
       body: currentLocation == null
-          ? const Center(child: Text('Loading'))
+          ? const Center(child: CircularProgressIndicator())
           : GoogleMap(
               initialCameraPosition: CameraPosition(
                 target: LatLng(

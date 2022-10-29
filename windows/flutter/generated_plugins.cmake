@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  agora_rtc_engine
   connectivity_plus_windows
   dart_vlc
   desktop_drop
@@ -10,6 +11,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_native_view
   flutter_secure_storage_windows
   geolocator_windows
+  iris_event
   permission_handler_windows
   screen_retriever
   smart_auth

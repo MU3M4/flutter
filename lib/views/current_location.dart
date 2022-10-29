@@ -194,7 +194,9 @@ class _CurrentLocationState extends State<CurrentLocation> {
     return Scaffold(
       body: GoogleMap(
         initialCameraPosition: initialCameraPosition,
-        markers: markers,
+        markers:
+
+        markers,
         myLocationEnabled: true,
         zoomControlsEnabled: false,
         mapType: MapType.normal,

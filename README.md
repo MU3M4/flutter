@@ -1,6 +1,6 @@
-# flutter_progress
+# Atta
 
-A new Flutter project.
+A new Flutter project that connects users with nearby garages. The app features include Google Maps, Appointment schedule and in-app messaging and calls functionalities to help users connect with garages with much ease. 
 
 ## Getting Started
 

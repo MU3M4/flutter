@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_progress/views/calendar/appointment.dart';
+import 'package:flutter_progress/views/current_location.dart';
 import 'package:flutter_progress/views/message.dart';
+import 'package:flutter_progress/views/tracking.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class GarageProfile extends StatefulWidget {
   final String garageUid;
@@ -46,7 +51,9 @@ class _GarageProfileState extends State<GarageProfile> {
                   child: Row(
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await FlutterPhoneDirectCaller.callNumber(garageUid);
+                        },
                         child: const Text('Call'),
                       ),
                       const SizedBox(width: 10),
@@ -86,12 +93,22 @@ class _GarageProfileState extends State<GarageProfile> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TrackProgress()));
+                  },
                   child: const Text('Call Mechanic'),
                 ),
                 const SizedBox(width: 5),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CurrentLocation()));
+                  },
                   child: const Text('Go to Garage'),
                 ),
               ],
