@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _RegistrationViewState extends State<RegistrationView> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-               
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
@@ -60,7 +61,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                   ),
                 ),
 
-               
+
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -170,7 +171,7 @@ class _RegistrationViewState extends State<RegistrationView> {
 
                 ElevatedButton(
                     child: const Text('Sign Up'),
-                    onPressed: () async {
+                    onPressed: ()  {
                       String tokenFromServer = "";
 
 OneSignal.shared.setEmail(email: email, emailAuthHashToken: tokenFromServer).then((result) {
@@ -178,7 +179,7 @@ OneSignal.shared.setEmail(email: email, emailAuthHashToken: tokenFromServer).the
 }).catchError((error) {
     //encountered an error
 });
-var status = await OneSignal.shared.getDeviceState();
+var status =  OneSignal.shared.getDeviceState();
 // String tokenId = status?.subscriptionStatus.userId;
                       OneSignal.shared.getDeviceState().then((deviceState) {
      print("OneSignal: device state: ${deviceState?.jsonRepresentation()}");
@@ -210,30 +211,28 @@ var status = await OneSignal.shared.getDeviceState();
                       // progressDialog.show();
 
                       try {
-                        UserCredential userCredential =
-                            await _auth.createUserWithEmailAndPassword(
-                                email: email, password: pass);
-                        if (userCredential.user != null) {
-                          User user = FirebaseAuth.instance.currentUser!;
-                          ref.child(user.uid).set({
+
+                             _auth.createUserWithEmailAndPassword(
+                                email: email, password: pass).then((value){
+                                  FirebaseFirestore.instance.collection('UserData').doc(value.user?.uid).set({
                             'fullName': name,
                             'email': email,
                             'phone': phone,
                             // 'tokenid': tokenId,
                           });
-                      
+
                           Fluttertoast.showToast(msg: 'Success');
                           // ignore: use_build_context_synchronously
                           Navigator.of(context).pushNamedAndRemoveUntil(
                             homeRoute,
                             (route) => false,
                           );
-                        } else {
+                        }); }else {
                           Fluttertoast.showToast(msg: 'Failed');
                         }
-                        
+
                       } on FirebaseAuthException catch (e) {
-                        
+
                         if (e.code == 'email-already-in-use') {
                           Fluttertoast.showToast(
                               msg: 'email is already in use');
@@ -241,10 +240,10 @@ var status = await OneSignal.shared.getDeviceState();
                           Fluttertoast.showToast(msg: 'The password is weak');
                         }
                       } catch (e) {
-                        
+
                         Fluttertoast.showToast(msg: 'Something went wrong');
                       }
-                    }),
+                     != null}),
 
                 TextButton(
                   onPressed: () {

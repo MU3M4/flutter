@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/calendar/event.dart';
 import 'package:flutter_progress/views/calendar/event_provider.dart';
@@ -16,6 +17,8 @@ class EventEditingPage extends StatefulWidget {
 }
 
 class _EventEditingPageState extends State<EventEditingPage> {
+  final fb = FirebaseDatabase.instance;
+  final databaseRef = FirebaseDatabase.instance.ref().child('Appointments');
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   late DateTime fromDate;
@@ -37,6 +40,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
   @override
   Widget build(BuildContext context) {
+    //  final databaseRef = fb.ref().child('Appointments');
     return Scaffold(
       appBar: AppBar(
         leading: const CloseButton(),
@@ -60,6 +64,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
         ElevatedButton.icon(
             style: ElevatedButton.styleFrom(shadowColor: Colors.transparent),
             onPressed: saveForm,
+
+
             icon: const Icon(Icons.done),
             label: const Text('Save'))
       ];
@@ -133,7 +139,10 @@ class _EventEditingPageState extends State<EventEditingPage> {
         to: toDate,
         isAllDay: false,
         description: 'Description',
+
       );
+
+
       final provider = Provider.of<EventProvider>(context, listen: false);
       provider.addEvent(event);
       Navigator.of(context).pop();

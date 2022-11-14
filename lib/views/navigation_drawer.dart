@@ -22,29 +22,29 @@ class NavigationDrawer extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(24, 70, 14, 0),
         child: Column(children: [
           DrawerItems(
-            name: 'Contact Us',
+            name: 'Personal Details',
             icon: Icons.contact_mail,
             onPressed: () => onItemPressed(context, index: 0),
           ),
           const SizedBox(height: 20),
+          // DrawerItems(
+          //   name: 'Settings',
+          //   icon: Icons.settings,
+          //   onPressed: () => onItemPressed(context, index: 1),
+          // ),
+          // const SizedBox(height: 20),
           DrawerItems(
-            name: 'Settings',
-            icon: Icons.settings,
-            onPressed: () => onItemPressed(context, index: 1),
-          ),
-          const SizedBox(height: 20),
-          DrawerItems(
-            name: 'Dark Mode',
+            name: 'Car Profile',
             icon: Icons.dark_mode,
             onPressed: () => onItemPressed(context, index: 2),
           ),
           const SizedBox(height: 20),
-          DrawerItems(
-            name: 'About Us',
-            icon: Icons.home,
-            onPressed: () => onItemPressed(context, index: 3),
-          ),
-          const SizedBox(height: 20),
+          // DrawerItems(
+          //   name: 'About Us',
+          //   icon: Icons.home,
+          //   onPressed: () => onItemPressed(context, index: 3),
+          // ),
+          // const SizedBox(height: 20),
           DrawerItems(
             name: 'logout',
             icon: Icons.logout,

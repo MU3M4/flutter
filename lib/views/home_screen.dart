@@ -8,8 +8,9 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
-   
-  const HomeScreen({Key? key, }) : super(key: key);
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -29,10 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
     OneSignal.shared.setAppId(oneSignalAppId);
   }
 
- 
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
+    // final text = MediaQuery.of(context).platformBrightness == Brightness.dark
+    //     ? 'Dark Theme'
+    //     : 'Light Theme';
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -41,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.deepOrange,
+          // actions: const [ChangeThemeButtonWidget()],
         ),
         drawer: NavigationDrawer(),
         body: Column(

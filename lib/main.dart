@@ -18,15 +18,6 @@ import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<void> main() async {
-  // final client = StreamChatClient('tx7k5vg6m6j5', logLevel: Level.INFO);
-  // await client.connectUser(User(id: '1076653947330'),
-  //     'AAAA-q2TecI:APA91bFtOcsvrfu_Ba89oArxQ5-PtYO-R2i3fWLjWzWJ8sLLF6jAlfDWSw4fpiQ_Tqp0BNbypluDONrB-6hQN7MIEEFivpPPUScHmNcn5mYlCKszcX9o0Vd5Ri5W50i8o3e80-hRn8LZ');
-  // final channel = client.channel('messaging', id: '');
-  // channel.watch();
-  // client:
-  // client;
-  // channel:
-  // channel;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -38,23 +29,17 @@ Future<void> main() async {
       create: (context) => EventProvider(),
       child: MaterialApp(
         title: 'Atta',
-        themeMode: ThemeMode.dark,
-        // builder: (context, child) {
-        //   // return StreamChat(client: _client, child: child);
-        // },
-        debugShowCheckedModeBanner: false,
-        // themeMode: ThemeMode.dark,
-        // darkTheme: ThemeData.dark().copyWith(
-        //   scaffoldBackgroundColor: Colors.black,
-        //   primaryColor: Colors.deepOrange,
-        // ),
-
         theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
+          primaryColor: Colors.deepOrange,
+          brightness: Brightness.light,
+        ),
+        themeMode: ThemeMode.system,
+        debugShowCheckedModeBanner: false,
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Colors.black12,
         ),
         home: const Splash(),
-
-        // initialRoute: phoneRoute: (content) => const PhoneAuth(),};
         routes: {
           phoneRoute: (context) => const PhoneAuth(),
           otpRoute: (context) => const OtpPage(phone: ''),
@@ -65,34 +50,9 @@ Future<void> main() async {
           forgotRoute: (context) => ForgotPassword(),
           garageRoute: (context) => const SelectGarage(),
           appointmentRoute: (context) => const AppointmentDetails(),
-
           carRoute: (context) => const CarType(),
-
-          //locationRoute: (context) => LocationController(),
         },
       ),
     ),
   );
 }
-
-// class HomePage extends StatefulWidget {
-//   const HomePage({Key? key}) : super(key: key);
-
-//   @override
-//   State<HomePage> createState() => _HomePageState();
-// }
-
-// class _HomePageState extends State<HomePage> {
-//   @override
-//   Widget build(BuildContext context) => Scaffold(
-//         body: StreamBuilder<User?>(
-//             stream: FirebaseAuth.instance.authStateChanges(),
-//             builder: (context, snapshot) {
-//               if (snapshot.hasData) {
-//                 return const VerifyEmailView();
-//               } else {
-//                 return const LoginView();
-//               }
-//             }),
-//       );
-// }

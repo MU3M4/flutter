@@ -20,7 +20,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
   }
 
   CalendarView calendarView = CalendarView.month;
-  CalendarController _controller = CalendarController();
+  final CalendarController _controller = CalendarController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,6 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
               firstDayOfWeek: 1,
               headerHeight: 0,
               todayHighlightColor: Colors.black,
-              
               onLongPress: (details) {
                 final provider =
                     Provider.of<EventProvider>(context, listen: false);

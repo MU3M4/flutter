@@ -2,6 +2,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:flutter_progress/views/account_details.dart';
 import 'package:flutter_progress/views/calls.dart';
 import 'package:flutter_progress/views/garage_profile.dart';
@@ -23,8 +25,36 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> {
+  String locality = "";
+  Position? _currentUserPosition;
+  double? distanceInMeters = 0.0;
+  Future _getTheDistance() async {
+    _currentUserPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
+    double garagelat = -1.113418;
+    double garageLng = 37.0224462;
+    distanceInMeters = await Geolocator.distanceBetween(
+        _currentUserPosition!.latitude,
+        _currentUserPosition!.longitude,
+        garagelat,
+        garageLng);
+    List<Placemark> placemarks = await placemarkFromCoordinates(
+      _currentUserPosition!.latitude,
+      _currentUserPosition!.longitude,
+    );
+    print(placemarks[0].toString());
+    setState(() {
+      locality = placemarks[0].locality == null ? "" : placemarks[0].locality!;
+    });
+  }
+
   final dref = FirebaseDatabase.instance;
   int _selectedIndex = 1;
+  @override
+  void initState() {
+    _getTheDistance();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +84,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                           Text(snapshot.child('OfficeNumber').value.toString()),
                       contentPadding: const EdgeInsets.all(20),
                       dense: true,
-                      trailing: const Icon(Icons.arrow_forward_ios),
+                      trailing: Text(locality),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       onTap: () {
@@ -70,16 +100,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
                                   snapshot.child('GarageName').value.toString(),
                             ),
                           ),
-                          // MessageCenter(
-                          //       garageUid: snapshot
-                          //           .child('OfficeNumber')
-                          //           .value
-                          //           .toString(),
-                          //       garageName: snapshot
-                          //           .child('GarageName')
-                          //           .value
-                          //           .toString(),
-                          //     )),
                         );
                       },
                     ),
@@ -90,33 +110,33 @@ class _ChatsScreenState extends State<ChatsScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: buildBottomNavigatorBar(),
+      // bottomNavigationBar: buildBottomNavigatorBar(),
     );
   }
 
-  BottomNavigationBar buildBottomNavigatorBar() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: _selectedIndex,
-      onTap: (value) {
-        _selectedIndex = value;
-      },
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.phone),
-          label: 'Calls',
-        ),
-        BottomNavigationBarItem(icon: Icon(Icons.garage), label: 'Garages'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline), label: 'Profile'),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
-      ],
-      backgroundColor: Colors.grey,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.black.withOpacity(0.32),
-      selectedIconTheme: const IconThemeData(color: Colors.deepOrange),
-    );
-  }
+  // BottomNavigationBar buildBottomNavigatorBar() {
+  //   return BottomNavigationBar(
+  //     type: BottomNavigationBarType.fixed,
+  //     currentIndex: _selectedIndex,
+  //     onTap: (value) {
+  //       _selectedIndex = value;
+  //     },
+  //     items: const [
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.phone),
+  //         label: 'Calls',
+  //       ),
+  //       BottomNavigationBarItem(icon: Icon(Icons.garage), label: 'Garages'),
+  //       BottomNavigationBarItem(
+  //           icon: Icon(Icons.person_outline), label: 'Profile'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
+  //     ],
+  //     backgroundColor: Colors.grey,
+  //     selectedItemColor: Colors.white,
+  //     unselectedItemColor: Colors.black.withOpacity(0.32),
+  //     selectedIconTheme: const IconThemeData(color: Colors.deepOrange),
+  //   );
+  // }
 
   AppBar buildAppBar() {
     return AppBar(
@@ -124,6 +144,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
       title: const Text('Atta Garages'),
       centerTitle: true,
       elevation: 0,
+      backgroundColor: Colors.deepOrange,
     );
   }
 }
@@ -144,4 +165,3 @@ class _ChatsScreenState extends State<ChatsScreen> {
 //           ),
 //         );
 //       });
-
