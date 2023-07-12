@@ -31,6 +31,7 @@ Future<void> main() async {
         title: 'Atta',
         theme: ThemeData(
           primaryColor: Colors.deepOrange,
+          primarySwatch: Colors.deepOrange,
           brightness: Brightness.light,
         ),
         themeMode: ThemeMode.system,

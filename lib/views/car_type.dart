@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class CarType extends StatefulWidget {
 
 class _CarTypeState extends State<CarType> {
   final fb = FirebaseDatabase.instance;
+  final db = FirebaseFirestore.instance;
 
   final List<String> carModel = [
     'Audi',
@@ -477,7 +479,7 @@ class _CarTypeState extends State<CarType> {
   @override
   Widget build(BuildContext context) {
     //final ref = fb.ref().child("car");
-    final ref = fb.ref('Attausers').child('carprofile');
+    final db = FirebaseFirestore.instance;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Car Type'),
@@ -623,13 +625,20 @@ class _CarTypeState extends State<CarType> {
     selectedCarModel,
   ) {
     User user = FirebaseAuth.instance.currentUser!;
-    fb.ref().child(user.uid).push().set({
+    db.collection('Car Details').doc(user.uid).set({
       "year": year,
       "appmodel": appmodel,
       "numberplate": numberplate,
       "carmodel": selectedCarModel,
       "carMake": selectedCarMake,
     });
+    // fb.ref().child(user.uid).push().set({
+    //   "year": year,
+    //   "appmodel": appmodel,
+    //   "numberplate": numberplate,
+    //   "carmodel": selectedCarModel,
+    //   "carMake": selectedCarMake,
+    // });
     _yearController.clear();
     _appModelController.clear();
 

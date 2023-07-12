@@ -25,34 +25,10 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> {
-  String locality = "";
-  Position? _currentUserPosition;
-  double? distanceInMeters = 0.0;
-  Future _getTheDistance() async {
-    _currentUserPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
-    double garagelat = -1.113418;
-    double garageLng = 37.0224462;
-    distanceInMeters = await Geolocator.distanceBetween(
-        _currentUserPosition!.latitude,
-        _currentUserPosition!.longitude,
-        garagelat,
-        garageLng);
-    List<Placemark> placemarks = await placemarkFromCoordinates(
-      _currentUserPosition!.latitude,
-      _currentUserPosition!.longitude,
-    );
-    print(placemarks[0].toString());
-    setState(() {
-      locality = placemarks[0].locality == null ? "" : placemarks[0].locality!;
-    });
-  }
-
   final dref = FirebaseDatabase.instance;
   int _selectedIndex = 1;
   @override
   void initState() {
-    _getTheDistance();
     super.initState();
   }
 
@@ -84,7 +60,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
                           Text(snapshot.child('OfficeNumber').value.toString()),
                       contentPadding: const EdgeInsets.all(20),
                       dense: true,
-                      trailing: Text(locality),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       onTap: () {

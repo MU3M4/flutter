@@ -6,27 +6,31 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthEnt {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  Future<String> getCurrentUID() async {
+    return (await auth.currentUser!).uid;
+  }
+
   //handle auth state
   handleAuthState() {
-
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, snapshot) {
-      if (snapshot.hasData) {
-        return const HomeScreen();
-      } else {
-        return const LoginView();
-      }
-    });
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          } else {
+            return const LoginView();
+          }
+        });
   }
+
   //signInWithGoogle()
-  signInWithGoogle()async {
+  signInWithGoogle() async {
     //Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn(
-        scopes: <String>["email"]).signIn();
+    final GoogleSignInAccount? googleUser =
+        await GoogleSignIn(scopes: <String>["email"]).signIn();
     //Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth = await googleUser!
-        .authentication;
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
     //Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -34,13 +38,10 @@ class AuthEnt {
     );
     //Once signed In, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
-
   }
-  }
-
-  //signOut()
-signOut(){
-  FirebaseAuth.instance.signOut();
 }
 
-
+//signOut()
+signOut() {
+  FirebaseAuth.instance.signOut();
+}

@@ -31,190 +31,187 @@ class _RegistrationViewState extends State<RegistrationView> {
           centerTitle: true,
         ),
         body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
+            child: Form(
+                key: _formKey,
+                child: Column(children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      onChanged: (val) {
+                        name = val;
+                      },
+                      validator: (val) {
+                        if (val!.isEmpty ||
+                            !RegExp(r'^[a-z A-Z]+$').hasMatch(val)) {
+                          return "Enter Correct Name";
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        hintText: ' Full Name',
+                        labelText: 'Enter Your  Name',
+                        labelStyle: TextStyle(
+                          color: Colors.deepOrange,
+                        ),
+                        icon: Icon(Icons.person),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      onChanged: (val) {
+                        email = val;
+                      },
 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    onChanged: (val) {
-                      name = val;
-                    },
-                    validator: (val) {
-                      if (val!.isEmpty ||
-                          !RegExp(r'^[a-z A-Z]+$').hasMatch(val)) {
-                        return "Enter Correct Name";
-                      } else {
+                      // regular expression validates the format of the email address
+                      validator: (val) {
+                        if (val!.isEmpty ||
+                            !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                                .hasMatch(val)) {
+                          return "Enter a valid email address";
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        hintText: ' Email Address',
+                        labelText: 'Enter Your  email',
+                        labelStyle: TextStyle(
+                          color: Colors.deepOrange,
+                        ),
+                        icon: Icon(Icons.email),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      onChanged: (val) {
+                        phone = val;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Phone Number',
+                        labelText: 'Enter your phone number',
+                        labelStyle: TextStyle(color: Colors.deepOrange),
+                        icon: Icon(Icons.phone),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      onChanged: (val) {
+                        pass = val;
+                      },
+                      obscureText: true,
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          Fluttertoast.showToast(
+                            msg: "please enter your password",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.redAccent,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                        }
                         return null;
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      hintText: ' Full Name',
-                      labelText: 'Enter Your  Name',
-                      labelStyle: TextStyle(
-                        color: Colors.deepOrange,
+                      },
+                      decoration: const InputDecoration(
+                        hintText: ' password',
+                        labelText: 'Enter Your  password',
+                        labelStyle: TextStyle(
+                          color: Colors.deepOrange,
+                        ),
+                        icon: Icon(Icons.lock),
                       ),
-                      icon: Icon(Icons.person),
                     ),
                   ),
-                ),
-
-
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    onChanged: (val) {
-                      email = val;
-                    },
-
-                    // regular expression validates the format of the email address
-                    validator: (val) {
-                      if (val!.isEmpty ||
-                          !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
-                              .hasMatch(val)) {
-                        return "Enter a valid email address";
-                      } else {
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      onChanged: (val) {
+                        cpass = val;
+                      },
+                      obscureText: true,
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          Fluttertoast.showToast(
+                            msg: "please enter your password",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.redAccent,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                        }
                         return null;
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      hintText: ' Email Address',
-                      labelText: 'Enter Your  email',
-                      labelStyle: TextStyle(
-                        color: Colors.deepOrange,
+                      },
+                      decoration: const InputDecoration(
+                        hintText: ' password',
+                        labelText: 'Enter Your  password',
+                        labelStyle: TextStyle(
+                          color: Colors.deepOrange,
+                        ),
+                        icon: Icon(Icons.lock),
                       ),
-                      icon: Icon(Icons.email),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    onChanged: (val) {
-                      phone = val;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: 'Phone Number',
-                      labelText: 'Enter your phone number',
-                      labelStyle: TextStyle(color: Colors.deepOrange),
-                      icon: Icon(Icons.phone),
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    onChanged: (val) {
-                      pass = val;
-                    },
-                    obscureText: true,
-                    validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        Fluttertoast.showToast(
-                          msg: "please enter your password",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.redAccent,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: ' password',
-                      labelText: 'Enter Your  password',
-                      labelStyle: TextStyle(
-                        color: Colors.deepOrange,
-                      ),
-                      icon: Icon(Icons.lock),
-                    ),
-                  ),
-                ),
+                  ElevatedButton(
+                      child: const Text('Sign Up'),
+                      onPressed: () {
+//                       String tokenFromServer = "";
 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    onChanged: (val) {
-                      cpass = val;
-                    },
-                    obscureText: true,
-                    validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        Fluttertoast.showToast(
-                          msg: "please enter your password",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.redAccent,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: ' password',
-                      labelText: 'Enter Your  password',
-                      labelStyle: TextStyle(
-                        color: Colors.deepOrange,
-                      ),
-                      icon: Icon(Icons.lock),
-                    ),
-                  ),
-                ),
+// OneSignal.shared.setEmail(email: email, emailAuthHashToken: tokenFromServer).then((result) {
+//     //request succeeded
+// }).catchError((error) {
+//     //encountered an error
+// });
+// var status =  OneSignal.shared.getDeviceState();
+// // String tokenId = status?.subscriptionStatus.userId;
+//                       OneSignal.shared.getDeviceState().then((deviceState) {
+//      print("OneSignal: device state: ${deviceState?.jsonRepresentation()}");
+// });
+//                       if (email.isEmpty ||
+//                           name.isEmpty ||
+//                           pass.isEmpty ||
+//                           cpass.isEmpty ||
+//                           phone.isEmpty) {
+//                         Fluttertoast.showToast(
+//                             msg: 'Please fill in the blank fields');
+//                         return;
+//                       }
+//                       if (pass.length < 6) {
+//                         Fluttertoast.showToast(
+//                             msg:
+//                                 'password is too short, add six to more characters');
+//                         return;
+//                       }
+//                       if (pass != cpass) {
+//                         Fluttertoast.showToast(msg: 'Passwords do not match');
+//                         return;
+//                       }
+//                       // ProgressDialog progressDialog = ProgressDialog(
+//                       //   context,
+//                       //   title: const Text('Signing up'),
+//                       //   message: const Text('Please wait'),
+//                       // );
+//                       // progressDialog.show();
 
-                ElevatedButton(
-                    child: const Text('Sign Up'),
-                    onPressed: ()  {
-                      String tokenFromServer = "";
-
-OneSignal.shared.setEmail(email: email, emailAuthHashToken: tokenFromServer).then((result) {
-    //request succeeded
-}).catchError((error) {
-    //encountered an error
-});
-var status =  OneSignal.shared.getDeviceState();
-// String tokenId = status?.subscriptionStatus.userId;
-                      OneSignal.shared.getDeviceState().then((deviceState) {
-     print("OneSignal: device state: ${deviceState?.jsonRepresentation()}");
-});
-                      if (email.isEmpty ||
-                          name.isEmpty ||
-                          pass.isEmpty ||
-                          cpass.isEmpty ||
-                          phone.isEmpty) {
-                        Fluttertoast.showToast(
-                            msg: 'Please fill in the blank fields');
-                        return;
-                      }
-                      if (pass.length < 6) {
-                        Fluttertoast.showToast(
-                            msg:
-                                'password is too short, add six to more characters');
-                        return;
-                      }
-                      if (pass != cpass) {
-                        Fluttertoast.showToast(msg: 'Passwords do not match');
-                        return;
-                      }
-                      // ProgressDialog progressDialog = ProgressDialog(
-                      //   context,
-                      //   title: const Text('Signing up'),
-                      //   message: const Text('Please wait'),
-                      // );
-                      // progressDialog.show();
-
-                      try {
-
-                             _auth.createUserWithEmailAndPassword(
-                                email: email, password: pass).then((value){
-                                  FirebaseFirestore.instance.collection('UserData').doc(value.user?.uid).set({
+                        _auth
+                            .createUserWithEmailAndPassword(
+                                email: email, password: pass)
+                            .then((value) {
+                          FirebaseFirestore.instance
+                              .collection('UserData')
+                              .doc(value.user?.uid)
+                              .set({
                             'fullName': name,
                             'email': email,
                             'phone': phone,
@@ -227,36 +224,32 @@ var status =  OneSignal.shared.getDeviceState();
                             homeRoute,
                             (route) => false,
                           );
-                        }); }else {
-                          Fluttertoast.showToast(msg: 'Failed');
-                        }
+                          //     }  on FirebaseAuthException catch (e) {
 
-                      } on FirebaseAuthException catch (e) {
+                          //     if (e.code == 'email-already-in-use') {
+                          //       Fluttertoast.showToast(
+                          //           msg: 'email is already in use');
+                          //     } else if (e.code == 'weak password') {
+                          //       Fluttertoast.showToast(msg: 'The password is weak');
+                          //     }
+                          //   } catch (e) {
 
-                        if (e.code == 'email-already-in-use') {
-                          Fluttertoast.showToast(
-                              msg: 'email is already in use');
-                        } else if (e.code == 'weak password') {
-                          Fluttertoast.showToast(msg: 'The password is weak');
-                        }
-                      } catch (e) {
+                          //     Fluttertoast.showToast(msg: 'Something went wrong');
+                          //   }
+                          // }),
 
-                        Fluttertoast.showToast(msg: 'Something went wrong');
-                      }
-                     != null}),
-
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginView()));
-                  },
-                  child: const Text('Already have an account? click here'),
-                ),
-              ],
-            ),
-          ),
-        ));
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const LoginView()));
+                            },
+                            child: const Text(
+                                'Already have an account? click here'),
+                          );
+                        });
+                      })
+                ]))));
   }
 }
