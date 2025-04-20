@@ -26,7 +26,7 @@ class ChatsScreen extends StatefulWidget {
 
 class _ChatsScreenState extends State<ChatsScreen> {
   final dref = FirebaseDatabase.instance;
-  int _selectedIndex = 1;
+  final int _selectedIndex = 1;
   @override
   void initState() {
     super.initState();

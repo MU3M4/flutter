@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/views/about_us.dart';
 import 'package:flutter_progress/views/account_details.dart';
-import 'package:flutter_progress/views/car_profile.dart';
 import 'package:flutter_progress/views/drawer_items.dart';
 import 'package:flutter_progress/views/settings.dart';
 

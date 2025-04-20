@@ -65,15 +65,15 @@ class _PhoneAuthState extends State<PhoneAuth> {
           Container(
             margin: const EdgeInsets.only(top: 40, right: 10, left: 10),
             child: IntlPhoneField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Phone Number',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(),
                 ),
               ),
               initialCountryCode: 'KE',
-              onChanged: (_phone) {
-                print(_phone.completeNumber);
+              onChanged: (phone) {
+                print(phone.completeNumber);
               },
             ),
             // child: TextFormField(

@@ -7,7 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthEnt {
   final FirebaseAuth auth = FirebaseAuth.instance;
   Future<String> getCurrentUID() async {
-    return (await auth.currentUser!).uid;
+    return (auth.currentUser!).uid;
   }
 
   //handle auth state

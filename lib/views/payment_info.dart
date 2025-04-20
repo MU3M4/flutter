@@ -23,14 +23,14 @@ class _PaymentInfoState extends State<PaymentInfo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Text(
+                      Text(
                         'My',
                         style: TextStyle(
                             fontSize: 28, fontWeight: FontWeight.bold),
                       ),
-                      const Text(
+                      Text(
                         'Cards',
                         style: TextStyle(fontSize: 28),
                       ),

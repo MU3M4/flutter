@@ -10,7 +10,7 @@ class LetsStart extends StatelessWidget {
     return CupertinoButton(
       onPressed: () {
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => MainPage()));
+            .push(MaterialPageRoute(builder: (context) => const MainPage()));
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

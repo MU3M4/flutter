@@ -17,7 +17,8 @@ class MechanicProfile extends StatefulWidget {
 }
 
 class _MechanicProfileState extends State<MechanicProfile> {
-  static final String oneSignalAppId = '048cb7d8-66ee-4423-999a-d96a5269148a';
+  static const String oneSignalAppId = '048cb7d8-66ee-4423-999a-d96a5269148a';
+
   /// Create a [AndroidNotificationChannel] for heads up notifications
   late AndroidNotificationChannel channel;
   TextEditingController username = TextEditingController();
@@ -36,15 +37,14 @@ class _MechanicProfileState extends State<MechanicProfile> {
     FirebaseMessaging.instance.subscribeToTopic('Car Service');
     super.initState();
   }
-  void getTokenFromFirestore() async{
 
+  void getTokenFromFirestore() async {}
+  void saveToken(String token) async {
+    await FirebaseFirestore.instance.collection('UserTokens').doc('User1').set({
+      'token': token,
+    });
   }
- void saveToken(String token) async{
-    await FirebaseFirestore.instance.collection('UserTokens').doc('User1').set(
-        {
-          'token': token,
-        });
- }
+
   void sendPushMessage(String token, String body, String title) async {
     try {
       await http.post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
@@ -71,13 +71,13 @@ class _MechanicProfileState extends State<MechanicProfile> {
 
   void getToken() async {
     await FirebaseMessaging.instance.getToken().then((token) {
-
-    setState(() {
-      mtoken =token;
-    });
-    saveToken(token!);
+      setState(() {
+        mtoken = token;
+      });
+      saveToken(token!);
     });
   }
+
   void requestPermission() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(
@@ -155,9 +155,11 @@ class _MechanicProfileState extends State<MechanicProfile> {
       );
     }
   }
-Future<void> initPlatformState() async{
+
+  Future<void> initPlatformState() async {
     OneSignal.shared.setAppId(oneSignalAppId);
-}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,59 +168,62 @@ Future<void> initPlatformState() async{
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: username,
-                decoration: const InputDecoration(
-                  hintText: 'Input your username',
-                ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: username,
+              decoration: const InputDecoration(
+                hintText: 'Input your username',
               ),
             ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: title,
-                decoration: const InputDecoration(
-                  hintText: 'Title of the message',
-                ),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: title,
+              decoration: const InputDecoration(
+                hintText: 'Title of the message',
               ),
             ),
-            const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: body,
-                decoration: const InputDecoration(
-                  hintText: 'The body of your text',
-                ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: body,
+              decoration: const InputDecoration(
+                hintText: 'The body of your text',
               ),
             ),
-          const SizedBox(height: 10,),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           GestureDetector(
-            onTap: () async{
+            onTap: () async {
               String name = username.text.trim();
               String titleText = title.text;
               String bodyText = body.text;
-              if (name != ""){
-                DocumentSnapshot snap = await FirebaseFirestore.instance.collection('UserTokens').doc(name).get();
+              if (name != "") {
+                DocumentSnapshot snap = await FirebaseFirestore.instance
+                    .collection('UserTokens')
+                    .doc(name)
+                    .get();
                 String token = snap['token'];
                 print(token);
                 sendPushMessage(token, titleText, bodyText);
               }
             },
-            child: Container(
+            child: SizedBox(
               height: 40,
-                width: 200,
-
+              width: 200,
             ),
           ),
-            ]
-        ),
+        ]),
       ),
     );
   }

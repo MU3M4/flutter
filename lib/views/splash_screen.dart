@@ -26,11 +26,11 @@ class Splash extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
             color: Colors.black.withOpacity(0),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                 Logo(),
+              children: [
+                Logo(),
                 LetsStart(),
               ],
             )),

@@ -15,7 +15,7 @@ appBar: AppBar(
   centerTitle: true,
   elevation: 1,
 ),
-body: Column(),
+body: const Column(),
     );
   }
 }

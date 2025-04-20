@@ -31,7 +31,7 @@ class _MessageCenterState extends State<MessageCenter> {
   @override
   void initState() {
     checkUser();
-    
+
     super.initState();
   }
 
@@ -105,7 +105,7 @@ class _MessageCenterState extends State<MessageCenter> {
           );
         }
         if (snapshot.hasData) {
-          var data;
+          Object data;
           return CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
               previousPageTitle: "back",
@@ -207,7 +207,4 @@ class _MessageCenterState extends State<MessageCenter> {
       },
     );
   }
-
-
-  }
-
+}

@@ -17,10 +17,10 @@ class CurrentLocation extends StatefulWidget {
 }
 
 class _CurrentLocationState extends State<CurrentLocation> {
-  TextEditingController _originController = TextEditingController();
-  TextEditingController _destinationController = TextEditingController();
+  final TextEditingController _originController = TextEditingController();
+  final TextEditingController _destinationController = TextEditingController();
   final Completer<GoogleMapController> _controllerGoogleMap = Completer();
-  Set<Polyline> _polyline = Set<Polyline>();
+  final Set<Polyline> _polyline = <Polyline>{};
 
   GoogleMapController? newgoogleMapController;
   static const CameraPosition initialCameraPosition =

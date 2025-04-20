@@ -40,30 +40,31 @@ class _MapScreenState extends State<MapScreen> {
       zoom: 14.5,
     );
   }
-  void requestPermission() async{
+
+  void requestPermission() async {
     final permission = await Permission.location.request();
-    if(permission == PermissionStatus.granted){
+    if (permission == PermissionStatus.granted) {
       TrustLocation.start(10);
       getLocation();
-    } else if (permission == PermissionStatus.denied){
+    } else if (permission == PermissionStatus.denied) {
       await Permission.location.request();
     }
   }
- void getLocation() async{
-    try{
-      TrustLocation.onChange.listen((result){
 
+  void getLocation() async {
+    try {
+      TrustLocation.onChange.listen((result) {
         setState(() {
           latitude = result.latitude;
           longitude = result.longitude;
           isMock = result.isMockLocation;
         });
-
       });
-    }catch (e){
+    } catch (e) {
       print('error');
     }
- }
+  }
+
   _addPolyLine() {
     PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(
@@ -178,7 +179,7 @@ class _MapScreenState extends State<MapScreen> {
                         Icon(Icons.search,
                             size: 25,
                             color:
-                                Theme.of(context).textTheme.bodyText1!.color),
+                                Theme.of(context).textTheme.bodyLarge!.color),
                       ],
                     ),
                   ))),

@@ -46,11 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.deepOrange,
           // actions: const [ChangeThemeButtonWidget()],
         ),
-        drawer: NavigationDrawer(),
-        body: Column(
+        drawer: Drawer(),
+        body: const Column(
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            const TabBar(
+            TabBar(
               tabs: [
                 Tab(
                   icon: Icon(
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            const Expanded(
+            Expanded(
               child: TabBarView(
                 children: [
                   ChatsScreen(),

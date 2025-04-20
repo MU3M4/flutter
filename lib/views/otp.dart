@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -28,10 +27,10 @@ class _OtpPageState extends State<OtpPage> {
     height: 56,
     textStyle: const TextStyle(
         fontSize: 20,
-        color:  Color.fromRGBO(30, 60, 87, 1),
+        color: Color.fromRGBO(30, 60, 87, 1),
         fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
-      border:  Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
+      border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
       borderRadius: BorderRadius.circular(20),
     ),
   );
@@ -57,7 +56,7 @@ class _OtpPageState extends State<OtpPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
             child: Pinput(
               length: 6,
               defaultPinTheme: defaultPinTheme,
@@ -101,15 +100,15 @@ class _OtpPageState extends State<OtpPage> {
           if (value.user != null) {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) =>  HomeScreen()),
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
                 (route) => false);
           }
         });
       },
       verificationFailed: (FirebaseAuthException e) {
-         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(e.toString()),
-                  ));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(e.toString()),
+        ));
       },
       codeSent: (String? verificationId, int? forceResendingToken) {
         setState(() {

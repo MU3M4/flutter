@@ -1,6 +1,6 @@
-# Atta
+# Mat
 
-A new Flutter project that connects users with nearby garages. The app features include Google Maps, Appointment schedule and in-app messaging and calls functionalities to help users connect with garages with much ease. 
+This is a flutter app that revolutionizes the matatu industry as it showcases the highlight of our streets, matatus. 
 
 ## Getting Started
 

@@ -21,8 +21,8 @@ class _EditNumberState extends State<EditNumber> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Text(
                   'Phone Verification',
                   style: TextStyle(color: Colors.deepOrange, fontSize: 30),

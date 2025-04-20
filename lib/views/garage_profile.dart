@@ -16,7 +16,7 @@ class GarageProfile extends StatefulWidget {
 
   @override
   State<GarageProfile> createState() =>
-      _GarageProfileState(this.garageUid, this.garageName);
+      _GarageProfileState(garageUid, garageName);
 }
 
 class _GarageProfileState extends State<GarageProfile> {

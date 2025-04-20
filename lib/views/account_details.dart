@@ -121,13 +121,13 @@ class _AccountDetailsState extends State<AccountDetails> {
                                   ),
                             ),
                             textTheme: const TextTheme(
-                              headline4: TextStyle(
+                              headlineMedium: TextStyle(
                                 fontFamily: 'Nexabold',
                               ),
-                              overline: TextStyle(
+                              labelSmall: TextStyle(
                                 fontFamily: 'Nexabold',
                               ),
-                              button: TextStyle(
+                              labelLarge: TextStyle(
                                 fontFamily: 'Nexabold',
                               ),
                             ),
